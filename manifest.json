@@ -1,0 +1,17 @@
+{
+  "name": "Comingle",
+  "description": "A great app for the Comingle toy!",
+  "version": "0.1",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "icons": { "128": "assets/images/logo.png" },
+  "permissions": [
+    "serial",
+    "usb",
+    "http://*/"
+  ]
+}
