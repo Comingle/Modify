@@ -1,0 +1,16 @@
+{{#if devicesFound}}
+
+  {{#if isSelecting}}
+    <a {{action 'resetDevices'}}>Try to find device again.</a>
+    <ul>
+      {{#each device in devices}}
+        <li {{action 'chooseDevice' device}}>{{device.path}}</li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <a {{action 'startSelecting'}}>Select a device port</a>
+  {{/if}}
+
+{{else}}
+  <div>No devices were found to connect to.</div>
+{{/if}}
