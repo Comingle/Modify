@@ -8,6 +8,12 @@ export default Ember.Service.extend({
     this._connect(device);
   },
 
+  nextFrame: function (frame) {
+    var newBinary = this._getNewBinary(frame);
+    var callback = function (stuff) {};
+    chrome.serial.send(this.get('connectionId'), newBinary, callback);
+  },
+
   _connect: function (device) {
     var _this = this;
     chrome.serial.connect(device.path, { bitrate: this.kBitrate }, function (args) {
@@ -15,4 +21,18 @@ export default Ember.Service.extend({
       console.log('CONNECTION : ' + _this.get('connectionId'));
     });
   },
+
+  _getNewBinary: function (frame) {
+    var newVals = "{ " + frame.get('motor1') + ", " + frame.get('motor2') + ", " + frame.get('motor3') + " }";
+    return this._stringToBinary(newVals);
+  },
+
+  _stringToBinary: function (str) {
+    var buffer = new ArrayBuffer(str.length);
+    var bufferView = new Uint8Array(buffer);
+    for (var i = 0; i < str.length; i++) {
+      bufferView[i] = str.charCodeAt(i);
+    }
+    return buffer;
+  }
 });
