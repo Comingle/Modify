@@ -6,9 +6,13 @@ export default Ember.Controller.extend({
     return chrome.serial;
   }.property(),
 
+  isConnected: function () {
+    return this.get('toy.connectionId') > 0;
+  }.property('toy.connectionId'),
+
   actions: {
     chooseDevice: function (device) {
-      console.log(device);
+      this.get('toy').connectDevice(device);
     }
   }
 });

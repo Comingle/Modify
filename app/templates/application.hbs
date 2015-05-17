@@ -1,2 +1,8 @@
 {{port-picker serialObj=serialObj chooseDevice='chooseDevice'}}
 
+<img src="assets/images/logo.png">
+{{#if isConnected}}
+  <div class='connected-notice'>
+    <h3>CONNECTED<span>({{toy.connectionId}})</span></h3>
+  </div>
+{{/if}}
