@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('sliding-value', {
+moduleForComponent('slider-input', {
   // Specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
 });
