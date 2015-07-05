@@ -95,7 +95,7 @@ export default Ember.Component.extend({
     return d3.behavior.drag()
       .on("drag", function(d) {
         let newX = d3.event.x
-        let newValue = parseInt(component.get('valueToPercentScale')(newX));
+        let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           d3.select(this).attr('cx', newX);
           component.set('rightHandleValue', newValue);

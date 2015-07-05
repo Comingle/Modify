@@ -16,40 +16,72 @@ export default Ember.Component.extend({
     this.svg = d3.select(elementId).append('svg')
       .attr('width', width)
       .attr('height', height);
-    this.updateMotorOne();
-    this.updateMotorTwo();
-    this.updateMotorThree();
+    this.createMotorOne();
+    this.createMotorTwo();
+    this.createMotorThree();
   },
 
-  updateMotorOne: function () {
+  createMotorOne: function () {
     let motorOne = this.get('motorOne')
-    let path = this.updatePath(motorOne);
+    let path = this.createPath(motorOne);
     this.set('motorOnePath', path);
-  }.observes('motorOne'),
+  },
 
-  updateMotorTwo: function () {
+  createMotorTwo: function () {
     let motorTwo = this.get('motorTwo')
-    let path = this.updatePath(motorTwo);
+    let path = this.createPath(motorTwo);
     this.set('motorTwoPath', path);
   }.observes('motorTwo'),
 
-  updateMotorThree: function () {
+  createMotorThree: function () {
     let motorThree = this.get('motorThree')
-    let path = this.updatePath(motorThree);
+    let path = this.createPath(motorThree);
     this.set('motorThreePath', path);
   }.observes('motorThree'),
 
-  updatePath: function (motor) {
+  createPath: function (motor) {
     let sin = new SineWave(
       motor.get('percentAmplitude'),
       motor.get('cyclesPerSecond'),
       motor.get('percentPhaseShift'),
-      motor.get('second'),
-      motor.get('maxY')
+      this.get('second'),
+      this.get('maxY')
     );
     let lineData = this.getLineData(sin);
     let path = this.draw(lineData, motor.get('color'));
     return path;
+  },
+
+  updateMotorOne: function () {
+    let motor = this.get('motorOne');
+    let path = this.get('motorOnePath');
+    this.updatePath(motor, path);
+  }.observes('motorOne.percentAmplitude', 'motorOne.cyclesPerSecond', 'motorOne.percentPhaseShift'),
+
+  updateMotorTwo: function () {
+    let motor = this.get('motorTwo');
+    let path = this.get('motorTwoPath');
+    this.updatePath(motor, path);
+  }.observes('motorTwo.percentAmplitude', 'motorTwo.cyclesPerSecond', 'motorTwo.percentPhaseShift'),
+
+  updateMotorThree: function () {
+    let motor = this.get('motorThree');
+    let path = this.get('motorThreePath');
+    this.updatePath(motor, path);
+  }.observes('motorThree.percentAmplitude', 'motorThree.cyclesPerSecond', 'motorThree.percentPhaseShift'),
+
+  updatePath: function (motor, path) {
+    let sin = new SineWave(
+      motor.get('percentAmplitude'),
+      motor.get('cyclesPerSecond'),
+      motor.get('percentPhaseShift'),
+      this.get('second'),
+      this.get('maxY')
+    );
+    let lineData = this.getLineData(sin);
+    let lineFunction = this.get('lineFunction');
+
+    d3.transition(path).attr("d", lineFunction(lineData));
   },
 
   draw: function (lineData, color) {
@@ -60,7 +92,7 @@ export default Ember.Component.extend({
       .attr("stroke", color)
       .attr("stroke-width", strokeWidth)
       .attr("fill", "none");
-    return 'path';
+    return path;
   },
 
   getLineData: function (sin) {

@@ -1,7 +1,31 @@
+
+{{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
+
 <div class='motorOne'>
-  <h3>{{motorOne.percentPhaseShift}}</h3>
+  {{!-- <div>{{motorOne.percentAmplitude}}</div> --}}
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.percentAmplitude}}</div>
+  <div>{{motorOne.cyclesPerSecond}}</div>
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.cyclesPerSecond}}</div>
+  {{!-- <div>{{motorOne.percentPhaseShift}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.percentPhaseShift}}</div>
 </div>
-{{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
+<hr>
+<div class='motorTwo'>
+  {{!-- <div>{{motorTwo.percentAmplitude}}</div> --}}
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.percentAmplitude}}</div>
+  <div>{{motorTwo.cyclesPerSecond}}</div>
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.cyclesPerSecond}}</div>
+  {{!-- <div>{{motorTwo.percentPhaseShift}}</div> --}}
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.percentPhaseShift}}</div>
+</div>
+<hr>
+<div class='motorThree'>
+  {{!-- <div>{{motorThree.percentAmplitude}}</div> --}}
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.percentAmplitude}}</div>
+  <div>{{motorThree.cyclesPerSecond}}</div>
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.cyclesPerSecond}}</div>
+  {{!-- <div>{{motorThree.percentPhaseShift}}</div> --}}
+  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.percentPhaseShift}}</div>
+</div>
 
 {{outlet}}
