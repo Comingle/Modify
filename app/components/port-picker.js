@@ -35,6 +35,4 @@ export default Ember.Component.extend({
       this.setDevices();
     }
   }
-
-
 });

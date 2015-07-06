@@ -1,10 +1,11 @@
-
+<button {{action 'startMotors'}}>Lets Play</button>
+<button {{action 'stopMotors'}}>Stop Playin'</button>
 {{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
 
 <div class='motorOne'>
   {{!-- <div>{{motorOne.percentAmplitude}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.percentAmplitude}}</div>
-  <div>{{motorOne.cyclesPerSecond}}</div>
+  <div class='percent-phase-shift'>{{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax}}</div>
+  {{!-- <div>{{motorOne.cyclesPerSecond}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.cyclesPerSecond}}</div>
   {{!-- <div>{{motorOne.percentPhaseShift}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.percentPhaseShift}}</div>
@@ -12,8 +13,8 @@
 <hr>
 <div class='motorTwo'>
   {{!-- <div>{{motorTwo.percentAmplitude}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.percentAmplitude}}</div>
-  <div>{{motorTwo.cyclesPerSecond}}</div>
+  <div class='percent-phase-shift'>{{slider-input leftHandleValue=motorTwo.percentAmplitudeMin rightHandleValue=motorTwo.percentAmplitudeMax}}</div>
+  {{!-- <div>{{motorTwo.cyclesPerSecond}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.cyclesPerSecond}}</div>
   {{!-- <div>{{motorTwo.percentPhaseShift}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.percentPhaseShift}}</div>
@@ -21,8 +22,8 @@
 <hr>
 <div class='motorThree'>
   {{!-- <div>{{motorThree.percentAmplitude}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.percentAmplitude}}</div>
-  <div>{{motorThree.cyclesPerSecond}}</div>
+  <div class='percent-phase-shift'>{{slider-input leftHandleValue=motorThree.percentAmplitudeMin rightHandleValue=motorThree.percentAmplitudeMax}}</div>
+  {{!-- <div>{{motorThree.cyclesPerSecond}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.cyclesPerSecond}}</div>
   {{!-- <div>{{motorThree.percentPhaseShift}}</div> --}}
   <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.percentPhaseShift}}</div>

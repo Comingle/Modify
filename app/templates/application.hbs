@@ -1,6 +1,6 @@
 {{port-picker serialObj=serialObj chooseDevice='chooseDevice'}}
 
-<img src="assets/images/logo.png">
+{{!-- <img src="assets/images/logo.png"> --}}
 {{#if isConnected}}
   <div class='connected-notice'>
     <h3>CONNECTED<span>({{toy.connectionId}})</span></h3>
@@ -8,10 +8,6 @@
 {{/if}}
 <div class='clear-float'></div>
 
-<label>motor 1</label> <span>({{model.motor1}})</span>
-{{sliding-value changeMotor='changeMotor' motorNum='motor1' motorVal=model.motor1}}
-<label>motor 2</label> <span>({{model.motor2}})</span>
-{{sliding-value changeMotor='changeMotor' motorNum='motor2' motorVal=model.motor2}}
-<label>motor 3</label> <span>({{model.motor3}})</span>
-{{sliding-value changeMotor='changeMotor' motorNum='motor3' motorVal=model.motor3}}
-<label>time</label> <span>({{model.timeMS}})</span>
+{{link-to 'Quicky' 'quicky'}}
+
+{{outlet}}

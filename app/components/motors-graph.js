@@ -31,17 +31,18 @@ export default Ember.Component.extend({
     let motorTwo = this.get('motorTwo')
     let path = this.createPath(motorTwo);
     this.set('motorTwoPath', path);
-  }.observes('motorTwo'),
+  },
 
   createMotorThree: function () {
     let motorThree = this.get('motorThree')
     let path = this.createPath(motorThree);
     this.set('motorThreePath', path);
-  }.observes('motorThree'),
+  },
 
   createPath: function (motor) {
     let sin = new SineWave(
-      motor.get('percentAmplitude'),
+      motor.get('percentAmplitudeMin'),
+      motor.get('percentAmplitudeMax'),
       motor.get('cyclesPerSecond'),
       motor.get('percentPhaseShift'),
       this.get('second'),
@@ -56,23 +57,33 @@ export default Ember.Component.extend({
     let motor = this.get('motorOne');
     let path = this.get('motorOnePath');
     this.updatePath(motor, path);
-  }.observes('motorOne.percentAmplitude', 'motorOne.cyclesPerSecond', 'motorOne.percentPhaseShift'),
+  }.observes('motorOne.percentAmplitudeMin',
+             'motorOne.percentAmplitudeMax',
+             'motorOne.cyclesPerSecond',
+             'motorOne.percentPhaseShift'),
 
   updateMotorTwo: function () {
     let motor = this.get('motorTwo');
     let path = this.get('motorTwoPath');
     this.updatePath(motor, path);
-  }.observes('motorTwo.percentAmplitude', 'motorTwo.cyclesPerSecond', 'motorTwo.percentPhaseShift'),
+  }.observes('motorTwo.percentAmplitudeMin',
+             'motorTwo.percentAmplitudeMax',
+             'motorTwo.cyclesPerSecond',
+             'motorTwo.percentPhaseShift'),
 
   updateMotorThree: function () {
     let motor = this.get('motorThree');
     let path = this.get('motorThreePath');
     this.updatePath(motor, path);
-  }.observes('motorThree.percentAmplitude', 'motorThree.cyclesPerSecond', 'motorThree.percentPhaseShift'),
+  }.observes('motorThree.percentAmplitudeMin',
+             'motorThree.percentAmplitudeMax',
+             'motorThree.cyclesPerSecond',
+             'motorThree.percentPhaseShift'),
 
   updatePath: function (motor, path) {
     let sin = new SineWave(
-      motor.get('percentAmplitude'),
+      motor.get('percentAmplitudeMin'),
+      motor.get('percentAmplitudeMax'),
       motor.get('cyclesPerSecond'),
       motor.get('percentPhaseShift'),
       this.get('second'),

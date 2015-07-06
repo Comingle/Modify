@@ -61,23 +61,42 @@ export default Ember.Component.extend({
     let handleStrokeColor = this.get('handleStrokeColor');
     let handleStrokeWidth = this.get('handleStrokeWidth');
     let handleRadius = this.get('handleRadius')
-    let cx = this.get('rightHandleValue');
     let drag = this.get('drag');
     let scale = d3.scale.linear()
       .domain([0, 100])
       .range([0, lineLength]);
 
-    let rightHandle = svg.append('circle')
-      .style('fill', handleColor)
-      .style('stroke', handleStrokeColor)
-      .style('stroke-width', handleStrokeWidth)
-      .attr('class', 'handle')
-      .attr('cy', allY)
-      .attr('cx', function () { return scale(cx) })
-      .attr('r', handleRadius)
-      .call(drag);;
 
-    this.set('rightHandle', rightHandle);
+    let cxRight = this.get('rightHandleValue');
+    if (cxRight || cxRight === 0) {
+      let rightHandle = svg.append('circle')
+        .style('fill', handleColor)
+        .style('stroke', handleStrokeColor)
+        .style('stroke-width', handleStrokeWidth)
+        .attr('class', 'handle')
+        .attr('cy', allY)
+        .attr('cx', function () { return scale(cxRight) })
+        .attr('r', handleRadius)
+        .call(this.get('dragRight'));
+
+      this.set('rightHandle', rightHandle);
+    }
+
+    let cxLeft = this.get('leftHandleValue');
+    if (cxLeft || cxLeft === 0) {
+      let leftHandle = svg.append('circle')
+        .style('fill', handleColor)
+        .style('stroke', handleStrokeColor)
+        .style('stroke-width', handleStrokeWidth)
+        .attr('class', 'handle')
+        .attr('cy', allY)
+        .attr('cx', function () { return scale(cxLeft) })
+        .attr('r', handleRadius)
+        .call(this.get('dragLeft'));
+
+      this.set('leftHandle', leftHandle);
+    }
+
     this.set('lowX', x1);
     this.set('highX', x2);
   },
@@ -90,7 +109,20 @@ export default Ember.Component.extend({
       .range([0, 100]);
   }.property(),
 
-  drag: function () {
+  dragLeft: function () {
+    let component = this;
+    return d3.behavior.drag()
+      .on("drag", function(d) {
+        let newX = d3.event.x
+        let newValue = component.get('valueToPercentScale')(newX);
+        if (0 <= newValue && newValue <= 100) {
+          d3.select(this).attr('cx', newX);
+          component.set('leftHandleValue', newValue);
+        }
+      });
+  }.property(),
+
+  dragRight: function () {
     let component = this;
     return d3.behavior.drag()
       .on("drag", function(d) {
@@ -102,5 +134,4 @@ export default Ember.Component.extend({
         }
       });
   }.property()
-
 });
