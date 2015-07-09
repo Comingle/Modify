@@ -3,6 +3,7 @@ import SineWave from 'chrome-app/lib/sine-wave';
 
 export default Ember.Component.extend({
   classNames: ['motors-graph'],
+  backgroundColor: '#202336',
   strokeWidth: 6,
   second: 1000,
   maxY: 255,
@@ -16,6 +17,12 @@ export default Ember.Component.extend({
     this.svg = d3.select(elementId).append('svg')
       .attr('width', width)
       .attr('height', height);
+
+    this.svg.append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr('fill', this.get('backgroundColor'));
+
     this.createMotorOne();
     this.createMotorTwo();
     this.createMotorThree();

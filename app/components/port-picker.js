@@ -13,9 +13,9 @@ export default Ember.Component.extend({
 
   setDevices: function () {
     var _this = this;
-    this.get('serialObj').getDevices(function (devices) {
-      _this.set('devices', devices);
-    });
+    // this.get('serialObj').getDevices(function (devices) {
+    //   _this.set('devices', devices);
+    // });
   },
 
   devicesFound: function () {

@@ -3,7 +3,7 @@ class SineWave {
   constructor (percentAmplitudeMin, percentAmplitudeMax, cyclesPerSecond, percentPhaseShift, second, maxY) {
     this.second = second || 1000; // resolution defaults to milliseconds
     this.maxY = maxY || 255; // defaults to the hightest a motor can go
-    this.amplitude = this.amplitudePercentToValue((percentAmplitudeMax / 2) - (percentAmplitudeMin / 2));
+    this.amplitude = this.amplitudePercentToValue((percentAmplitudeMax) - (percentAmplitudeMin));
     this.amplitudeMin = this.amplitudePercentToValue(this.amplitude + percentAmplitudeMin);
     this.cycle = (2 * Math.PI) / this.second; // a constant one cycle per second
     this.frequency = cyclesPerSecond * this.cycle;

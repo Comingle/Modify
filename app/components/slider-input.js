@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['slider-input'],
-  lineColor: 'LightSteelBlue',
-  handleColor: 'SteelBlue',
+  lineColor: '#cad1e5',
+  handleColor: '#344276',
   handleStrokeColor: 'white',
   handleStrokeWidth: 4,
   handleOverflow: 10,
@@ -45,8 +45,30 @@ export default Ember.Component.extend({
     let lineWidth = this.get('lineWidth');
     let x1 = this.get('lineStartX');
     let x2 = this.get('lineEndX');
-    let lineLength = x2 - x1;
     let allY = this.get('allY');
+    let handleColor = this.get('handleColor');
+    let handleStrokeColor = this.get('handleStrokeColor');
+    let handleStrokeWidth = this.get('handleStrokeWidth');
+    let handleRadius = this.get('handleRadius')
+    let cxRight = this.get('rightHandleValue');
+    let cxLeft = this.get('leftHandleValue');
+    let scale = d3.scale.linear()
+      .domain([0, 100])
+      .range([x1, x2]);
+    let rangeLineX1 = function () {
+      if (cxLeft) {
+        return scale(cxLeft);
+      } else {
+        return x1;
+      }
+    }
+    let rangeLineX2 = function () {
+      if (cxRight) {
+        return scale(cxRight);
+      } else {
+        return x1;
+      }
+    }
 
     svg.append("line")
       .style("stroke", lineColor)
@@ -57,17 +79,15 @@ export default Ember.Component.extend({
       .attr("x2", x2)
       .attr("y2", allY);
 
-    let handleColor = this.get('handleColor');
-    let handleStrokeColor = this.get('handleStrokeColor');
-    let handleStrokeWidth = this.get('handleStrokeWidth');
-    let handleRadius = this.get('handleRadius')
-    let drag = this.get('drag');
-    let scale = d3.scale.linear()
-      .domain([0, 100])
-      .range([0, lineLength]);
+    let rangeLine = svg.append("line")
+      .style("stroke", this.get('rangeLineColor'))
+      .style("stroke-width", lineWidth)
+      .style("stroke-linecap", "round")
+      .attr("x1", rangeLineX1)
+      .attr("y1", allY)
+      .attr("x2", rangeLineX2)
+      .attr("y2", allY);
 
-
-    let cxRight = this.get('rightHandleValue');
     if (cxRight || cxRight === 0) {
       let rightHandle = svg.append('circle')
         .style('fill', handleColor)
@@ -82,7 +102,6 @@ export default Ember.Component.extend({
       this.set('rightHandle', rightHandle);
     }
 
-    let cxLeft = this.get('leftHandleValue');
     if (cxLeft || cxLeft === 0) {
       let leftHandle = svg.append('circle')
         .style('fill', handleColor)
@@ -99,6 +118,21 @@ export default Ember.Component.extend({
 
     this.set('lowX', x1);
     this.set('highX', x2);
+    this.set('rangeLine', rangeLine);
+  },
+
+  updateLeftHandle: function (newX) {
+    let handle = this.get('leftHandle');
+    let line = this.get('rangeLine');
+    d3.transition(handle).attr('cx', newX);
+    d3.transition(line).attr('x1', newX);
+  },
+
+  updateRightHandle: function (newX) {
+    let handle = this.get('rightHandle');
+    let line = this.get('rangeLine');
+    d3.transition(handle).attr('cx', newX);
+    d3.transition(line).attr('x2', newX);
   },
 
   valueToPercentScale: function () {
@@ -116,7 +150,7 @@ export default Ember.Component.extend({
         let newX = d3.event.x
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
-          d3.select(this).attr('cx', newX);
+          component.updateLeftHandle(newX);
           component.set('leftHandleValue', newValue);
         }
       });
@@ -129,7 +163,7 @@ export default Ember.Component.extend({
         let newX = d3.event.x
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
-          d3.select(this).attr('cx', newX);
+          component.updateRightHandle(newX);
           component.set('rightHandleValue', newValue);
         }
       });

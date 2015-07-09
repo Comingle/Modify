@@ -7,7 +7,7 @@ export default Ember.Route.extend({
       percentAmplitudeMax: 100,
       cyclesPerSecond: 2,
       percentPhaseShift: 25,
-      color: 'pink'
+      color: '#d28dbf'
     });
 
     let motorTwo = this.store.createRecord('motor', {
@@ -15,7 +15,7 @@ export default Ember.Route.extend({
       percentAmplitudeMax: 50,
       cyclesPerSecond: 2,
       percentPhaseShift: 30,
-      color: 'green'
+      color: '#fec742'
     });
 
     let motorThree = this.store.createRecord('motor', {
@@ -23,7 +23,7 @@ export default Ember.Route.extend({
       percentAmplitudeMax: 100,
       cyclesPerSecond: 2,
       percentPhaseShift: 35,
-      color: 'orange'
+      color: '#dbe546'
     });
 
     let frame = this.store.createRecord('frame');
