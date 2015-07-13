@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   handleOverflow: 10,
 
   didInsertElement: function () {
-    let elementId = '#' + this.get('elementId')
+    let elementId = '#' + this.get('elementId');
     let width = $(elementId).width();
     let height = $(elementId).height();
     let svg = d3.select(elementId).append('svg')
@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     let handleStrokeWidth = this.get('handleStrokeWidth');
     let lineWidth = height - (handleStrokeWidth * 2) - this.get('handleOverflow');
     let handleRadius = (height - (handleStrokeWidth)) / 2;
-    let linePadding = handleRadius + handleStrokeWidth
+    let linePadding = handleRadius + handleStrokeWidth;
     let allY = height / 2;
     let lineStartX = linePadding;
     let lineEndX = width - linePadding;
@@ -49,7 +49,7 @@ export default Ember.Component.extend({
     let handleColor = this.get('handleColor');
     let handleStrokeColor = this.get('handleStrokeColor');
     let handleStrokeWidth = this.get('handleStrokeWidth');
-    let handleRadius = this.get('handleRadius')
+    let handleRadius = this.get('handleRadius');
     let cxRight = this.get('rightHandleValue');
     let cxLeft = this.get('leftHandleValue');
     let scale = d3.scale.linear()
@@ -61,14 +61,14 @@ export default Ember.Component.extend({
       } else {
         return x1;
       }
-    }
+    };
     let rangeLineX2 = function () {
       if (cxRight) {
         return scale(cxRight);
       } else {
         return x1;
       }
-    }
+    };
 
     svg.append("line")
       .style("stroke", lineColor)
@@ -95,7 +95,7 @@ export default Ember.Component.extend({
         .style('stroke-width', handleStrokeWidth)
         .attr('class', 'handle')
         .attr('cy', allY)
-        .attr('cx', function () { return scale(cxRight) })
+        .attr('cx', function () { return scale(cxRight); })
         .attr('r', handleRadius)
         .call(this.get('dragRight'));
 
@@ -109,7 +109,7 @@ export default Ember.Component.extend({
         .style('stroke-width', handleStrokeWidth)
         .attr('class', 'handle')
         .attr('cy', allY)
-        .attr('cx', function () { return scale(cxLeft) })
+        .attr('cx', function () { return scale(cxLeft); })
         .attr('r', handleRadius)
         .call(this.get('dragLeft'));
 
@@ -146,8 +146,8 @@ export default Ember.Component.extend({
   dragLeft: function () {
     let component = this;
     return d3.behavior.drag()
-      .on("drag", function(d) {
-        let newX = d3.event.x
+      .on("drag", function() {
+        let newX = d3.event.x;
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           component.updateLeftHandle(newX);
@@ -159,8 +159,8 @@ export default Ember.Component.extend({
   dragRight: function () {
     let component = this;
     return d3.behavior.drag()
-      .on("drag", function(d) {
-        let newX = d3.event.x
+      .on("drag", function() {
+        let newX = d3.event.x;
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           component.updateRightHandle(newX);

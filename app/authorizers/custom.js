@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Base from 'simple-auth/authorizers/base';
 
 export default Base.extend({
@@ -5,7 +6,7 @@ export default Base.extend({
   tokenAttributeName: 'token',
   identificationAttributeName: 'email',
 
-  authorize: function(jqXHR, requestOptions) {
+  authorize: function(jqXHR) {
     var secureData         = this.get('session.secure');
     var userToken          = secureData['token'];
     var userIdentification = secureData['email'];

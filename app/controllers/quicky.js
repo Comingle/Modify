@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
       motor.get('percentPhaseShift'),
       this.get('second'),
       this.get('maxY')
-    )
+    );
   }.property('motorOne.percentAmplitudeMin',
              'motorOne.percentAmplitudeMax',
              'motorOne.cyclesPerSecond',
@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
       motor.get('percentPhaseShift'),
       this.get('second'),
       this.get('maxY')
-    )
+    );
   }.property('motorTwo.percentAmplitudeMin',
              'motorTwo.percentAmplitudeMax',
              'motorTwo.cyclesPerSecond',
@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
       motor.get('percentPhaseShift'),
       this.get('second'),
       this.get('maxY')
-    )
+    );
   }.property('motorThree.percentAmplitudeMin',
              'motorThree.percentAmplitudeMax',
              'motorThree.cyclesPerSecond',
@@ -59,7 +59,7 @@ export default Ember.Controller.extend({
           motorTwo: parseInt(controller.get('motorTwoSin').at(time)),
           motorThree: parseInt(controller.get('motorThreeSin').at(time))
         });
-        controller.get('toy').nextFrame(frame)
+        controller.get('toy').nextFrame(frame);
         controller.runMotors(time + 2);
       }, 2 );
     } else {

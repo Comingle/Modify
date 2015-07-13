@@ -10,14 +10,14 @@ export default Ember.Service.extend({
 
   nextFrame: function (frame) {
     var newBinary = this._getNewBinary(frame);
-    var callback = function (stuff) {};
+    var callback = function () {};
     chrome.serial.send(this.get('connectionId'), newBinary, callback);
   },
 
   stop: function () {
     var stopVals = "{ 0, 0, 0 }";
     var newBinary = this._stringToBinary(stopVals);
-    var callback = function (stuff) {};
+    var callback = function () {};
     chrome.serial.send(this.get('connectionId'), newBinary, callback);
   },
 

@@ -4,7 +4,8 @@
     "window",
     "-Promise",
     "d3",
-    "chrome"
+    "chrome",
+    "$"
   ],
   "browser": true,
   "boss": true,
