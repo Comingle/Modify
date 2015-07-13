@@ -13,6 +13,10 @@ export default Ember.Controller.extend({
   actions: {
     chooseDevice: function (device) {
       this.get('toy').connectDevice(device);
+    },
+
+    invalidateSession: function() {
+      this.get('session').invalidate();
     }
   }
 });

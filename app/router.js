@@ -7,4 +7,9 @@ var Router = Ember.Router.extend({
 
 export default Router.map(function() {
   this.route('quicky');
+  this.route('login');
+  this.resource('users', function () {
+    this.route('new');
+    this.route('show', { path: '/:user_id' });
+  });
 });
