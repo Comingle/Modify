@@ -1,22 +1,45 @@
-<h1>{{session.isAuthenticated}}</h1>
+<div class="container-fluid">
+  <div class='main-nav'>
+    <div class='button comingle-btn'>
+      <span>Comingle</span>
+      {{!-- <img src="assets/images/logo.png"> --}}
+    </div>
+    {{#link-to 'quicky'}}
+      <div {{bind-attr class=':button quickyIsActive:active'}}>
+        <span>QUICKY</span>
+        {{!-- <img src="assets/images/logo.png"> --}}
+      </div>
+    {{/link-to}}
 
-{{#if session.isAuthenticated}}
-  <a {{ action 'invalidateSession' }}>Logout</a>
-{{else}}
-  {{#link-to 'login'}}Login{{/link-to}}
-  {{#link-to 'users.new'}}Sign Up{{/link-to}}
-{{/if}}
+    {{#link-to 'get_intimate'}}
+      <div {{bind-attr class=':button getIntimateIsActive:active'}}>
+        <span>GET INTIMATE</span>
+        {{!-- <img src="assets/images/logo.png"> --}}
+      </div>
+    {{/link-to}}
 
-{{port-picker serialObj=serialObj chooseDevice='chooseDevice'}}
-
-{{!-- <img src="assets/images/logo.png"> --}}
-{{#if isConnected}}
-  <div class='connected-notice'>
-    <h3>CONNECTED<span>({{toy.connectionId}})</span></h3>
+    <div {{bind-attr class=':button accessoryIsActive:active'}}>
+      <span>ACCESSORY</span>
+      {{!-- <img src="assets/images/logo.png"> --}}
+    </div>
+    <div {{bind-attr class=':button myAccountIsActive:active'}}>
+      <span>MY ACCOUNT</span>
+      {{!-- <img src="assets/images/logo.png"> --}}
+    </div>
   </div>
-{{/if}}
-<div class='clear-float'></div>
 
-{{link-to 'Quicky' 'quicky'}}
+  <div class='sub-nav'>
+    <div>HELLO BEAUTIFUL!</div>
+    {{#if session.isAuthenticated}}
+      <a {{ action 'invalidateSession' }}>SIGN OUT</a>
+    {{else}}
+      {{#link-to 'login'}}Login{{/link-to}}
+      {{#link-to 'users.new'}}Sign Up{{/link-to}}
+    {{/if}}
+  </div>
 
-{{outlet}}
+  <div class='container-fluid main-outlet'>
+    {{!port-picker serialObj=serialObj chooseDevice='chooseDevice'}}
+    {{outlet}}
+  </div>
+</div>
