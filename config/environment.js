@@ -1,12 +1,14 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
+  // var apiDomain = 'http://sketchbook.comingle.io'
+  var apiDomain = ' http://localhost:3000'
   var ENV = {
     modulePrefix: 'chrome-app',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    domain: 'http://localhost:3000',
+    domain: apiDomain,
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -23,7 +25,7 @@ module.exports = function(environment) {
     'default-src': "'none'",
     'script-src': "'self'",
     'font-src': "'self'",
-    'connect-src': "'self' https://localhost:3000 http://localhost:3000",
+    'connect-src': "'self' " + apiDomain,
     'img-src': "'self'",
     'style-src': "'self' 'unsafe-inline'",
     'media-src': "'self'"
@@ -33,8 +35,8 @@ module.exports = function(environment) {
     ENV.locationType = 'hash';
     ENV['simple-auth'] = {
       authorizer: 'authorizer:custom',
-      serverTokenEndpoint: 'http://localhost:3000/api/v1/sessions',
-      crossOriginWhitelist: ['http://localhost:3000']
+      serverTokenEndpoint: apiDomain + '/api/v1/sessions',
+      crossOriginWhitelist: [apiDomain]
     };
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
