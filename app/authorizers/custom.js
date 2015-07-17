@@ -7,12 +7,13 @@ export default Base.extend({
   identificationAttributeName: 'email',
 
   authorize: function(jqXHR) {
-    var secureData         = this.get('session.secure');
-    var userToken          = secureData['token'];
-    var userIdentification = secureData['email'];
-    if (this.get('session.isAuthenticated') && !Ember.isEmpty(userToken) && !Ember.isEmpty(userIdentification)) {
-      var authData = 'token="' + userToken + '", ' + 'email="' + userIdentification + '"';
-      jqXHR.setRequestHeader('Authorization', 'Token ' + authData);
+    var secureData = this.get('session.secure');
+    var token      = secureData['authentication_token'];
+    var identifier = secureData['identifier'];
+
+    if (this.get('session.isAuthenticated') && token && identifier) {
+      var authData = JSON.stringify({ authentication_token: token, identifier: identifier });
+      jqXHR.setRequestHeader('Authorization', authData);
     }
   }
 });

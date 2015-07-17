@@ -11,7 +11,7 @@ export default Base.extend({
   restore: function(properties) {
     var props = Ember.Object.create(properties);
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!Ember.isEmpty(props.get('authorization_token'))) {
+      if (!Ember.isEmpty(props.get('authentication_token'))) {
         resolve(properties);
       } else {
         reject();
