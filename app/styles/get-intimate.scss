@@ -1,0 +1,22 @@
+.patterns {
+  li {
+    width: 100%;
+    background-color: $light-background;
+    cursor: pointer;
+    div {
+      margin: 10px 0 10px 0;
+      padding: 10px;
+      &.active {
+        background-color: lighten( $comingle-pink, 40%)
+      }
+    }
+    h3 {
+      margin: 0;
+      color: $dark-font;
+    }
+  }
+  .slider-input {
+    width: 100%;
+    height: 50px;
+  }
+}

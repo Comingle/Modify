@@ -59,6 +59,11 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.locationType = 'hash';
+    ENV['simple-auth'] = {
+      authorizer: 'authorizer:custom',
+      serverTokenEndpoint: apiDomain + '/api/v1/sessions',
+      crossOriginWhitelist: [apiDomain]
+    };
   }
 
   return ENV;
