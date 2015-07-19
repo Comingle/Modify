@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
       var controller = this;
       var data = this.getProperties('identifier', 'password');
       return this.get('session').authenticate('authenticator:custom', data).then( function () {
-        controller.transitionToRoute('/');
+        controller.transitionToRoute('/get_intimate');
       });
     }
   }

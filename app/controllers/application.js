@@ -32,7 +32,10 @@ export default Ember.Controller.extend({
     },
 
     invalidateSession: function() {
-      this.get('session').invalidate();
+      var _this = this;
+      this.get('session').invalidate().then( function () {
+        _this.transitionTo('/');
+      });
     }
   }
 });

@@ -11,7 +11,9 @@
   "icons": { "16": "logo-16.png", "128": "logo.png" },
   "permissions": [
     "serial",
+    "storage",
     "usb",
-    "http://*/"
+    "http://*/",
+    "https://*/"
   ]
 }

@@ -61,6 +61,7 @@ module.exports = function(environment) {
     ENV.locationType = 'hash';
     ENV['simple-auth'] = {
       authorizer: 'authorizer:custom',
+      store: 'store:chrome-storage',
       serverTokenEndpoint: apiDomain + '/api/v1/sessions',
       crossOriginWhitelist: [apiDomain]
     };
