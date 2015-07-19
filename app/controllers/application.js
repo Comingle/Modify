@@ -18,10 +18,6 @@ export default Ember.Controller.extend({
     return this.get('currentRouteName') === '?';
   }.property('currentRouteName'),
 
-  serialObj: function () {
-    return chrome.serial;
-  }.property(),
-
   isConnected: function () {
     return this.get('toy.connectionId') > 0;
   }.property('toy.connectionId'),

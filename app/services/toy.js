@@ -11,14 +11,17 @@ export default Ember.Service.extend({
   nextFrame: function (frame) {
     var newBinary = this._getNewBinary(frame);
     var callback = function () {};
-    chrome.serial.send(this.get('connectionId'), newBinary, callback);
+    if (chrome.serial) {
+      chrome.serial.send(this.get('connectionId'), newBinary, callback);
+    }
   },
 
   startPlaying: function (frames) {
-    this.set('play', true);
+    this.stopPlaying();
     this.set('playFrames', frames);
     var totalIndexes = frames.get('length') - 1;
     var currentIndex = 0;
+    this.set('play', true);
     this.playNextRecursion(currentIndex, totalIndexes);
   },
 
@@ -26,8 +29,8 @@ export default Ember.Service.extend({
     console.log('play')
     var _this = this;
     var frame = this.get('playFrames').objectAt(currentIndex);
-    // this.nextFrame(frame);
-    setTimeout( function () {
+    if (frame) { this.nextFrame(frame);}
+    var playNextTimeout = setTimeout( function () {
       if (_this.get('play')) {
         currentIndex = currentIndex + 1;
         if (currentIndex > totalIndexes) {
@@ -36,18 +39,23 @@ export default Ember.Service.extend({
         _this.playNextRecursion(currentIndex, totalIndexes);
       }
     }, frame.get('timeMS'));
+
+    this.set('playNextTimeout', playNextTimeout);
   },
 
   stopPlaying: function () {
     this.set('play', false);
-    // this.stop();
+    clearTimeout(this.get('playNextTimeout'));
+    this.stop();
   },
 
   stop: function () {
     var stopVals = "{ 0, 0, 0 }";
     var newBinary = this._stringToBinary(stopVals);
     var callback = function () {};
-    chrome.serial.send(this.get('connectionId'), newBinary, callback);
+    if (chrome.serial) {
+      chrome.serial.send(this.get('connectionId'), newBinary, callback);
+    }
   },
 
   _connect: function (device) {
@@ -59,6 +67,7 @@ export default Ember.Service.extend({
   },
 
   _getNewBinary: function (frame) {
+    if (!frame) { console.log("here") }
     var newVals = "{ " + frame.get('motorOne') + ", " + frame.get('motorTwo') + ", " + frame.get('motorThree') + " }";
     return this._stringToBinary(newVals);
   },

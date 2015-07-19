@@ -28,6 +28,10 @@
     </div>
   </div>
 
+  {{#if session.isAuthenticated}}
+    {{port-picker chooseDevice='chooseDevice'}}
+  {{/if}}
+
   <div class='sub-nav'>
     <div>HELLO BEAUTIFUL!</div>
     {{#if session.isAuthenticated}}
@@ -39,7 +43,6 @@
   </div>
 
   <div class='container-fluid main-outlet'>
-    {{!port-picker serialObj=serialObj chooseDevice='chooseDevice'}}
     {{outlet}}
   </div>
 </div>

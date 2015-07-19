@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['port-picker'],
 
   isSelecting: false,
 
@@ -12,10 +13,12 @@ export default Ember.Component.extend({
   },
 
   setDevices: function () {
-    // var _this = this;
-    // this.get('serialObj').getDevices(function (devices) {
-    //   _this.set('devices', devices);
-    // });
+    var _this = this;
+    if (chrome.serial) {
+      chrome.serial.getDevices(function (devices) {
+        _this.set('devices', devices);
+      });
+    }
   },
 
   devicesFound: function () {

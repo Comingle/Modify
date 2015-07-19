@@ -2,13 +2,13 @@
 <h3>VIBRATION PATTERNS FOR YOUR MOD</h3>
 
 <ul class='patterns'>
-{{#each pattern in model}}
-  <li>
-    {{patterns/basic-pattern
-      pattern=pattern
-      selectPattern='selectPattern'
-      stopPlayingPattern='stopPlayingPattern'
-    }}
-  </li>
-{{/each}}
+  {{#each pattern in model}}
+    <li>
+      {{patterns/basic-pattern
+        pattern=pattern
+        selectPattern='selectPattern'
+        stopPlayingPattern='stopPlayingPattern'
+      }}
+    </li>
+  {{/each}}
 </ul>

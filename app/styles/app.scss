@@ -4,6 +4,7 @@
 @import "sub-nav";
 @import "get-intimate";
 
+html, body { overflow-y: visible; }
 body { background-color: $body-background; }
 a { text-decoration: none; }
 h1 { color: $dark-font; }
@@ -32,4 +33,18 @@ li { margin: 0; padding: 0; }
 
 .slider-input .handle {
   cursor: pointer;
+}
+
+
+
+// HACKY TEMP DESIGN
+
+.port-picker {
+  position: absolute;
+  right: 200px;
+  top: 20px;
+  font-weight: $link-font-weight;
+  a {
+    color: $comingle-blue;
+  }
 }
