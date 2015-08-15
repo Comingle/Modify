@@ -1,7 +1,34 @@
-<h3>{{pattern.prettyName}}</h3>
+<div class='basic-pattern'>
+  <div class="main-interface">
+    <div {{bind-attr class=':discription-block pattern.color'}}>
+      <h3>{{pattern.prettyName}}</h3>
+    </div>
+    <div class="interface-block">
+      <div class="play-pause">
+        {{#if isPlaying}}
+          <div {{action 'pausePattern'}} class="control-btn">PAUSE</div>
+        {{else}}
+          <div {{action 'playPattern'}} class="control-btn">PLAY</div>
+        {{/if}}
+      </div>
+      <div {{action 'toggleOptions'}} class="toggle-options">...</div>
+    </div>
+  </div>
 
-<ul class='control-options'>
-  {{#each controlOption in pattern.controlOptions}}
-    <li>{{slider-input rightHandleValue=controlOption.value rangeLineColor=motorOne.color rangeLineColor='#e91e77'}}</li>
-  {{/each}}
-</ul>
+  <div class="patterns">
+    {{#if showOptions}}
+      <ul class='control-options'>
+        {{#each controlOption in pattern.controlOptions}}
+          <li>
+            <div {{bind-attr class=':discription-block pattern.color'}}>
+              <h5>{{controlOption.name}}</h5>
+            </div>
+            <div class="interface-block">
+              {{slider-input rightHandleValue=controlOption.value rangeLineColor=pattern.colorHex}}
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+</div>

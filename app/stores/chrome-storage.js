@@ -1,4 +1,4 @@
-import LocalStorage from 'simple-auth/stores/local-storage'
+import LocalStorage from 'simple-auth/stores/local-storage';
 
 export default LocalStorage.extend({
 
@@ -7,7 +7,7 @@ export default LocalStorage.extend({
   },
 
   persist: function(data) {
-    var _data = {}
+    var _data = {};
     _data[this.key] = data;
     chrome.storage.local.set(_data, this.logginCallback);
     this._lastData = this.restore();

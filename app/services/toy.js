@@ -26,7 +26,7 @@ export default Ember.Service.extend({
   },
 
   playNextRecursion: function (currentIndex, totalIndexes) {
-    console.log('play')
+    console.log('play');
     var _this = this;
     var frame = this.get('playFrames').objectAt(currentIndex);
     if (frame) { this.nextFrame(frame);}
@@ -38,6 +38,7 @@ export default Ember.Service.extend({
         }
         _this.playNextRecursion(currentIndex, totalIndexes);
       }
+      console.log("MS : " + frame.get('timeMS'));
     }, frame.get('timeMS'));
 
     this.set('playNextTimeout', playNextTimeout);
@@ -67,8 +68,8 @@ export default Ember.Service.extend({
   },
 
   _getNewBinary: function (frame) {
-    if (!frame) { console.log("here") }
     var newVals = "{ " + frame.get('motorOne') + ", " + frame.get('motorTwo') + ", " + frame.get('motorThree') + " }";
+    console.log(newVals);
     return this._stringToBinary(newVals);
   },
 

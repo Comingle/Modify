@@ -151,6 +151,7 @@ export default Ember.Component.extend({
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           component.updateLeftHandle(newX);
+          console.log('send action instead of changing in place')
           component.set('leftHandleValue', newValue);
         }
       });
@@ -164,6 +165,8 @@ export default Ember.Component.extend({
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           component.updateRightHandle(newX);
+          console.log('send action instead of changing in place')
+          // Component.sendAction('rightHandleValueChanged', )
           component.set('rightHandleValue', newValue);
         }
       });

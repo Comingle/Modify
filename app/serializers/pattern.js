@@ -31,7 +31,7 @@ export default DS.ActiveModelSerializer.extend({
         option.defaultValue = parseInt(option.default);
         delete option.default;
         controlOptions.push(option);
-        controlOptionIds.push(uid)
+        controlOptionIds.push(uid);
       });
 
       pattern.controlOptions = controlOptionIds;
