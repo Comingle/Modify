@@ -1,5 +1,14 @@
 import Ember from 'ember';
 
+// {{slider-input
+//   data=controlOption
+//   rightHandleValueChanged='maxValueChanged'
+//   leftHandleValueChanged='minValueChanged'
+//   rangeLineColor=pattern.colorHex
+// }}
+
+// controlOption must have a max and/or min
+
 export default Ember.Component.extend({
   classNames: ['slider-input'],
   lineColor: '#cad1e5',
@@ -151,7 +160,6 @@ export default Ember.Component.extend({
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           component.updateLeftHandle(newX);
-          console.log('send action instead of changing in place')
           component.set('leftHandleValue', newValue);
         }
       });
@@ -165,8 +173,7 @@ export default Ember.Component.extend({
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
           component.updateRightHandle(newX);
-          console.log('send action instead of changing in place')
-          // Component.sendAction('rightHandleValueChanged', )
+          component.sendAction('rightHandleValueChanged', component.get('data'), newValue);
           component.set('rightHandleValue', newValue);
         }
       });

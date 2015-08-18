@@ -24,7 +24,13 @@
               <h5>{{controlOption.name}}</h5>
             </div>
             <div class="interface-block">
-              {{slider-input rightHandleValue=controlOption.value rangeLineColor=pattern.colorHex}}
+              {{slider-input
+                data=controlOption
+                rightHandleValue=controlOption.value
+                rightHandleValueChanged='maxValueChanged'
+                leftHandleValueChanged='minValueChanged'
+                rangeLineColor=pattern.colorHex
+              }}
             </div>
           </li>
         {{/each}}

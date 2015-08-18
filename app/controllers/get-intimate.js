@@ -11,12 +11,15 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    editPatternOptions: function (pattern, optionName, property, value) {
-      pattern.get('controlOptions').findBy('name', optionName).set(property, value);
+    maxOptionValueChanged: function (pattern, option, property, value) {
+      option.set(property, value);
 
-      if (optionName === 'time') {
+      // TODO: this will need to be handled much better for each pattern
+      // to do this any better we really need to be able to build them on the client
+      // to me that means we should build out sin functions
+      if (option.get('name') === 'time') {
         pattern.get('frames').forEach( (frame) => {
-          frame.set(property, value);
+          frame.set('timeMS', value);
         });
       }
 
