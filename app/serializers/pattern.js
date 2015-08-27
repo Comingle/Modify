@@ -3,14 +3,18 @@ import DS from 'ember-data';
 export default DS.ActiveModelSerializer.extend({
 
   extractArray: function(store, type, payload) {
-    var patterns = payload.components;
+    var patterns = payload;
     var frames = [];
     var controlOptions = [];
     var getUniqueId = this.getUniqueId;
 
-    patterns.forEach( function (pattern) {
+    var newPatterns = patterns.map( function (patternFull) {
       var frameIds = [];
       var controlOptionIds = [];
+      var name = Object.keys(patternFull)[0];
+      var pattern = patternFull[name];
+      pattern.name = name;
+      pattern.prettyName = pattern.pretty_name;
 
       pattern.testride.steps.forEach( function (step, index) {
         var frame = {};
@@ -25,7 +29,7 @@ export default DS.ActiveModelSerializer.extend({
         frameIds.push(uid);
       });
 
-      pattern.options.forEach(function (option, index) {
+      pattern.variables.forEach(function (option, index) {
         var uid = getUniqueId(pattern.id, index);
         option.id = uid;
         option.defaultValue = parseInt(option.default);
@@ -37,9 +41,10 @@ export default DS.ActiveModelSerializer.extend({
       pattern.controlOptions = controlOptionIds;
       pattern.frames = frameIds;
       delete pattern.testride;
+      return pattern;
     });
 
-    payload = { patterns: patterns, frames: frames, controlOptions: controlOptions };
+    payload = { patterns: newPatterns, frames: frames, controlOptions: controlOptions };
     return this._super(store, type, payload);
   },
 

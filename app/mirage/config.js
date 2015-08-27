@@ -1,4 +1,13 @@
+import patterns_data from './fixtures/patterns';
+import config from '../config/environment';
+
 export default function() {
+
+  let base_path = config.domain + '/api/v1';
+
+  this.get(base_path + '/patterns', function() {
+    return patterns_data;
+  });
 
   // These comments are here to help you get started. Feel free to delete them.
 
