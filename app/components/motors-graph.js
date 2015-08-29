@@ -1,6 +1,12 @@
 import Ember from 'ember';
 import SineWave from 'chrome-app/lib/sine-wave';
 
+// {{motors-graph
+//   motorOne=motorOne
+//   motorTwo=motorTwo
+//   motorThree=motorThree
+// }}
+
 export default Ember.Component.extend({
   classNames: ['motors-graph'],
   backgroundColor: '#202336',

@@ -3,6 +3,7 @@ import Ember from 'ember';
 // {{slider-input
 //   data=controlOption
 //   rightHandleValueChanged='maxValueChanged'
+//   rightHandleValueChangEnded='maxValueChanged'
 //   leftHandleValueChanged='minValueChanged'
 //   rangeLineColor=pattern.colorHex
 // }}
@@ -167,15 +168,19 @@ export default Ember.Component.extend({
 
   dragRight: function () {
     let component = this;
+    let currentValue;
     return d3.behavior.drag()
       .on("drag", function() {
         let newX = d3.event.x;
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
+          currentValue = newValue;
           component.updateRightHandle(newX);
           component.sendAction('rightHandleValueChanged', component.get('data'), newValue);
           component.set('rightHandleValue', newValue);
         }
+      }).on('dragend', function () {
+        component.sendAction('rightHandleValueChangeEnded', component.get('data'), currentValue);
       });
   }.property()
 });
