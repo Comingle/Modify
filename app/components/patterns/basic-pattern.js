@@ -13,10 +13,6 @@ export default Ember.Component.extend({
     return this.get('pattern.active');
   }.property('pattern.active'),
 
-  active: function () {
-    return this.get('pattern.active');
-  }.property('pattern.active'),
-
   actions: {
     maxValueChanged: function (controlOption, newValue) {
       this.sendAction('maxValueChanged', this.get('pattern'), controlOption, 'max', newValue);

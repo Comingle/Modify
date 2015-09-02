@@ -1,0 +1,33 @@
+.login {
+  background: #08c2f1 url('http://www.comingle.io/wp-content/images/logo.svg') no-repeat;
+  background-size: cover;
+  h1 {
+    background: linear-gradient(90deg, $dark-purple 25%, $red 50%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+  header {
+    background:rgba(255,255,255,0.5);
+  }
+}
+
+.login-wrap {
+  background-color: $body-background;
+  box-shadow: #00a7d2 0px 1px 0px;
+  border-left:#e6e7ee 1px solid;
+  border-right:#e6e7ee 1px solid;
+  border-bottom:#d3d6e1 1px solid;
+  padding: 20px;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    button {
+      margin: 5px 5px 0 5px;
+    }
+    a {
+      flex: 1;
+    }
+  }
+}

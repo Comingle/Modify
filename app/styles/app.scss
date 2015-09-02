@@ -4,17 +4,163 @@
 @import "sub-nav";
 @import "get-intimate";
 @import "basic-pattern";
+@import "playback";
+
+@mixin flex-center-column {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  @include flex-center-column;
+}
+
+@mixin flex-center-row {
+
+}
 
 html, body { overflow-y: visible; }
-body { background-color: $body-background; }
-a { text-decoration: none; }
-h1 { color: $dark-font; }
-h3 { color: $pink-font;}
+
+body {
+  background-color: $body-background;
+  font-family: $font;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  min-height: 100vh;
+  counter-reset: section;
+  flex: 1;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color:inherit;
+  }
+}
+
+h1 {
+  color: $dark-font;
+  font-weight:900;
+  letter-spacing: 3px;
+  font-size: 2.5em;
+  flex: 1;
+}
+
+h3 {
+  color: $pink-font;
+  font-weight:700;
+  font-size: 1.3em;
+  flex: 1;
+}
+
 ul { list-style-type: none; padding: 0; }
 li { margin: 0; padding: 0; }
-.container-fluid {
-  padding: 0;
+
+label {
+  color: $gray;
 }
+
+header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  h1 {
+    flex: 1 0 auto;
+    margin: 0;
+  }
+  h3 {
+    flex: 0 0 100%;
+    margin-top:18px;
+  }
+}
+
+/* page structure */
+
+body > .ember-view {
+  display:flex;
+  flex-direction:row;
+  flex: 1;
+}
+
+.app-main {
+  flex: 1;
+}
+
+.app-nav {
+  flex: 0 0 180px;
+  order: -1;
+  background-color: $blue;
+  display: flex;
+  max-height: 1206px;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* nav definitions */
+
+.nav-logo {
+  background-color: $light-blue;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav-item {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-spacer {
+  flex: 1 1 100%;
+}
+.nav-last-item {
+  color: #fff;
+  background-color: $dark-blue;
+}
+
+.nav-active {
+  background-color: $background;
+  color: $comingle-pink;
+}
+
+.nav-inactive {
+  color: #555a73;
+  background-color: $dark-blue;
+}
+
+/* inputs */
+
+input[type='text'],input[type='password'] {
+  border: 2px $gray solid;
+  border-radius: 0;
+  box-shadow: none;
+  height: 72px;
+  font-size: 1.4em;
+  background-color:inherit;
+}
+
+.slider-input {
+  height: 30px;
+  width:100%;
+}
+
+.slider-input .handle {
+  cursor: ew-resize;
+}
+
+/* */
+
 
 .main-outlet {
   padding: 150px;
@@ -27,25 +173,305 @@ li { margin: 0; padding: 0; }
   width: 900px;
 }
 
-.slider-input {
-  height: 30px;
-  width: 600px;
-}
-
-.slider-input .handle {
-  cursor: pointer;
-}
-
 
 
 // HACKY TEMP DESIGN
 
 .port-picker {
-  position: absolute;
-  right: 200px;
-  top: 20px;
   font-weight: $link-font-weight;
   a {
     color: $comingle-blue;
   }
+}
+
+// unsorted
+
+.password {
+  flex-direction:row;
+  flex-wrap:wrap;
+  display:flex;
+  label {
+    flex: 9 0 0;
+  }
+  a {
+   font-size: 0.8em;
+   color: $gray;
+ }
+
+}
+
+.avatar {
+  height:180px;
+  margin:0;
+  img {
+    margin-bottom: 10px;
+  }
+  span {
+    text-align: center;
+    font-size: 12px;
+    color: $light-purple;
+    margin: 0 40px 0 40px;
+  }
+}
+
+.password {
+  flex-direction:row;
+  flex-wrap:wrap;
+  display:flex;
+  label {
+    flex: 9 0 0;
+  }
+  a {
+   font-size: 0.8em;
+   color: $gray;
+ }
+
+}
+
+/* <select> styling */
+
+select {
+  background-color: inherit;
+  -webkit-appearance: none;
+  height: 100%;
+  color: #fff;
+  text-transform:uppercase;
+  border-radius: 0px;
+  border: 0px;
+  font-weight: 200;
+  padding-left:0;
+  align-self: center;
+  flex: 9 0 0;
+  margin-left: 1em;
+}
+
+.select-wrapper {
+  background-color: $light-purple;
+  height:100%;
+  flex:2 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:row;
+  overflow:hidden;
+  padding-right: 1em;
+}
+
+.select-triangle {
+  color: #fff;
+  top: 0px;
+}
+
+.dark {
+  background-color: $purple;
+}
+
+
+.upload-box {
+  @include flex-center-column;
+  font-size: 16px;
+  background: $dark-purple;
+  a {
+    @include flex-center-column;
+    height: 100%;
+  }
+  span {
+    color: #fff;
+  }
+  .glyphicon {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+}
+
+.select-label {
+  font-weight: 900;
+  padding-top:0;
+  padding-bottom:0;
+  margin-bottom: 0;
+  flex: 1 0 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+  color: $dark-purple;
+}
+
+/* list item styling rules. */
+
+@mixin list-item {
+  min-height: 80px;
+  font-size: 1.5em;
+  align-items: center;
+  display:flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+}
+
+
+.list-item-add {
+  @include list-item;
+  border: $gray 3px dashed;
+  color: $gray;
+}
+
+.list-item {
+  @include list-item;
+  box-shadow: #ebecf0 0px 1px 0px;
+  color: $dark-purple;
+  background-color: #fff;
+  border-left:#e6e7ee 1px solid;
+  border-right:#e6e7ee 1px solid;
+  border-bottom:#d3d6e1 1px solid;
+}
+
+/* .in appears on expanded collapse() items -- negative margin moves it up to
+  appear to merge with its parent */
+.in {
+  margin-top: -10px;
+}
+
+.list-item-double {
+  @include list-item;
+  height: 160px;
+  box-shadow: #ebecf0 0px 1px 0px;
+  color: $dark-purple;
+  background-color: #fff;
+  border-left:#e6e7ee 1px solid;
+  border-right:#e6e7ee 1px solid;
+  border-bottom:#d3d6e1 1px solid;
+}
+
+.list-item-double-prefix {
+  @include flex-center-column;
+  flex: 0 0 20%;
+  height:100%;
+}
+
+.list-item-double-name {
+  width: 100%;
+  /*margin: 0 22px 0 22px;*/
+  display:flex;
+  height:100%;
+  flex-direction:column;
+  span {
+    margin:0;
+    font-size: 1em;
+    color: #fff;
+  }
+  a {
+    flex: 2 0 0;
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    background-color: $light-purple;
+  }
+}
+
+.list-item-numbered::before {
+  counter-increment: section;
+  content: counter(section);
+  flex: 1 0 auto;
+  margin-right: 1em;
+  margin-left: 1em;
+  color: $gray;
+}
+
+.pattern-slider .list-item-double {
+  margin-top: 50px;
+}
+
+/* gray dashed outline item for adding new items */
+.list-item-add {
+  border: $gray 3px dashed;
+  height: 80px;
+  color: $gray;
+  font-size: 1.5em;
+  align-items: center;
+  display:flex;
+  margin-bottom: 8px;
+}
+
+.list-item-prefix {
+  flex: 1 0 auto;
+  margin-left: 1em;
+  color: $gray;
+}
+
+.list-item-suffix {
+  flex: 1 0 auto;
+  margin-left: 2rem;
+  color: $gray;
+  font-size:2.7rem;
+}
+
+.list-item-name {
+    flex: 20 0 auto;
+}
+
+/* inputs */
+
+input[type='text'],input[type='password'] {
+  border: 2px $gray solid;
+  border-radius: 0;
+  box-shadow: none;
+  height: 72px;
+  font-size: 1.4em;
+  background-color:inherit;
+}
+
+/* CSS for range sliders */
+
+.range-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 18px 0 18px;
+  margin: 18px 0 36px 0;
+  label {
+    color: $gray;
+    font-size: 0.7em;
+    margin-bottom: 5px;
+  }
+}
+
+/* misc */
+
+.pink {
+  background-color: $pink;
+}
+
+.yellow {
+  background-color: $yellow;
+}
+
+.green {
+  background-color: $green;
+}
+
+.glyphicon {
+  top: 0;
+  line-height:inherit;
+}
+
+.left-align {
+  padding-left: 0 !important;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.save-button {
+  color: $gray;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: $gray 3px solid;
+  border-radius: 12px 12px 12px 12px;
+  font-size: 0.8em;
 }

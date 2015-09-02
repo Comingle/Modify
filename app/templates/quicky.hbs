@@ -1,32 +1,101 @@
-<button {{action 'startMotors'}}>Lets Play</button>
-<button {{action 'stopMotors'}}>Stop Playin'</button>
-{{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
-
-<div class='motorOne'>
-  {{!-- <div>{{motorOne.percentAmplitude}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}</div>
-  {{!-- <div>{{motorOne.cyclesPerSecond}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.cyclesPerSecond rangeLineColor=motorOne.color}}</div>
-  {{!-- <div>{{motorOne.percentPhaseShift}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorOne.percentPhaseShift rangeLineColor=motorOne.color}}</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div id="pattern-grid-controls">
+      <div id="controls">
+        <a {{action null}} id="play-pause-wrapper">
+          <span class="glyphicon glyphicon-play playback-btn"></span>
+          <span class="playback-btn-label">Let's play!</span>
+        </a>
+        <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
+        <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
+      </div>
+      <div id="grid">
+        <div id="top-haze">
+            <span class='graph-label'>Maximum Intensity</span>
+        </div>
+        <div id="bottom-haze">
+          <span class='graph-label'>Minimum Intensity</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<hr>
-<div class='motorTwo'>
-  {{!-- <div>{{motorTwo.percentAmplitude}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input leftHandleValue=motorTwo.percentAmplitudeMin rightHandleValue=motorTwo.percentAmplitudeMax rangeLineColor=motorTwo.color}}</div>
-  {{!-- <div>{{motorTwo.cyclesPerSecond}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.cyclesPerSecond rangeLineColor=motorTwo.color}}</div>
-  {{!-- <div>{{motorTwo.percentPhaseShift}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorTwo.percentPhaseShift rangeLineColor=motorTwo.color}}</div>
+<div class="row">
+  <header class="col-md-8 col-md-offset-2">
+    <h1>Pleasure Playlist</h1>
+    <button class="btn save-button">Save Playlist</button>
+  </header>
 </div>
-<hr>
-<div class='motorThree'>
-  {{!-- <div>{{motorThree.percentAmplitude}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input leftHandleValue=motorThree.percentAmplitudeMin rightHandleValue=motorThree.percentAmplitudeMax rangeLineColor=motorThree.color}}</div>
-  {{!-- <div>{{motorThree.cyclesPerSecond}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.cyclesPerSecond rangeLineColor=motorThree.color}}</div>
-  {{!-- <div>{{motorThree.percentPhaseShift}}</div> --}}
-  <div class='percent-phase-shift'>{{slider-input rightHandleValue=motorThree.percentPhaseShift rangeLineColor=motorThree.color}}</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="list-item">
+      <span class="list-item-name list-item-numbered">The Dougaller</span>
+      <span class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
+    </div>
+  </div>
 </div>
-
-{{outlet}}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="list-item">
+      <span class="list-item-name list-item-numbered">The Dougaller</span>
+      <span class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="list-item" data-toggle="collapse" data-target="#pattern-config"
+      aria-expanded="false" aria-controls="pattern-config">
+      <span class="list-item-name list-item-numbered">The Dougaller</span>
+      <span class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
+    </div>
+    <div class="collapse pattern-slider" id="pattern-config">
+      <div class="row">
+        <div class="list-item-double">
+          <span class="list-item-double-prefix yellow">motor1</span>
+          <div class="list-item-double-name">
+            <div class="range-wrapper">
+              <label>Motor 1 Power</label>
+              {{slider-input leftHandleValue=motorTwo.percentAmplitudeMin rightHandleValue=motorTwo.percentAmplitudeMax rangeLineColor=motorTwo.color}}
+              <!-- <input class='yellow' type="range" min="0" max="255" /> -->
+            </div>
+            <div class="range-wrapper">
+              <label>Frequency</label>
+              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="list-item-double">
+          <span class="list-item-double-prefix pink">motor2</span>
+          <div class="list-item-double-name">
+            <div class="range-wrapper">
+              <label>Intensity</label>
+              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
+            </div>
+            <div class="range-wrapper">
+              <label>Frequency</label>
+              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="list-item-double">
+          <span class="list-item-double-prefix green">motor3</span>
+          <div class="list-item-double-name">
+            <div class="range-wrapper">
+              <label>Intensity</label>
+              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
+            </div>
+            <div class="range-wrapper">
+              <label>Frequency</label>
+              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

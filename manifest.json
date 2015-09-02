@@ -1,5 +1,7 @@
 {
-  "name": "Comingle",
+  "name": "Comingle Modify",
+  "short_name": "Modify",
+  "author": "Comingle",
   "description": "A great app for the Comingle toy!",
   "version": "0.1",
   "manifest_version": 2,
@@ -8,7 +10,12 @@
       "scripts": ["background.js"]
     }
   },
-  "icons": { "16": "logo-16.png", "128": "logo.png" },
+  "icons": { "16": "logoicon-16.png",
+           "32": "logoicon-32.png",
+           "64": "logoicon-64.png",
+          "128": "logoicon-128.png",
+          "256": "logoicon-256.png"
+  },
   "permissions": [
     "serial",
     "storage",

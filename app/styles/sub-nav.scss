@@ -1,9 +1,19 @@
-.sub-nav {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  font-weight: $link-font-weight;
+// .sub-nav {
+//   position: absolute;
+//   right: 20px;
+//   top: 20px;
+//   font-weight: $link-font-weight;
+//   a {
+//     color: $comingle-blue;
+//   }
+// }
+
+.greeting {
+  text-align: right;
+  color: $gray;
+  padding: 30px 45px 0;
   a {
     color: $comingle-blue;
+    text-decoration:none;
   }
 }

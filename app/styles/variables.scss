@@ -1,20 +1,37 @@
 $main-nav-btn-width: 150px;
 
+$font: 'Futura', "Helvetica", sans-serif;
 
 // COLORS
 $comingle-blue: #09c3f2;
-$comingle-pink: #e91e77;
-$pink-wave: #d48dc9;
-$yellow-wave: #fec945;
-$green-wave: #dbe546;
-$dark-blue: #222538;
+$comingle-pink: #e91f76;
+$pink-wave: #d58cc8;
+$yellow-wave: #ffc845;
+$green-wave: #dbe444;
+$dark-blue: #232538;
+$gray: #bfc3d9;
 
-$body-background: #f7f7f7;
+$light-purple: #7580b8;
+$purple: #55609a;
+$dark-purple: #384272;
+
+$body-background: #f8f8f8;
 $light-background: #ffffff;
 $disabled-background: $dark-blue;
 
 $light-font: $light-background;
-$dark-font: $dark-blue;
+$dark-font: $dark-purple;
 $pink-font: $comingle-pink;
 $disabled-font: #565c74;
 $link-font-weight: 500;
+
+$red: $comingle-pink;
+$background: $body-background;
+$light-blue: $comingle-blue;
+$blue: $dark-blue;
+$yellow: $yellow-wave;
+$pink: $pink-wave;
+$green: $green-wave;
+// to reconcile
+
+$dark-blue-orig : #1c1d2b;

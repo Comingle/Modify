@@ -1,0 +1,91 @@
+/* pattern display/playback */
+
+#pattern-grid-controls {
+  display: flex;
+}
+
+#grid {
+  height: 320px;
+  width: 720px;
+  line-height: 1;
+  background-color: $dark-blue;
+  background-size: 32px 32px, 32px 32px;
+  background-image:
+    linear-gradient(rgba(41,46,74,1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(41,46,74,1) 1px, transparent 1px);
+  display:flex;
+  flex-direction:column;
+  align-items: stretch;
+  justify-content: space-between;
+  flex: 4 0 0;
+}
+
+#top-haze {
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px dotted #4a527b;
+  flex: 0 0 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#bottom-haze {
+  background: rgba(255,255,255,0.05);
+  flex: 0 0 10%;
+  border-top: 1px dotted #4a527b;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.graph-label {
+  font-family: $font;
+  color: $dark-purple;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  padding-right: 1.5em;
+}
+
+#controls {
+  flex: 1 0 0;
+  background: $dark-purple;
+  display: flex;
+  flex-direction:column;
+}
+
+#play-pause-wrapper {
+  flex: 2 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.playback-btn {
+	color: #fff;
+  font-size: 2em;
+  padding-bottom: 0.5em;
+}
+
+.playback-btn-label {
+  font-family: $font;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+#play-pause-next {
+  background-color: $purple;
+  flex:1 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#play-pause-previous {
+  background-color: $light-purple;
+  flex: 1 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
