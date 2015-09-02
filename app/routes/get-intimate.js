@@ -6,5 +6,4 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function () {
     return this.store.find('pattern');
   }
-
 });

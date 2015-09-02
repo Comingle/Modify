@@ -8,6 +8,14 @@ var Pattern = DS.Model.extend({
   controlOptions: DS.hasMany('control-option'),
   active: DS.attr('boolean', { defaultValue: false }),
 
+  updateOptionValues: function () {
+    let options = this.get('controlOptions');
+    return options.reduce( function (acc, option) {
+      acc[option.get('name')] = option.get('value');
+      return acc;
+    }, {});
+  }.property('controlOptions.@each.value'),
+
   // TODO: this color value should come from the server
   color: 'comingle-blue',
 

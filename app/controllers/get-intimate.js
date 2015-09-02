@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import PatternUpdaterMixin from '../mixins/pattern-updater';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(PatternUpdaterMixin, {
 
   makeActive: function (selectedPattern) {
     this.get('model').forEach( function (pattern) {
@@ -12,17 +13,9 @@ export default Ember.Controller.extend({
 
   actions: {
     maxOptionValueChanged: function (pattern, option, property, value) {
+      console.log('CHANGE', value)
       option.set(property, value);
-
-      // TODO: this will need to be handled much better for each pattern
-      // to do this any better we really need to be able to build them on the client
-      // to me that means we should build out sin functions
-      if (option.get('name') === 'time') {
-        pattern.get('frames').forEach( (frame) => {
-          frame.set('timeMS', value);
-        });
-      }
-
+      this.updatePattern(pattern);
       if (pattern.get('active')) {
         this.get('toy').startPlaying(pattern.get('frames'));
       }
