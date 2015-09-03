@@ -1,15 +1,14 @@
-<h1>WIGGLE PRESETS</h1>
-<h3>VIBRATION PATTERNS FOR YOUR MOD</h3>
-
-<ul class='patterns'>
-  {{#each pattern in model}}
-    <li>
-      {{patterns/basic-pattern
-        pattern=pattern
-        selectPattern='startPlayingPattern'
-        stopPlayingPattern='stopPlayingPattern'
-        maxValueChanged='maxOptionValueChanged'
-      }}
-    </li>
-  {{/each}}
-</ul>
+<div class="row">
+  <header class="col-md-8 col-md-offset-2">
+    <h1>Pleasure Playlist</h1>
+    <button class="btn save-button">Save Playlist</button>
+  </header>
+</div>
+{{#each pattern in model}}
+  {{patterns/basic-pattern
+    pattern=pattern
+    selectPattern='startPlayingPattern'
+    stopPlayingPattern='stopPlayingPattern'
+    maxValueChanged='maxOptionValueChanged'
+  }}
+{{/each}}

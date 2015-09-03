@@ -159,6 +159,10 @@ input[type='text'],input[type='password'] {
   cursor: ew-resize;
 }
 
+.pattern-container {
+  margin-top: -10px;
+}
+
 /* */
 
 
@@ -407,7 +411,8 @@ select {
 }
 
 .list-item-name {
-    flex: 20 0 auto;
+    //flex: 20 0 auto;
+    width: 85%;
 }
 
 /* inputs */

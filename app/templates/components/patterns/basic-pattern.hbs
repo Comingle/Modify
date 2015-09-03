@@ -1,40 +1,31 @@
-<div class='basic-pattern'>
-  <div class="main-interface">
-    <div {{bind-attr class=':discription-block pattern.color'}}>
-      <h3>{{pattern.prettyName}}</h3>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="list-item">
+      <span class="list-item-name list-item-numbered">{{pattern.prettyName}}</span>
+      {{#if isPlaying}}
+        <span {{action 'pausePattern'}} class="glyphicon glyphicon-pause list-item-suffix"></span>
+      {{else}}
+        <span {{action 'playPattern'}} class="glyphicon glyphicon-play list-item-suffix"></span>
+      {{/if}}
+        <span {{action 'toggleOptions'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
     </div>
-    <div class="interface-block">
-      <div class="play-pause">
-        {{#if isPlaying}}
-          <div {{action 'pausePattern'}} class="control-btn">PAUSE</div>
-        {{else}}
-          <div {{action 'playPattern'}} class="control-btn">PLAY</div>
-        {{/if}}
-      </div>
-      <div {{action 'toggleOptions'}} class="toggle-options">...</div>
-    </div>
-  </div>
-
-  <div class="patterns">
     {{#if showOptions}}
-      <ul class='control-options'>
+    <div class="pattern-container">
+      <div class="list-item col">
         {{#each controlOption in pattern.controlOptions}}
-          <li>
-            <div {{bind-attr class=':discription-block pattern.color'}}>
-              <h5>{{controlOption.name}}</h5>
-            </div>
-            <div class="interface-block">
-              {{slider-input
-                data=controlOption
-                rightHandleValue=controlOption.value
-                rightHandleValueChangeEnded='maxValueChanged'
-                leftHandleValueChanged='minValueChanged'
-                rangeLineColor=pattern.colorHex
-              }}
-            </div>
-          </li>
+          <div class="range-wrapper">
+            <label>{{controlOption.name}}</label>
+            {{slider-input
+              data=controlOption
+              rightHandleValue=controlOption.value
+              rightHandleValueChangeEnded='maxValueChanged'
+              leftHandleValueChanged='minValueChanged'
+              rangeLineColor=pattern.colorHex
+            }}
+          </div>
         {{/each}}
-      </ul>
+      </div>
+    </div>
     {{/if}}
   </div>
 </div>
