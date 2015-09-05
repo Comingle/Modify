@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   }.property('currentRouteName'),
 
   myAccountIsActive: function () {
-    return this.get('currentRouteName') === '?';
+    return this.get('currentRouteName') === 'account';
   }.property('currentRouteName'),
 
   isConnected: function () {

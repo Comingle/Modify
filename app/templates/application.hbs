@@ -8,7 +8,7 @@
     <div class="col-md-4 greeting">
       <p>Hello beautiful!</p>
       {{#if session.isAuthenticated}}
-        <a {{ action 'myAccount'}}>My Account</a> |
+        <a {{ action 'myAccount'}}>My Account</a>
         <a {{ action 'invalidateSession' }}>Sign Out</a>
       {{else}}
         {{#link-to 'login'}}Login{{/link-to}}
@@ -24,16 +24,24 @@
       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logoIcon"></use>
     </svg>
   </div>
-  {{#link-to 'quicky' class='nav-item nav-inactive'}}
-    <img src="assets/images/quicky-inactive.png">
+  {{#link-to 'quicky' class='nav-item'}}
+    {{#if quickyIsActive}}
+      <img src="assets/images/quicky-active.png">
+    {{else}}
+      <img src="assets/images/quicky-inactive.png">
+    {{/if}}
     <span>Quicky</span>
   {{/link-to}}
-  {{#link-to 'get_intimate' class='nav-item nav-active'}}
-    <img src="assets/images/initimate-active.png">
+  {{#link-to 'get_intimate' class='nav-item'}}
+  {{#if getIntimateIsActive}}
+    <img src="assets/images/intimate-active.png">
+  {{else}}
+    <img src="assets/images/intimate-inactive.png">
+  {{/if}}
     <span>Get Intimate</span>
   {{/link-to}}
   <div class="nav-spacer"></div>
-  {{#link-to '' class='nav-item nav-last-item nav-inactive'}}
+  {{#link-to 'account' class='nav-item nav-last-item'}}
     <img src="assets/images/patterns-inactive.png">
     <span>Account</span>
   {{/link-to}}
