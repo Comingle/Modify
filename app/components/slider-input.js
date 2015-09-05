@@ -29,6 +29,8 @@ export default Ember.Component.extend({
     this.set('svg', svg);
     this.setDimensions(width, height);
     this.build();
+    this.$("circle").attr('data-original-title', this.get('rightHandleValue'));
+    this.$("circle").tooltip({container: "#" + this.get('elementId')});
   },
 
   setDimensions: function (width, height) {
@@ -62,6 +64,8 @@ export default Ember.Component.extend({
     let handleRadius = this.get('handleRadius');
     let cxRight = this.get('rightHandleValue');
     let cxLeft = this.get('leftHandleValue');
+    let minValue = this.get('minValue');
+    let maxValue = this.get('maxValue');
     let scale = d3.scale.linear()
       .domain([0, 100])
       .range([x1, x2]);
@@ -179,7 +183,10 @@ export default Ember.Component.extend({
           component.sendAction('rightHandleValueChanged', component.get('data'), newValue);
           component.set('rightHandleValue', newValue);
         }
+        component.$("circle").tooltip('hide');
       }).on('dragend', function () {
+        component.$("circle").attr("data-original-title", parseInt(currentValue));
+        component.$("circle").tooltip('show');
         component.sendAction('rightHandleValueChangeEnded', component.get('data'), currentValue);
       });
   }.property()
