@@ -26,76 +26,11 @@
     <button class="btn save-button">Save Playlist</button>
   </header>
 </div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="list-item">
-      <span class="list-item-name list-item-numbered">The Dougaller</span>
-      <span class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="list-item">
-      <span class="list-item-name list-item-numbered">The Dougaller</span>
-      <span class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="list-item" data-toggle="collapse" data-target="#pattern-config"
-      aria-expanded="false" aria-controls="pattern-config">
-      <span class="list-item-name list-item-numbered">The Dougaller</span>
-      <span class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
-    </div>
-    <div class="collapse pattern-slider" id="pattern-config">
-      <div class="row">
-        <div class="list-item-double">
-          <span class="list-item-double-prefix yellow">motor1</span>
-          <div class="list-item-double-name">
-            <div class="range-wrapper">
-              <label>Motor 1 Power</label>
-              {{slider-input leftHandleValue=motorTwo.percentAmplitudeMin rightHandleValue=motorTwo.percentAmplitudeMax rangeLineColor=motorTwo.color}}
-              <!-- <input class='yellow' type="range" min="0" max="255" /> -->
-            </div>
-            <div class="range-wrapper">
-              <label>Frequency</label>
-              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="list-item-double">
-          <span class="list-item-double-prefix pink">motor2</span>
-          <div class="list-item-double-name">
-            <div class="range-wrapper">
-              <label>Intensity</label>
-              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
-            </div>
-            <div class="range-wrapper">
-              <label>Frequency</label>
-              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="list-item-double">
-          <span class="list-item-double-prefix green">motor3</span>
-          <div class="list-item-double-name">
-            <div class="range-wrapper">
-              <label>Intensity</label>
-              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
-            </div>
-            <div class="range-wrapper">
-              <label>Frequency</label>
-              {{slider-input leftHandleValue=motorOne.percentAmplitudeMin rightHandleValue=motorOne.percentAmplitudeMax rangeLineColor=motorOne.color}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{{#each pattern in model}}
+  {{patterns/basic-pattern
+    pattern=pattern
+    selectPattern='startPlayingPattern'
+    stopPlayingPattern='stopPlayingPattern'
+    maxValueChanged='maxOptionValueChanged'
+  }}
+{{/each}}

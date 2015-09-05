@@ -70,8 +70,8 @@ header {
   align-items: center;
   flex-wrap: wrap;
   flex-direction: row;
-  margin-top: 100px;
   margin-bottom: 40px;
+  margin-top: 10.2rem;
   h1 {
     flex: 1 0 auto;
     margin: 0;
@@ -104,6 +104,18 @@ body > .ember-view {
   align-items: stretch;
 }
 
+.app-main > :first-child {
+  margin-bottom: 10.2rem;
+}
+
+// second row is main content below greeting
+// we set normal header top-margin to 0 if header leads the main content
+// do it this way so that headers in general have top-margin
+// and so that if something other than a header leads we still get the margin
+.app-main > .row:nth-of-type(2) header {
+  margin-top: 0;
+}
+
 /* nav definitions */
 
 .nav-logo {
@@ -119,25 +131,23 @@ body > .ember-view {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #555a73;
+  background-color: $dark-blue;
 }
 
 .nav-spacer {
   flex: 1 1 100%;
 }
 .nav-last-item {
-  color: #fff;
-  background-color: $dark-blue;
+  color: #fff !important;
+  background-color: $darkest-blue !important;
 }
 
-.nav-active {
-  background-color: $background;
-  color: $comingle-pink;
+.active {
+  background-color: $background !important;
+  color: $comingle-pink !important;
 }
 
-.nav-inactive {
-  color: #555a73;
-  background-color: $dark-blue;
-}
 
 /* inputs */
 
@@ -165,12 +175,6 @@ input[type='text'],input[type='password'] {
 
 /* */
 
-
-.main-outlet {
-  padding: 150px;
-  float: right;
-  width: calc(100% -  #{$main-nav-btn-width});
-}
 
 .motors-graph {
   height: 200px;
@@ -218,20 +222,6 @@ input[type='text'],input[type='password'] {
   }
 }
 
-.password {
-  flex-direction:row;
-  flex-wrap:wrap;
-  display:flex;
-  label {
-    flex: 9 0 0;
-  }
-  a {
-   font-size: 0.8em;
-   color: $gray;
- }
-
-}
-
 /* <select> styling */
 
 select {
@@ -251,7 +241,7 @@ select {
 
 .select-wrapper {
   background-color: $light-purple;
-  height:100%;
+  height:80px; // not ideal
   flex:2 0 0;
   display:flex;
   align-items:center;
@@ -330,12 +320,6 @@ select {
   border-bottom:#d3d6e1 1px solid;
 }
 
-/* .in appears on expanded collapse() items -- negative margin moves it up to
-  appear to merge with its parent */
-.in {
-  margin-top: -10px;
-}
-
 .list-item-double {
   @include list-item;
   height: 160px;
@@ -382,6 +366,7 @@ select {
   color: $gray;
 }
 
+// unused?
 .pattern-slider .list-item-double {
   margin-top: 50px;
 }
@@ -408,6 +393,13 @@ select {
   margin-left: 2rem;
   color: $gray;
   font-size:2.7rem;
+  // cursor for other parts of the list-item might change (like for dragndrop)
+  &.glyphicon {
+    cursor: pointer;
+  }
+  &:last-child {
+    margin-right: 1.4rem;
+  }
 }
 
 .list-item-name {
@@ -415,15 +407,23 @@ select {
     width: 85%;
 }
 
-/* inputs */
 
-input[type='text'],input[type='password'] {
-  border: 2px $gray solid;
+/* tooltip styling */
+
+.tooltip {
+  font-family: $font;
+  font-size: 1.4rem;
+}
+
+.tooltip-inner {
+  background-color: $light-purple;
   border-radius: 0;
-  box-shadow: none;
-  height: 72px;
-  font-size: 1.4em;
-  background-color:inherit;
+  padding: 3px 14px;
+}
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: $light-purple;
+  
 }
 
 /* CSS for range sliders */
@@ -439,30 +439,15 @@ input[type='text'],input[type='password'] {
     color: $gray;
     font-size: 0.7em;
     margin-bottom: 5px;
+    margin-right: 8px;
   }
 }
 
 /* misc */
 
-.pink {
-  background-color: $pink;
-}
-
-.yellow {
-  background-color: $yellow;
-}
-
-.green {
-  background-color: $green;
-}
-
 .glyphicon {
   top: 0;
   line-height:inherit;
-}
-
-.left-align {
-  padding-left: 0 !important;
 }
 
 .flex-center {
