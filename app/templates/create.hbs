@@ -1,0 +1,107 @@
+<div class="app-main">
+  {{partial "header"}}
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <!-- <button {{action 'startMotors'}}>Lets Play</button>
+      <button {{action 'stopMotors'}}>Stop Playin'</button> -->
+      <div id="pattern-grid-controls">
+        <div id="controls">
+          <a {{action null}} id="play-pause-wrapper">
+            <span class="glyphicon glyphicon-play playback-btn"></span>
+            <span class="playback-btn-label">Let's play!</span>
+          </a>
+        </div>
+        {{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <header class="col-md-8 col-md-offset-2">
+      <h1>Set The Mood</h1>
+      <button class="btn save-button">Save Playlist</button>
+    </header>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="list-item" draggable=true>
+        <span class="list-item-name list-item-numbered">Motor 1</span>
+        <span {{action 'toggleOptions'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
+      </div>
+      <div class="pattern-container">
+        <div class="list-item col motorOne">
+          <div class="range-wrapper">
+            <label>Amplitude</label>
+            {{slider-input
+              leftHandleValue=motorOne.percentAmplitudeMin
+              rightHandleValue=motorOne.percentAmplitudeMax
+              rangeLineColor=motorOne.color}}
+          </div>
+          <div class="range-wrapper">
+            <label>Frequency</label>
+            {{slider-input
+              rightHandleValue=motorOne.cyclesPerSecond
+              rangeLineColor=motorOne.color}}
+          </div>
+          <div class="range-wrapper">
+            <label>Shift</label>
+            {{slider-input
+              rightHandleValue=motorOne.percentPhaseShift
+              rangeLineColor=motorOne.color}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="list-item col motorTwo">
+        <div class="range-wrapper">
+          <label>Amplitude</label>
+          {{slider-input
+            leftHandleValue=motorTwo.percentAmplitudeMin
+            rightHandleValue=motorTwo.percentAmplitudeMax
+            rangeLineColor=motorTwo.color}}
+        </div>
+        <div class="range-wrapper">
+          <label>Frequency</label>
+          {{slider-input
+            rightHandleValue=motorTwo.cyclesPerSecond
+            rangeLineColor=motorTwo.color}}
+        </div>
+        <div class="range-wrapper">
+          <label>Shift</label>
+          {{slider-input
+            rightHandleValue=motorTwo.percentPhaseShift
+            rangeLineColor=motorTwo.color}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="list-item col motorThree">
+        <div class="range-wrapper">
+          <label>Amplitude</label>
+          {{slider-input
+            leftHandleValue=motorThree.percentAmplitudeMin
+            rightHandleValue=motorThree.percentAmplitudeMax
+            rangeLineColor=motorThree.color}}
+        </div>
+        <div class="range-wrapper">
+          <label>Frequency</label>
+          {{slider-input
+            rightHandleValue=motorThree.cyclesPerSecond
+            rangeLineColor=motorThree.color}}
+        </div>
+        <div class="range-wrapper">
+          <label>Shift</label>
+          {{slider-input
+            rightHandleValue=motorThree.percentPhaseShift
+            rangeLineColor=motorThree.color}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{partial "nav"}}
