@@ -24,7 +24,7 @@ export default Ember.Component.extend({
       .attr("xmlns", 'http://www.w3.org/2000/svg')
       .attr("version", "1.2")
       .attr("viewBox", "0 0 " + width + " " + height)
-      .attr('height', 360);
+      .attr('height', 360)
       .attr('height', height);
 
     this.svg.append("rect")
