@@ -1,36 +1,41 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div id="pattern-grid-controls">
-      <div id="controls">
-        <a {{action null}} id="play-pause-wrapper">
-          <span class="glyphicon glyphicon-play playback-btn"></span>
-          <span class="playback-btn-label">Let's play!</span>
-        </a>
-        <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
-        <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
-      </div>
-      <div id="grid">
-        <div id="top-haze">
-            <span class='graph-label'>Maximum Intensity</span>
+<div class="app-main">
+  {{partial "header"}}
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div id="pattern-grid-controls">
+        <div id="controls">
+          <a {{action null}} id="play-pause-wrapper">
+            <span class="glyphicon glyphicon-play playback-btn"></span>
+            <span class="playback-btn-label">Let's play!</span>
+          </a>
+          <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
+          <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
         </div>
-        <div id="bottom-haze">
-          <span class='graph-label'>Minimum Intensity</span>
+        <div id="grid">
+          <div id="top-haze">
+              <span class='graph-label'>Maximum Intensity</span>
+          </div>
+          <div id="bottom-haze">
+            <span class='graph-label'>Minimum Intensity</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    <header class="col-md-8 col-md-offset-2">
+      <h1>Pleasure Playlist</h1>
+      <button class="btn save-button">Save Playlist</button>
+    </header>
+  </div>
+  {{#each pattern in model}}
+    {{patterns/basic-pattern
+      pattern=pattern
+      selectPattern='startPlayingPattern'
+      stopPlayingPattern='stopPlayingPattern'
+      maxValueChanged='maxOptionValueChanged'
+    }}
+  {{/each}}
+
 </div>
-<div class="row">
-  <header class="col-md-8 col-md-offset-2">
-    <h1>Pleasure Playlist</h1>
-    <button class="btn save-button">Save Playlist</button>
-  </header>
-</div>
-{{#each pattern in model}}
-  {{patterns/basic-pattern
-    pattern=pattern
-    selectPattern='startPlayingPattern'
-    stopPlayingPattern='stopPlayingPattern'
-    maxValueChanged='maxOptionValueChanged'
-  }}
-{{/each}}
+{{partial "nav"}}

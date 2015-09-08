@@ -1,49 +1,53 @@
-<div class="row">
-  <header class="col-md-8 col-md-offset-2">
-    <h1>Account Profile</h1>
-    <button class="btn save-button">Update Profile</button>
-    <h3>Update your account information</h3>
-  </header>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 form-group">
-    <label for="username">Username</label>
-    <input type="text" class='form-control'>
+<div class="app-main">
+  {{partial "header"}}
+  <div class="row">
+    <header class="col-md-8 col-md-offset-2">
+      <h1>Account Profile</h1>
+      <button class="btn save-button">Update Profile</button>
+      <h3>Update your account information</h3>
+    </header>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 form-group">
-    <label for="email">Email</label>
-    <input type="text" class='form-control'>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 form-group">
+      <label for="username">Username</label>
+      <input type="text" class='form-control'>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 form-group password">
-    <label for="password" class='password-label'>Password</label>
-    <a href="#">Forgot password?</a>
-    <input type="text" class='form-control'>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 form-group">
+      <label for="email">Email</label>
+      <input type="text" class='form-control'>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <label>Avatar</label>
-    <div class="list-item-double avatar">
-      <div class="list-item-double-prefix">
-        <img src="assets/images/avatar-active.png">
-        <span>Pretty Woman</span>
-      </div>
-      <div class="list-item-double-name">
-        <a href="#"><span>Randomize my Avatar</span></a>
-        <div class="select-wrapper dark">
-          <select id="avatar-select">
-            <option>Some Avatar</option>
-            <option>Another Avatar</option>
-          </select>
-          <label for="avatar-select">
-            <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
-          </label>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 form-group password">
+      <label for="password" class='password-label'>Password</label>
+      <a href="#">Forgot password?</a>
+      <input type="text" class='form-control'>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <label>Avatar</label>
+      <div class="list-item-double avatar">
+        <div class="list-item-double-prefix">
+          <img src="assets/images/avatar-active.png">
+          <span>Pretty Woman</span>
+        </div>
+        <div class="list-item-double-name">
+          <a href="#"><span>Randomize my Avatar</span></a>
+          <div class="select-wrapper dark">
+            <select id="avatar-select">
+              <option>Some Avatar</option>
+              <option>Another Avatar</option>
+            </select>
+            <label for="avatar-select">
+              <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+{{partial "nav"}}
