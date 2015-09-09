@@ -4,6 +4,18 @@ export default Ember.Controller.extend({
   identifier: '',
   password: '',
 
+  hasDevice: function () {
+    return this.get('toy.hasDevice');
+  }.property('toy.hasDevice'),
+
+  deviceStatus: function () {
+    return this.get('toy.deviceStatus');
+  }.property('toy.deviceStatus'),
+
+  device: function () {
+    return this.get('toy.device');
+  }.property('toy.device'),
+
   actions: {
     authenticate: function() {
       var controller = this;
@@ -11,7 +23,13 @@ export default Ember.Controller.extend({
       return this.get('session').authenticate('authenticator:custom', data).then( function () {
         controller.transitionToRoute('/quicky');
       });
+    },
+
+    chooseDevice: function(device) {
+      this.get('toy').connectDevice(device);
     }
+
+
   }
 
 });

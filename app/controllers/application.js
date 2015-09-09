@@ -22,6 +22,10 @@ export default Ember.Controller.extend({
     return this.get('toy.connectionId') > 0;
   }.property('toy.connectionId'),
 
+  hasDevice: function () {
+    return this.get('toy.hasDevice');
+  }.property('toy.hasDevice'),
+
   actions: {
     chooseDevice: function (device) {
       this.get('toy').connectDevice(device);
@@ -33,5 +37,6 @@ export default Ember.Controller.extend({
         _this.transitionTo('/');
       });
     }
+
   }
 });

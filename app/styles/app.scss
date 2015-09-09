@@ -43,6 +43,12 @@ a {
   }
 }
 
+// ember actions don't need a href, so we set the cursor to pointer to
+// indicate they can still be clicked.
+a[data-ember-action] {
+  cursor: pointer;
+}
+
 h1 {
   color: $dark-font;
   font-weight:900;
@@ -185,6 +191,44 @@ body > .ember-view {
   }
 }
 
+.end-link {
+  flex-direction:row;
+  flex-wrap:wrap;
+  display:flex;
+  width:100%;
+  label {
+    flex: 9 0 0;
+  }
+  a {
+   font-size: 0.8em;
+   color: $gray;
+ }
+
+}
+
+
+.port-picker select {
+  color: #555;
+  text-transform: none;
+  font-size: 1.4em;
+  flex: 2 0 0;
+  background-color: inherit;
+  height: 72px;
+  align-items: center;
+  justify-content: center;
+  flex-direction:row;
+  overflow: hidden;
+  padding-right: 1em;
+  padding-left:0.7em;
+  margin-left:0;
+  width:100%;
+  border: 2px solid #bfc3d9;
+}
+
+.port-picker label {
+  flex: 9 0 90%;
+}
+
 /* inputs */
 
 input[type='text'],input[type='password'] {
@@ -212,34 +256,9 @@ input[type='text'],input[type='password'] {
 /* */
 
 
-
-
-
-
-// HACKY TEMP DESIGN
-
-.port-picker {
-  font-weight: $link-font-weight;
-  a {
-    color: $comingle-blue;
-  }
-}
-
 // unsorted
 
-.password {
-  flex-direction:row;
-  flex-wrap:wrap;
-  display:flex;
-  label {
-    flex: 9 0 0;
-  }
-  a {
-   font-size: 0.8em;
-   color: $gray;
- }
 
-}
 
 .avatar {
   height:180px;
