@@ -1,49 +1,11 @@
 .basic-pattern {
-  margin-top: 10px;
-  clear: both;
-  &.active {
-    background-color: lighten( $comingle-pink, 40%)
-  }
-  .discription-block {
-    float: left;
-    width: 20%;
-    height: 100%;
-    &.comingle-blue {
-      background-color: $comingle-blue;
-    }
-  }
-  .interface-block {
-    width: 80%;
-    height: 100%;
-    float: right;
-  }
-  .main-interface {
-    height: 50px;
-  }
-  .patterns {
-    li {
-      clear: both;
-      width: 100%;
-      height: 50px;
-      background-color: $light-background;
-      div.discription-block {
-        height: 100%;
-      }
-      div.interface-block {
-        height: 100%;
-        div.slider-input {
-          margin: 0;
-          padding: 10px;
-        }
-      }
-      h3 {
-        margin: 0;
-        color: $dark-font;
-      }
-    }
-    .slider-input {
-      width: 100%;
-      height: 50px;
-    }
-  }
+}
+
+/* Drag And drop stuff */
+[draggable] {
+  user-select: none;
+}
+
+.basic-pattern .list-item {
+  cursor: ns-resize;
 }

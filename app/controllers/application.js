@@ -15,12 +15,16 @@ export default Ember.Controller.extend({
   }.property('currentRouteName'),
 
   myAccountIsActive: function () {
-    return this.get('currentRouteName') === '?';
+    return this.get('currentRouteName') === 'account';
   }.property('currentRouteName'),
 
   isConnected: function () {
     return this.get('toy.connectionId') > 0;
   }.property('toy.connectionId'),
+
+  hasDevice: function () {
+    return this.get('toy.hasDevice');
+  }.property('toy.hasDevice'),
 
   actions: {
     chooseDevice: function (device) {
@@ -33,5 +37,6 @@ export default Ember.Controller.extend({
         _this.transitionTo('/');
       });
     }
+
   }
 });

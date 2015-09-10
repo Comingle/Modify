@@ -21,6 +21,14 @@
     "storage",
     "usb",
     "http://*/",
-    "https://*/"
+    "https://*/",
+    {
+      "usbDevices": [
+        { 
+          "vendorId": 6991,
+          "productId": 37384
+        }
+      ]
+    }
   ]
 }

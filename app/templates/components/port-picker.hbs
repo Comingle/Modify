@@ -1,16 +1,24 @@
 {{#if devicesFound}}
 
-  {{#if isSelecting}}
-    <a {{action 'resetDevices'}}>Refresh</a>
-    <ul>
-      {{#each device in devices}}
-        <li {{action 'chooseDevice' device}}>{{device.path}}</li>
-      {{/each}}
-    </ul>
-  {{else}}
-    <a {{action 'startSelecting'}}>Select a device port</a>
-  {{/if}}
+  <label>My Mod is connected to:
+    {{#if device}}
+      {{#if hasDevice}}
+        <span style="color: #00ff00;" class="glyphicon glyphicon-ok" data-toggle="tooltip" data-placement="right" title="{{deviceStatus}}"></span>
+      {{else}}
+        <span style="color: #ff0000;" class="glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="{{deviceStatus}}"></span>
+      {{/if}}
+    {{/if}}
+  </label>
 
+  <a {{action 'resetDevices'}}>Refresh</a>
+  {{view "select"
+    content=devices
+    optionValuePath="content.path"
+    optionLabelPath="content.path"
+    selection=chosenPort
+    value=null
+    prompt="Please select a port..."
+  }}
 {{else}}
   <div>No devices were found to connect to.</div>
 {{/if}}

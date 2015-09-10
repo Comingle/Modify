@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <div class="list-item">
+    <div class="list-item" draggable=true>
       <span class="list-item-name list-item-numbered">{{pattern.prettyName}}</span>
       {{#if isPlaying}}
         <span {{action 'pausePattern'}} class="glyphicon glyphicon-pause list-item-suffix"></span>
@@ -14,10 +14,12 @@
       <div class="list-item col">
         {{#each controlOption in pattern.controlOptions}}
           <div class="range-wrapper">
-            <label>{{controlOption.name}}</label>
+            <label>{{controlOption.pretty_name}}</label>
             {{slider-input
               data=controlOption
               rightHandleValue=controlOption.value
+              maxValue=controlOption.max
+              minValue=controlOption.min
               rightHandleValueChangeEnded='maxValueChanged'
               leftHandleValueChanged='minValueChanged'
               rangeLineColor=pattern.colorHex

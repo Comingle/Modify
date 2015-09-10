@@ -3,12 +3,13 @@ $main-nav-btn-width: 150px;
 $font: 'Futura', "Helvetica", sans-serif;
 
 // COLORS
-$comingle-blue: #09c3f2;
+$comingle-blue: #08c2f1;
 $comingle-pink: #e91f76;
 $pink-wave: #d58cc8;
 $yellow-wave: #ffc845;
 $green-wave: #dbe444;
 $dark-blue: #232538;
+$darkest-blue: #1c1d2b;
 $gray: #bfc3d9;
 
 $light-purple: #7580b8;
@@ -24,6 +25,7 @@ $dark-font: $dark-purple;
 $pink-font: $comingle-pink;
 $disabled-font: #565c74;
 $link-font-weight: 500;
+$graph-label-font: #484f76;
 
 $red: $comingle-pink;
 $background: $body-background;
@@ -32,6 +34,3 @@ $blue: $dark-blue;
 $yellow: $yellow-wave;
 $pink: $pink-wave;
 $green: $green-wave;
-// to reconcile
-
-$dark-blue-orig : #1c1d2b;

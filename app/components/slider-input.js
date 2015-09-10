@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ResizeMixin from 'ember-resize-mixin/main';
 
 // {{slider-input
 //   data=controlOption
@@ -29,6 +30,11 @@ export default Ember.Component.extend({
     this.set('svg', svg);
     this.setDimensions(width, height);
     this.build();
+    if (typeof(this.get('leftHandleValue')) != 'undefined') {
+      this.$("circle.left").attr('data-original-title', this.get('leftHandleValue'));
+    }
+    this.$("circle.right").attr('data-original-title', this.get('rightHandleValue'));
+    this.$("circle").tooltip({container: "#" + this.get('elementId')});
   },
 
   setDimensions: function (width, height) {
@@ -62,6 +68,8 @@ export default Ember.Component.extend({
     let handleRadius = this.get('handleRadius');
     let cxRight = this.get('rightHandleValue');
     let cxLeft = this.get('leftHandleValue');
+    let minValue = this.get('minValue');
+    let maxValue = this.get('maxValue');
     let scale = d3.scale.linear()
       .domain([0, 100])
       .range([x1, x2]);
@@ -103,7 +111,7 @@ export default Ember.Component.extend({
         .style('fill', handleColor)
         .style('stroke', handleStrokeColor)
         .style('stroke-width', handleStrokeWidth)
-        .attr('class', 'handle')
+        .attr('class', 'handle right')
         .attr('cy', allY)
         .attr('cx', function () { return scale(cxRight); })
         .attr('r', handleRadius)
@@ -117,7 +125,7 @@ export default Ember.Component.extend({
         .style('fill', handleColor)
         .style('stroke', handleStrokeColor)
         .style('stroke-width', handleStrokeWidth)
-        .attr('class', 'handle')
+        .attr('class', 'handle left')
         .attr('cy', allY)
         .attr('cx', function () { return scale(cxLeft); })
         .attr('r', handleRadius)
@@ -155,14 +163,20 @@ export default Ember.Component.extend({
 
   dragLeft: function () {
     let component = this;
+    let currentValue;
     return d3.behavior.drag()
       .on("drag", function() {
         let newX = d3.event.x;
         let newValue = component.get('valueToPercentScale')(newX);
         if (0 <= newValue && newValue <= 100) {
+          currentValue = newValue;
           component.updateLeftHandle(newX);
           component.set('leftHandleValue', newValue);
         }
+        component.$("circle.left").tooltip('hide');
+      }).on('dragend', function() {
+        component.$("circle.left").attr("data-original-title", parseInt(currentValue));
+        component.$("circle.left").tooltip('show');
       });
   }.property(),
 
@@ -179,8 +193,13 @@ export default Ember.Component.extend({
           component.sendAction('rightHandleValueChanged', component.get('data'), newValue);
           component.set('rightHandleValue', newValue);
         }
+        component.$("circle.right").tooltip('hide');
       }).on('dragend', function () {
+        component.$("circle.right").attr("data-original-title", parseInt(currentValue));
+        component.$("circle.right").tooltip('show');
         component.sendAction('rightHandleValueChangeEnded', component.get('data'), currentValue);
       });
-  }.property()
+  }.property(),
+
+  
 });

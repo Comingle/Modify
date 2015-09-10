@@ -4,7 +4,7 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
   type: DS.attr('string'),
-
+  pretty_name: DS.attr('string'),
   defaultValue: DS.attr('number'),
   min: DS.attr('number'),
   max: DS.attr('number'),
