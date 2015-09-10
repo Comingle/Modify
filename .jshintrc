@@ -4,6 +4,7 @@
     "document",
     "window",
     "-Promise",
+    "Promise",
     "d3",
     "chrome",
     "$"
