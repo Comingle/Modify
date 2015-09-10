@@ -21,7 +21,8 @@ export default Ember.Controller.extend({
       var controller = this;
       var data = this.getProperties('identifier', 'password');
       return this.get('session').authenticate('authenticator:custom', data).then( function () {
-        controller.transitionToRoute('/quicky');
+        let id = controller.get('session.secure.id');
+        controller.transitionToRoute('user', id);
       });
     },
 
@@ -31,5 +32,4 @@ export default Ember.Controller.extend({
 
 
   }
-
 });

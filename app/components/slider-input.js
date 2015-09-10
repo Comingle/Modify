@@ -139,6 +139,21 @@ export default Ember.Component.extend({
     this.set('rangeLine', rangeLine);
   },
 
+  rebuild: function () {
+    Ember.$( window ).resize(function() {
+      let elementId = '#' + this.get('elementId');
+      let width = $(elementId).width();
+      let height = $(elementId).height();
+      let svg = d3.select(elementId).append('svg')
+        .attr('width', width)
+        .attr('height', height);
+
+      this.set('svg', svg);
+      this.setDimensions(width, height);
+      this.build();
+    });
+  }.observes('height', 'width'),
+
   updateLeftHandle: function (newX) {
     let handle = this.get('leftHandle');
     let line = this.get('rangeLine');
@@ -201,5 +216,11 @@ export default Ember.Component.extend({
       });
   }.property(),
 
-  
+  percentToReal: function (percent) {
+    let min = this.get('data.min');
+    let max = this.get('data.max');
+    return d3.scale.linear()
+      .domain([0, 100])
+      .range([min, max]);
+  }
 });

@@ -1,8 +1,8 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
-  var apiDomain = 'http://sketchbook.comingle.io'
-  // var apiDomain = ' http://localhost:3000'
+  // var apiDomain = 'http://sketchbook.comingle.io'
+  var apiDomain = ' http://localhost:3000'
   var ENV = {
     modulePrefix: 'chrome-app',
     environment: environment,
@@ -36,7 +36,9 @@ module.exports = function(environment) {
     ENV['simple-auth'] = {
       authorizer: 'authorizer:custom',
       serverTokenEndpoint: apiDomain + '/api/v1/sessions',
-      crossOriginWhitelist: [apiDomain]
+      crossOriginWhitelist: [apiDomain],
+      routeAfterAuthentication: 'user',
+      routeIfAlreadyAuthenticated: 'user'
     };
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
