@@ -20,12 +20,12 @@ export default Base.extend({
   },
 
   authenticate: function(credentials) {
-    var _this = this;
+    var self = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var data = {};
       data['session'] = { password: credentials.password};
       data['session']['identifier'] = credentials.identifier || credentials.email || credentials.username;
-      _this.makeRequest(data).then( function(response) {
+      self.makeRequest(data).then( function(response) {
         Ember.run(function() {
           resolve(response);
         });
