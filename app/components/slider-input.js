@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ResizeMixin from 'ember-resize-mixin/main';
 
 // {{slider-input
 //   data=controlOption

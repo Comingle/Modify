@@ -1,77 +1,72 @@
-<div class="app-main">
-  {{partial "header"}}
-  <div class="row">
-    <header class="col-md-8 col-md-offset-2">
-      <h1>Button Options</h1>
-      <button class="btn save-button">Save Button Options</button>
-      <h3>Customize the function of your Mod's button</h3>
-    </header>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="list-item">
-        <label for="single-click" class="select-label">Single click</label>
-        <div class="select-wrapper">
-          <select id="single-click">
-            <option>Increase Power</option>
-            <option>Decrease Power</option>
-          </select>
-          <label for="single-click">
-            <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
-          </label>
-        </div>
-      </div>
-      <div class="list-item">
-        <label for="double-click" class="select-label">Double click</label>
-        <div class="select-wrapper">
-          <select id="double-click">
-            <option>Increase Power</option>
-            <option>Stop</option>
-          </select>
-          <label for="double-click">
-            <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
-          </label>
-        </div>
-      </div>
-      <div class="list-item">
-        <label for="click-and-hold" class="select-label">Click & Hold</label>
-        <div class="select-wrapper">
-          <select id="click-and-hold">
-            <option>Increase Power</option>
-            <option>Decrease Power</option>
-          </select>
-          <label for="click-and-hold">
-            <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <header class="col-md-8 col-md-offset-2">
-      <h1>Add Accessory</h1>
-      <button class="btn save-button">Update sketch</button>
-      <h3>Customize how you control your Mod</h3>
-    </header>
-  </div>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="list-item-add" data-toggle="collapse" data-target="#nunchuck-config"
-        aria-expanded="false" aria-controls="nunchuck-config">
-        <span class="glyphicon glyphicon-plus list-item-prefix"></span>
-        <span class="list-item-name">Add a Nunchuck</span>
-      </div>
-      <div class="collapse" id="nunchuck-config">
-        <div class="well">
-          ...
-        </div>
-      </div>
-      <div class="list-item-add">
-        <span class="glyphicon glyphicon-plus list-item-prefix"></span>
-        <span class="list-item-name">Add a sensor</span>
-      </div>
-    </div>
-  </div>
-
+<div class="row">
+  <header class="col-md-8 col-md-offset-2">
+    <h1>Button Options</h1>
+    <button class="btn save-button">Save Button Options</button>
+    <h3>Customize the function of your Mod's button</h3>
+  </header>
 </div>
-{{partial "nav"}}
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="list-item">
+      <label for="single-click" class="select-label">Single click</label>
+      <div class="select-wrapper">
+        <select id="single-click">
+          <option>Increase Power</option>
+          <option>Decrease Power</option>
+        </select>
+        <label for="single-click">
+          <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
+        </label>
+      </div>
+    </div>
+    <div class="list-item">
+      <label for="double-click" class="select-label">Double click</label>
+      <div class="select-wrapper">
+        <select id="double-click">
+          <option>Increase Power</option>
+          <option>Stop</option>
+        </select>
+        <label for="double-click">
+          <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
+        </label>
+      </div>
+    </div>
+    <div class="list-item">
+      <label for="click-and-hold" class="select-label">Click & Hold</label>
+      <div class="select-wrapper">
+        <select id="click-and-hold">
+          <option>Increase Power</option>
+          <option>Decrease Power</option>
+        </select>
+        <label for="click-and-hold">
+          <span class="glyphicon glyphicon-triangle-bottom select-triangle"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <header class="col-md-8 col-md-offset-2">
+    <h1>Add Accessory</h1>
+    <button class="btn save-button">Update sketch</button>
+    <h3>Customize how you control your Mod</h3>
+  </header>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="list-item-add" data-toggle="collapse" data-target="#nunchuck-config"
+      aria-expanded="false" aria-controls="nunchuck-config">
+      <span class="glyphicon glyphicon-plus list-item-prefix"></span>
+      <span class="list-item-name">Add a Nunchuck</span>
+    </div>
+    <div class="collapse" id="nunchuck-config">
+      <div class="well">
+        ...
+      </div>
+    </div>
+    <div class="list-item-add">
+      <span class="glyphicon glyphicon-plus list-item-prefix"></span>
+      <span class="list-item-name">Add a sensor</span>
+    </div>
+  </div>
+</div>

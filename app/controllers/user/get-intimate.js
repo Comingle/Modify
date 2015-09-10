@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import PatternUpdaterMixin from '../mixins/pattern-updater';
+import PatternUpdaterMixin from '../../mixins/pattern-updater';
 
 export default Ember.Controller.extend(PatternUpdaterMixin, {
 
