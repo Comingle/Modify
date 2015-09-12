@@ -67,6 +67,10 @@ export default Ember.Controller.extend({
     }
   },
 
+  baseData: function () {
+    return Ember.Object.create({ max: 100, min: 0 });
+  }.property(),
+
   actions: {
     startMotors: function () {
       if (!this.get('running')) {

@@ -31,6 +31,7 @@
         <div class="range-wrapper">
           <label>Amplitude</label>
           {{slider-input
+            data=baseData
             leftHandleValue=motorOne.percentAmplitudeMin
             rightHandleValue=motorOne.percentAmplitudeMax
             rangeLineColor=motorOne.color}}
@@ -38,12 +39,14 @@
         <div class="range-wrapper">
           <label>Frequency</label>
           {{slider-input
+            data=baseData
             rightHandleValue=motorOne.cyclesPerSecond
             rangeLineColor=motorOne.color}}
         </div>
         <div class="range-wrapper">
           <label>Shift</label>
           {{slider-input
+            data=baseData
             rightHandleValue=motorOne.percentPhaseShift
             rangeLineColor=motorOne.color}}
         </div>
@@ -58,6 +61,7 @@
       <div class="range-wrapper">
         <label>Amplitude</label>
         {{slider-input
+          data=baseData
           leftHandleValue=motorTwo.percentAmplitudeMin
           rightHandleValue=motorTwo.percentAmplitudeMax
           rangeLineColor=motorTwo.color}}
@@ -65,12 +69,14 @@
       <div class="range-wrapper">
         <label>Frequency</label>
         {{slider-input
+          data=baseData
           rightHandleValue=motorTwo.cyclesPerSecond
           rangeLineColor=motorTwo.color}}
       </div>
       <div class="range-wrapper">
         <label>Shift</label>
         {{slider-input
+          data=baseData
           rightHandleValue=motorTwo.percentPhaseShift
           rangeLineColor=motorTwo.color}}
       </div>
@@ -83,6 +89,7 @@
       <div class="range-wrapper">
         <label>Amplitude</label>
         {{slider-input
+          data=baseData
           leftHandleValue=motorThree.percentAmplitudeMin
           rightHandleValue=motorThree.percentAmplitudeMax
           rangeLineColor=motorThree.color}}
@@ -90,12 +97,14 @@
       <div class="range-wrapper">
         <label>Frequency</label>
         {{slider-input
+          data=baseData
           rightHandleValue=motorThree.cyclesPerSecond
           rangeLineColor=motorThree.color}}
       </div>
       <div class="range-wrapper">
         <label>Shift</label>
         {{slider-input
+          data=baseData
           rightHandleValue=motorThree.percentPhaseShift
           rangeLineColor=motorThree.color}}
       </div>
