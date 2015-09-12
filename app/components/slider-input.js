@@ -19,16 +19,9 @@ export default Ember.Component.extend({
   handleOverflow: 10,
 
   didInsertElement: function () {
-    let elementId = '#' + this.get('elementId');
-    let width = $(elementId).width();
-    let height = $(elementId).height();
-    let svg = d3.select(elementId).append('svg')
-      .attr('width', width)
-      .attr('height', height);
-
-    this.set('svg', svg);
-    this.setDimensions(width, height);
+    Ember.$( window ).resize(this.build.bind(this));
     this.build();
+
     if (typeof(this.get('leftHandleValue')) != 'undefined') {
       this.$("circle.left").attr('data-original-title', this.get('leftHandleValue'));
     }
@@ -55,6 +48,23 @@ export default Ember.Component.extend({
   },
 
   build: function () {
+    let elementId = '#' + this.get('elementId');
+    let width = $(elementId).width();
+    let height = $(elementId).height();
+    let oldSvg = this.get('svg');
+    if (oldSvg) {
+      oldSvg.remove();
+    }
+    let svg = d3.select(elementId).append('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+    this.set('svg', svg);
+    this.setDimensions(width, height);
+    this.buildSlider();
+  },
+
+  buildSlider: function () {
     let svg = this.get('svg');
     let lineColor = this.get('lineColor');
     let lineWidth = this.get('lineWidth');
