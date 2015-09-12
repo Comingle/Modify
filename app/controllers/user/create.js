@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
   },
 
   baseData: function () {
-    return Ember.Object.create({ max: 100, min: 0 });
+    return Ember.Object.create({min: 0, max: 100 });
   }.property(),
 
   actions: {

@@ -67,10 +67,10 @@ export default Ember.Component.extend({
     let handleRadius = this.get('handleRadius');
     let cxRight = this.get('rightHandleValue');
     let cxLeft = this.get('leftHandleValue');
-    let minValue = this.get('minValue');
-    let maxValue = this.get('maxValue');
+    let minValue = this.get('data.min');
+    let maxValue = this.get('data.max');
     let scale = d3.scale.linear()
-      .domain([0, 100])
+      .domain([minValue, maxValue])
       .range([x1, x2]);
     let rangeLineX1 = function () {
       if (cxLeft) {
@@ -138,21 +138,6 @@ export default Ember.Component.extend({
     this.set('rangeLine', rangeLine);
   },
 
-  rebuild: function () {
-    Ember.$( window ).resize(function() {
-      let elementId = '#' + this.get('elementId');
-      let width = $(elementId).width();
-      let height = $(elementId).height();
-      let svg = d3.select(elementId).append('svg')
-        .attr('width', width)
-        .attr('height', height);
-
-      this.set('svg', svg);
-      this.setDimensions(width, height);
-      this.build();
-    });
-  }.observes('height', 'width'),
-
   updateLeftHandle: function (newX) {
     let handle = this.get('leftHandle');
     let line = this.get('rangeLine');
@@ -170,56 +155,57 @@ export default Ember.Component.extend({
   valueToPercentScale: function () {
     let lowX = this.get('lowX');
     let highX = this.get('highX');
+    let min = this.get('data.min');
+    let max = this.get('data.max');
     return d3.scale.linear()
       .domain([lowX, highX])
-      .range([0, 100]);
+      .range([min, max]);
   }.property(),
 
   dragLeft: function () {
     let component = this;
-    let currentValue;
+    let newValue;
     return d3.behavior.drag()
       .on("drag", function() {
         let newX = d3.event.x;
-        let newValue = component.get('valueToPercentScale')(newX);
-        if (0 <= newValue && newValue <= 100) {
-          currentValue = newValue;
+        newValue = component.get('valueToPercentScale')(newX);
+        let minValue = component.get('data.min');
+        let maxValue = component.get('data.max');
+        if (minValue <= newValue && newValue <= maxValue) {
+          newValue = newValue;
           component.updateLeftHandle(newX);
+          component.sendAction('leftHandleValueChanged', component.get('data'), newValue);
           component.set('leftHandleValue', newValue);
         }
         component.$("circle.left").tooltip('hide');
       }).on('dragend', function() {
-        component.$("circle.left").attr("data-original-title", parseInt(currentValue));
+        component.$("circle.left").attr("data-original-title", parseInt(newValue));
         component.$("circle.left").tooltip('show');
+        component.sendAction('leftHandleValueChangeEnded', component.get('data'), newValue);
       });
   }.property(),
 
   dragRight: function () {
     let component = this;
-    let currentValue;
+    let newValue;
     return d3.behavior.drag()
-      .on("drag", function() {
+      .on('dragstart', function () {
+        component.$("circle.right").tooltip('hide');
+      }).on("drag", function() {
         let newX = d3.event.x;
-        let newValue = component.get('valueToPercentScale')(newX);
-        if (0 <= newValue && newValue <= 100) {
-          currentValue = newValue;
+        newValue = component.get('valueToPercentScale')(newX);
+        let minValue = component.get('data.min');
+        let maxValue = component.get('data.max');
+        if (minValue <= newValue && newValue <= maxValue) {
+          newValue = newValue;
           component.updateRightHandle(newX);
           component.sendAction('rightHandleValueChanged', component.get('data'), newValue);
           component.set('rightHandleValue', newValue);
         }
-        component.$("circle.right").tooltip('hide');
       }).on('dragend', function () {
-        component.$("circle.right").attr("data-original-title", parseInt(currentValue));
+        component.$("circle.right").attr("data-original-title", parseInt(newValue));
         component.$("circle.right").tooltip('show');
-        component.sendAction('rightHandleValueChangeEnded', component.get('data'), currentValue);
+        component.sendAction('rightHandleValueChangeEnded', component.get('data'), newValue);
       });
-  }.property(),
-
-  percentToReal: function (percent) {
-    let min = this.get('data.min');
-    let max = this.get('data.max');
-    return d3.scale.linear()
-      .domain([0, 100])
-      .range([min, max]);
-  }
+  }.property()
 });
