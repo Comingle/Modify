@@ -4,8 +4,7 @@ import {
 } from 'ember-qunit';
 
 moduleForModel('pattern', {
-  // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:frame', 'model:control-option']
 });
 
 test('it exists', function(assert) {
