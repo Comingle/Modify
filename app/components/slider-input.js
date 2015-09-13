@@ -181,7 +181,8 @@ export default Ember.Component.extend({
         newValue = component.get('valueToPercentScale')(newX);
         let minValue = component.get('data.min');
         let maxValue = component.get('data.max');
-        if (minValue <= newValue && newValue <= maxValue) {
+        let rightValue = component.get('rightHandleValue');
+        if (minValue <= newValue && newValue <= maxValue && newValue <= rightValue) {
           newValue = newValue;
           component.updateLeftHandle(newX);
           component.sendAction('leftHandleValueChanged', component.get('data'), newValue);
@@ -204,9 +205,10 @@ export default Ember.Component.extend({
       }).on("drag", function() {
         let newX = d3.event.x;
         newValue = component.get('valueToPercentScale')(newX);
-        let minValue = component.get('data.min');
-        let maxValue = component.get('data.max');
-        if (minValue <= newValue && newValue <= maxValue) {
+        let minValue  = component.get('data.min');
+        let maxValue  = component.get('data.max');
+        let leftValue = component.get('leftHandleValue');
+        if (minValue <= newValue && newValue <= maxValue && newValue >= leftValue) {
           newValue = newValue;
           component.updateRightHandle(newX);
           component.sendAction('rightHandleValueChanged', component.get('data'), newValue);
