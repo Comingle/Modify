@@ -1,8 +1,8 @@
 /* jshint node: true */
 
 module.exports = function(environment) {
-  // var apiDomain = 'http://sketchbook.comingle.io'
-  var apiDomain = ' http://localhost:3000'
+  var apiDomain = 'http://sketchbook.comingle.io'
+  // var apiDomain = ' http://localhost:3000'
   var ENV = {
     modulePrefix: 'chrome-app',
     environment: environment,

@@ -3,7 +3,7 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController: function (controller) {
-    let motorOne = this.store.createRecord('motor', {
+    let sineWaveOne = this.store.createRecord('sine-wave', {
       percentAmplitudeMin: 50,
       percentAmplitudeMax: 100,
       cyclesPerSecond: 2,
@@ -11,7 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       color: '#d28dbf'
     });
 
-    let motorTwo = this.store.createRecord('motor', {
+    let sineWaveTwo = this.store.createRecord('sine-wave', {
       percentAmplitudeMin: 25,
       percentAmplitudeMax: 50,
       cyclesPerSecond: 2,
@@ -19,7 +19,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       color: '#fec742'
     });
 
-    let motorThree = this.store.createRecord('motor', {
+    let sineWaveThree = this.store.createRecord('sine-wave', {
       percentAmplitudeMin: 0,
       percentAmplitudeMax: 100,
       cyclesPerSecond: 2,
@@ -27,12 +27,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       color: '#dbe546'
     });
 
-    let frame = this.store.createRecord('frame');
-
-    controller.set('motorOne', motorOne);
-    controller.set('motorTwo', motorTwo);
-    controller.set('motorThree', motorThree);
-    controller.set('frame', frame);
+    controller.set('sineWaveOne', sineWaveOne);
+    controller.set('sineWaveTwo', sineWaveTwo);
+    controller.set('sineWaveThree', sineWaveThree);
   }
-
 });
