@@ -60,7 +60,7 @@ export default Ember.Service.extend({
   // we give it 5 2-second long attempts for the device to show up.
   reviveConnection: function() {
     let _this = this;
-    if (!_this.get('sketch')) return;
+    if (!_this.get('sketch')) { return; }
     _this.set('connectionAttempts', 0);
 
     let getDevicesLoop = function() {
@@ -84,7 +84,7 @@ export default Ember.Service.extend({
           _this.connectDevice(_this.get('device'));
         }
       });
-    }
+    };
 
     let deviceLost = function(info) {
       if (info.error === 'device_lost') {
@@ -142,7 +142,7 @@ export default Ember.Service.extend({
         });
       } catch(e) {
         sketchError("", "", e);
-      };
+      }
     });
   },
 

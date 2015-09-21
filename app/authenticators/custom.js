@@ -25,13 +25,13 @@ export default Base.extend({
       var data = {};
       data['session'] = { password: credentials.password};
       data['session']['identifier'] = credentials.identifier || credentials.email || credentials.username;
-      _this.makeRequest(data).then(function(resp, status, xhr) {
+      _this.makeRequest(data).then(function(resp) {
         Ember.run(function() {
           // resolve must be given an argument, or else session data won't be stored
           // this argument WILL NOT actually make it to the *session* authenticate.then(resolve) function
           resolve(resp);
         });
-      }, function(xhr, status, error) {
+      }, function(xhr) {
         Ember.run(function() {
           reject(xhr.responseJSON || xhr.responseText);
         });
@@ -51,8 +51,8 @@ export default Base.extend({
         type:       'POST',
         data:       data,
         dataType:   'json',
-        success:    function(data, status, xhr) { resolve(data, status, xhr) },
-        error:      function(xhr, status, error) { reject(xhr, status, error) },
+        success:    function(data, status, xhr) { resolve(data, status, xhr); },
+        error:      function(xhr, status, error) { reject(xhr, status, error); },
         beforeSend: function(xhr, settings) {
           xhr.setRequestHeader('Accept', settings.accepts.json);
         }

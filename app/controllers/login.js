@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
   actions: {
     authenticate: function() {
       let controller = this;
-      let toy = controller.get('toy');
       var data = this.getProperties('identifier', 'password');
       controller.get('session').authenticate('authenticator:custom', data);
     },

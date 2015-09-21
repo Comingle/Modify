@@ -45,7 +45,7 @@ export default DS.ActiveModelSerializer.extend({
         delete pattern.testride;
         return pattern;
       }
-    }).filter(function(pattern){ return pattern });
+    }).filter(function(pattern){ return pattern; });
 
     payload = { patterns: newPatterns, frames: frames, controlOptions: controlOptions };
     return this._super(store, type, payload);

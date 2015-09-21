@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     Ember.$( window ).resize(this.build.bind(this));
     this.build();
 
-    if (typeof(this.get('leftHandleValue')) != 'undefined') {
+    if (typeof(this.get('leftHandleValue')) !== 'undefined') {
       this.$("circle.left").attr('data-original-title', this.get('leftHandleValue'));
     }
     this.$("circle.right").attr('data-original-title', this.get('rightHandleValue'));

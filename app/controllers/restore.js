@@ -16,14 +16,14 @@ export default Ember.Controller.extend({
       _this.set('restoreStatus', "Finding your toy...");
       _this.findNewDevice()
       .then(function() {
-        return new Promise(function(go,nogo) {
+        return new Promise(function(go) {
           _this.set('restoreStatus', "Downloading sofware from server...");
           go();
         });
       }.bind(_this))
       .then(toy.getDefault.bind(toy))
       .then(function() {
-        return new Promise(function(go,nogo) {
+        return new Promise(function(go) {
           _this.set('restoreStatus', "Uploading software to toy...");
           go();
         });

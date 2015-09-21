@@ -10,7 +10,7 @@ export default Ember.Mixin.create({
     let frames = pattern.get('frames');
     return self.callForNewFrames(params).done( function (framesData) {
       framesData.steps.forEach(function (frameData, index) {
-        let formattedFrameData = self.formatFrameData(frameData)
+        let formattedFrameData = self.formatFrameData(frameData);
         let id = self.getUniqueId(patternId, index);
         let frame = frames.findBy("id", id);
 

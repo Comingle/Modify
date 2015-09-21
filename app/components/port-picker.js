@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     let hasDevice = this.get("hasDevice");
     let newClass = "";
     let color = "";
-    let el = "label span"
+    let el = "label span";
     if (hasDevice === 0) {
       newClass = "glyphicon glyphicon-remove";
       color = "#ff0000";
@@ -40,7 +40,7 @@ export default Ember.Component.extend({
 
   deviceChanged: function() {
     let chosenPort = this.get('chosenPort');
-    if (typeof(chosenPort) != undefined) {
+    if (typeof(chosenPort) !== undefined) {
       if (!chosenPort.missing) {
         this.sendAction('testDevice', chosenPort);
       } else {

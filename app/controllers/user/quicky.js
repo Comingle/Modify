@@ -13,7 +13,7 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
 
   actions: {
     maxOptionValueChanged: function (pattern, option, property, value) {
-      console.log('CHANGE', value)
+      console.log('CHANGE', value);
       option.set(property, value);
       this.updatePattern(pattern);
       if (pattern.get('active')) {
