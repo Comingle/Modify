@@ -6,7 +6,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let sineWaveOne = this.store.createRecord('sine-wave', {
       percentAmplitudeMin: 0,
       percentAmplitudeMax: 100,
-      cyclesPerSecond: 1,
+      cyclesPerSecond: 3,
       percentPhaseShift: 10,
       color: '#d28dbf'
     });

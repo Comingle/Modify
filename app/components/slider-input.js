@@ -3,7 +3,7 @@ import Ember from 'ember';
 // {{slider-input
 //   data=controlOption
 //   rightHandleValueChanged='maxValueChanged'
-//   rightHandleValueChangEnded='maxValueChanged'
+//   rightHandleValueChangeEnded='maxValueChanged'
 //   leftHandleValueChanged='minValueChanged'
 //   rangeLineColor=pattern.colorHex
 // }}
@@ -181,7 +181,7 @@ export default Ember.Component.extend({
         newValue = component.get('valueToPercentScale')(newX);
         let minValue = component.get('data.min');
         let maxValue = component.get('data.max');
-        let rightValue = component.get('rightHandleValue');
+        let rightValue = component.get('rightHandleValue') || 0;
         if (minValue <= newValue && newValue <= maxValue && newValue <= rightValue) {
           newValue = newValue;
           component.updateLeftHandle(newX);
@@ -207,7 +207,7 @@ export default Ember.Component.extend({
         newValue = component.get('valueToPercentScale')(newX);
         let minValue  = component.get('data.min');
         let maxValue  = component.get('data.max');
-        let leftValue = component.get('leftHandleValue');
+        let leftValue = component.get('leftHandleValue') || 0;
         if (minValue <= newValue && newValue <= maxValue && newValue >= leftValue) {
           newValue = newValue;
           component.updateRightHandle(newX);

@@ -69,6 +69,8 @@
 =======
             leftHandleValue=sineWaveOne.percentAmplitudeMin
             rightHandleValue=sineWaveOne.percentAmplitudeMax
+            leftHandleValueChangeEnded='minAmplitudeOneChanged'
+            rightHandleValueChangeEnded='maxAmplitudeOneChanged'
             rangeLineColor=sineWaveOne.color}}
 >>>>>>> Provide frames to frames-graph
         </div>
@@ -81,6 +83,7 @@
             rangeLineColor=motorTwo.color}}
 =======
             rightHandleValue=sineWaveOne.cyclesPerSecond
+            rightHandleValueChangeEnded='frequencyOneChanged'
             rangeLineColor=sineWaveOne.color}}
 >>>>>>> Provide frames to frames-graph
         </div>
@@ -93,6 +96,7 @@
             rangeLineColor=motorTwo.color}}
 =======
             rightHandleValue=sineWaveOne.percentPhaseShift
+            rightHandleValueChangeEnded='shiftOneChanged'
             rangeLineColor=sineWaveOne.color}}
 >>>>>>> Provide frames to frames-graph
         </div>
@@ -137,6 +141,8 @@
           data=baseData
           leftHandleValue=sineWaveTwo.percentAmplitudeMin
           rightHandleValue=sineWaveTwo.percentAmplitudeMax
+          leftHandleValueChangeEnded='minAmplitudeTwoChanged'
+          rightHandleValueChangeEnded='maxAmplitudeTwoChanged'
           rangeLineColor=sineWaveTwo.color}}
       </div>
       <div class="range-wrapper">
@@ -144,6 +150,7 @@
         {{slider-input
           data=baseData
           rightHandleValue=sineWaveTwo.cyclesPerSecond
+          rightHandleValueChangeEnded='frequencyTwoChanged'
           rangeLineColor=sineWaveTwo.color}}
       </div>
       <div class="range-wrapper">
@@ -151,6 +158,7 @@
         {{slider-input
           data=baseData
           rightHandleValue=sineWaveTwo.percentPhaseShift
+          rightHandleValueChangeEnded='shiftTwoChanged'
           rangeLineColor=sineWaveTwo.color}}
       </div>
     </div>
@@ -165,6 +173,8 @@
           data=baseData
           leftHandleValue=sineWaveThree.percentAmplitudeMin
           rightHandleValue=sineWaveThree.percentAmplitudeMax
+          leftHandleValueChangeEnded='minAmplitudeThreeChanged'
+          rightHandleValueChangeEnded='maxAmplitudeThreeChanged'
           rangeLineColor=sineWaveThree.color}}
       </div>
       <div class="range-wrapper">
@@ -172,6 +182,7 @@
         {{slider-input
           data=baseData
           rightHandleValue=sineWaveThree.cyclesPerSecond
+          rightHandleValueChangeEnded='frequencyThreeChanged'
           rangeLineColor=sineWaveThree.color}}
       </div>
       <div class="range-wrapper">
@@ -179,6 +190,7 @@
         {{slider-input
           data=baseData
           rightHandleValue=sineWaveThree.percentPhaseShift
+          rightHandleValueChangeEnded='shiftThreeChanged'
           rangeLineColor=sineWaveThree.color}}
 >>>>>>> Provide frames to frames-graph
       </div>

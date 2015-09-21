@@ -124,7 +124,6 @@ export default Ember.Component.extend({
     let motorTwoData   = [];
     let motorThreeData = [];
     this.get('frames').forEach( function (frame) {
-      console.log(frame.get('motorTwo'))
       let nextX = frame.get('timeMS');
       motorOneData.pushObject(  { x: nextX, y: frame.get('motorOne') });
       motorTwoData.pushObject(  { x: nextX, y: frame.get('motorTwo') });
@@ -139,6 +138,35 @@ export default Ember.Component.extend({
 
     let motorThreePath = this.drawPath(motorThreeData, this.get('motorThreeColor'));
     this.set('motorThreePath', motorThreePath);
+  },
+
+  updateMotorOnePath: function () {
+    let motorData = this.motorDataFor('motorOne');
+    let path = this.get('motorOnePath');
+    this.updatePath(path, motorData)
+  }.observes('frames.@each.motorOne'),
+
+  updateMotorTwoPath: function () {
+    let motorData = this.motorDataFor('motorTwo');
+    let path = this.get('motorTwoPath');
+    this.updatePath(path, motorData)
+  }.observes('frames.@each.motorTwo'),
+
+  updateMotorThreePath: function () {
+    let motorData = this.motorDataFor('motorThree');
+    let path = this.get('motorThreePath');
+    this.updatePath(path, motorData)
+  }.observes('frames.@each.motorThree'),
+
+  updatePath: function (path, motorData) {
+    let lineFunction = this.get('lineFunction');
+    d3.transition(path).attr("d", lineFunction(motorData));
+  },
+
+  motorDataFor: function (motorName) {
+    return this.get('frames').map(function (frame) {
+      return { x: frame.get('timeMS'), y: frame.get(motorName) }
+    });
   },
 
   drawPath: function (lineData, color) {
