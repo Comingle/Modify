@@ -143,19 +143,19 @@ export default Ember.Component.extend({
   updateMotorOnePath: function () {
     let motorData = this.motorDataFor('motorOne');
     let path = this.get('motorOnePath');
-    this.updatePath(path, motorData)
+    this.updatePath(path, motorData);
   }.observes('frames.@each.motorOne'),
 
   updateMotorTwoPath: function () {
     let motorData = this.motorDataFor('motorTwo');
     let path = this.get('motorTwoPath');
-    this.updatePath(path, motorData)
+    this.updatePath(path, motorData);
   }.observes('frames.@each.motorTwo'),
 
   updateMotorThreePath: function () {
     let motorData = this.motorDataFor('motorThree');
     let path = this.get('motorThreePath');
-    this.updatePath(path, motorData)
+    this.updatePath(path, motorData);
   }.observes('frames.@each.motorThree'),
 
   updatePath: function (path, motorData) {
@@ -165,7 +165,7 @@ export default Ember.Component.extend({
 
   motorDataFor: function (motorName) {
     return this.get('frames').map(function (frame) {
-      return { x: frame.get('timeMS'), y: frame.get(motorName) }
+      return { x: frame.get('timeMS'), y: frame.get(motorName) };
     });
   },
 
@@ -185,7 +185,7 @@ export default Ember.Component.extend({
   yScale: function () {
     let height = this.get('height');
     let strokeWidth = this.get('strokeWidth');
-    let lebelWidth = this.get('cellSideLength')
+    let lebelWidth = this.get('cellSideLength');
     return d3.scale.linear()
       .domain([0, this.get('maxY')])
       .range([height - strokeWidth * 2 - lebelWidth, strokeWidth + lebelWidth]);

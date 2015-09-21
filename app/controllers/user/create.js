@@ -44,58 +44,55 @@ export default Ember.Controller.extend({
 
   actions: {
     minAmplitudeOneChanged: function (data, newValue) {
-      this.get('frames');
-      let sine = this.get('sineWaveOne.percentAmplitudeMin')
-      console.log('sine', sine)
       console.log('right', newValue);
     },
 
     maxAmplitudeOneChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     frequencyOneChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     shiftOneChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
 
 
     minAmplitudeTwoChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     maxAmplitudeTwoChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     frequencyTwoChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     shiftTwoChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
 
 
     minAmplitudeThreeChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     maxAmplitudeThreeChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     frequencyThreeChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
     shiftThreeChanged: function (data, newValue) {
-      console.log('right', newValue)
+      console.log('right', newValue);
     },
 
 
