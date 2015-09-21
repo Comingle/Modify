@@ -25,14 +25,16 @@ export default Ember.Component.extend({
 
     playPattern: function () {
       this.set('pattern.active', true);
-      this.sendAction('selectPattern', this.get('pattern'));
+      this.sendAction('startPlayingPattern', this.get('pattern'));
     },
 
     toggleOptions: function () {
       if (this.get('showOptions')) {
         this.set('showOptions', false);
+        // this.sendAction('openPattern', null);
       } else {
         this.set('showOptions', true);
+        // this.sendAction('openPattern', this.get('pattern'));
       }
     }
   }

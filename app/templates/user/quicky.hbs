@@ -10,6 +10,7 @@
           </a>
           <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
           <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
+          {{frames-graph frames=shownFrames}}
         </div>
         <div id="grid">
           <div id="top-haze">
@@ -31,7 +32,8 @@
   {{#each pattern in currentPatterns}}
     {{patterns/basic-pattern
       pattern=pattern
-      selectPattern='startPlayingPattern'
+      openPattern='openPattern'
+      startPlayingPattern='startPlayingPattern'
       stopPlayingPattern='stopPlayingPattern'
       maxValueChanged='maxOptionValueChanged'
     }}

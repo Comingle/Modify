@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayProxy.extend({
-  tickOffset: 12,
+  tickOffset: 50,
 
   init: function () {
     this._super();
@@ -36,7 +36,7 @@ export default Ember.ArrayProxy.extend({
       motorOne: sineWaves[0].at(time),
       motorTwo: sineWaves[1].at(time),
       motorThree: sineWaves[2].at(time),
-      timeMS: time
+      timeMS: this.get('tickOffset')
     };
   }
 });
