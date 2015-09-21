@@ -64,11 +64,23 @@ h3 {
   flex: 1;
 }
 
-ul { list-style-type: none; padding: 0; }
-li { margin: 0; padding: 0; }
-
 label {
   color: $gray;
+}
+
+p {
+  text-transform: none;
+  font-size: 1.5rem;
+}
+
+ul {
+  text-transform: none;
+  font-size: 1.5rem;
+}
+
+ol {
+  text-transform: none;
+  font-size: 1.5rem;
 }
 
 header {
@@ -79,7 +91,7 @@ header {
   margin-bottom: 40px;
   margin-top: 10.2rem;
   h1 {
-    flex: 1 0 auto;
+    flex: 1 1 auto;
     margin: 0;
   }
   h3 {
@@ -288,7 +300,7 @@ select {
   padding-left:0;
   align-self: center;
   flex: 9 0 0;
-  margin-left: 1em;
+  margin-left: $list-item-margin-left;
 }
 
 .select-wrapper {
@@ -370,6 +382,9 @@ select {
   border-left:#e6e7ee 1px solid;
   border-right:#e6e7ee 1px solid;
   border-bottom:#d3d6e1 1px solid;
+  span: {
+    margin-left: $list-item-margin-left;
+  }
 }
 
 .list-item-double {
@@ -414,13 +429,8 @@ select {
   content: counter(section);
   flex: 1 0 auto;
   margin-right: 1em;
-  margin-left: 1em;
+  margin-left: $list-item-margin-left;
   color: $gray;
-}
-
-// unused?
-.pattern-slider .list-item-double {
-  margin-top: 50px;
 }
 
 /* gray dashed outline item for adding new items */
@@ -436,7 +446,7 @@ select {
 
 .list-item-prefix {
   flex: 1 0 auto;
-  margin-left: 1em;
+  margin-left: $list-item-margin-left;
   color: $gray;
 }
 
@@ -469,12 +479,17 @@ select {
   background-color: $light-purple;
   border-radius: 0;
   padding: 3px 14px;
+  max-width: 300px;
 }
 
 .tooltip.top .tooltip-arrow {
   border-top-color: $light-purple;
-
 }
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: $light-purple;
+}
+
 
 /* CSS for range sliders */
 

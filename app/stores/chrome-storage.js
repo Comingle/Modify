@@ -14,8 +14,14 @@ export default LocalStorage.extend({
   },
 
   restore: function() {
-    var data = chrome.storage.local.get(this.key, this.loginCallback);
-    return data;
+    let _this = this;
+    return new Promise(function(resolve) {
+      chrome.storage.local.get(_this.key, function(response) {
+        console.log(response);
+        resolve(response);
+      });
+    });
+
   },
 
   clear: function() {

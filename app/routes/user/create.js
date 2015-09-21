@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend({
-  setupController: function (controller) {
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
+  setupController: function (controller, model) {
     let motorOne = this.store.createRecord('motor', {
       percentAmplitudeMin: 50,
       percentAmplitudeMax: 100,

@@ -1,13 +1,14 @@
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
-      {{#if session.isAuthenticated}}
+      <!-- XXX come back to this -->
+      <!-- {{#if session.isAuthenticated}}
         {{port-picker chooseDevice='chooseDevice'}}
-      {{/if}}
+      {{/if}} -->
     </div>
     <div class="col-md-4 greeting">
       <p>Hello beautiful!</p>
       {{#if session.isAuthenticated}}
-        <a {{ action 'myAccount'}}>My Account</a>
+        {{#link-to "account"}}My Account{{/link-to}}
         <a {{ action 'invalidateSession' }}>Sign Out</a>
       {{else}}
         {{#link-to 'login'}}Login{{/link-to}}

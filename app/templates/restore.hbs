@@ -1,0 +1,39 @@
+<div class="app-main">
+  {{partial "header"}}
+  <div class="row">
+    <header class="col-md-8 col-md-offset-2">
+      <h1>Restore your Mod's software</h1>
+      <h3>Fix an unresponsive toy</h3>
+    </header>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <p>If your toy stopped responding and isn't appearing for selection at login, it can be restored to its original software.</p>
+      <p>Before attempting to restore your toy's software, make sure of the following:</p>
+      <ul>
+        <li>Your toy is charged and can turn on.</li>
+        <li>That your USB cable is functioning. Try connecting your toy with a different USB cable and seeing if you still have communication problems.</li>
+        <li>There isn't visible water, condensation or liquid in the Mod's USB or Hacker Ports.</li>
+      </ul>
+      <hr>
+      <p>If none of those points let you communicate with your toy, then restoring the software is a good option</p>
+      <p><strong>To restore:</strong></p>
+      <ol>
+        <li>Turn your toy on and connect it to your computer</li>
+        <li>Double-click the reset button on your toy. The light near the mode button will start fading in and out. You need to do this step even if the light was fading in and out before you double-clicked the reset button.</li>
+        <li>When the light begins fading in and out, click the "Restore My Toy's Software" button below.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="list-item" {{action 'restore'}}>
+        <span>Restore My Toy's Software</span>
+      </div>
+      <div class="list-item">
+        <span>Status: {{status}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+{{partial "nav"}}

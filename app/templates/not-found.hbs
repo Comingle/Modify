@@ -1,0 +1,24 @@
+<div class="app-main">
+  {{partial "header"}}
+  <div class="row">
+    <header class="col-md-8 col-md-offset-2">
+      <h1>Sketch not found</h1>
+    </header>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <p>Your Mod has unrecognized software. You can continue as-is (which may not work at all) or you can restore to the original Mod software.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="list-item">
+        <p>Continue As-Is (unknown consequences)</p>
+      </div>
+      <div class="list-item" {{action 'getDefault'}}>
+        <p>Restore to original Mod software</p>
+      </div>
+    </div>
+  </div>
+</div>
+{{partial "nav"}}

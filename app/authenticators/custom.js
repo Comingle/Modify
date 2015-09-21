@@ -20,16 +20,18 @@ export default Base.extend({
   },
 
   authenticate: function(credentials) {
-    var self = this;
+    var _this = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       var data = {};
       data['session'] = { password: credentials.password};
       data['session']['identifier'] = credentials.identifier || credentials.email || credentials.username;
-      self.makeRequest(data).then( function(response) {
+      _this.makeRequest(data).then(function(resp, status, xhr) {
         Ember.run(function() {
-          resolve(response);
+          // resolve must be given an argument, or else session data won't be stored
+          // this argument WILL NOT actually make it to the *session* authenticate.then(resolve) function
+          resolve(resp);
         });
-      }, function(xhr) {
+      }, function(xhr, status, error) {
         Ember.run(function() {
           reject(xhr.responseJSON || xhr.responseText);
         });
@@ -42,14 +44,19 @@ export default Base.extend({
   },
 
   makeRequest: function(data) {
-    return Ember.$.ajax({
-      url:        config.domain + this.serverTokenEndpoint,
-      type:       'POST',
-      data:       data,
-      dataType:   'json',
-      beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader('Accept', settings.accepts.json);
-      }
+    let _this = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.ajax({
+        url:        config.domain + _this.serverTokenEndpoint,
+        type:       'POST',
+        data:       data,
+        dataType:   'json',
+        success:    function(data, status, xhr) { resolve(data, status, xhr) },
+        error:      function(xhr, status, error) { reject(xhr, status, error) },
+        beforeSend: function(xhr, settings) {
+          xhr.setRequestHeader('Accept', settings.accepts.json);
+        }
+      });
     });
   }
 });

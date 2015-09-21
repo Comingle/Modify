@@ -12,6 +12,8 @@ export default Router.map(function() {
     this.route('get_intimate');
     this.route('account');
     this.route('create');
+    this.route('not_found');
+    this.route('restore');
   });
   this.resource('users', function () {
     this.route('new');

@@ -9,7 +9,6 @@ export default Base.extend({
     var secureData = this.get('session.secure');
     var token      = secureData['authentication_token'];
     var identifier = secureData['identifier'];
-
     if (this.get('session.isAuthenticated') && token && identifier) {
       var authData = JSON.stringify({ authentication_token: token, identifier: identifier });
       jqXHR.setRequestHeader('Authorization', authData);

@@ -18,16 +18,20 @@ export default Ember.Controller.extend({
 
   actions: {
     authenticate: function() {
-      var controller = this;
+      let controller = this;
+      let toy = controller.get('toy');
       var data = this.getProperties('identifier', 'password');
-      return this.get('session').authenticate('authenticator:custom', data).then( function () {
-        let id = controller.get('session.secure.id');
-        controller.transitionToRoute('user', id);
-      });
+      controller.get('session').authenticate('authenticator:custom', data);
     },
 
-    chooseDevice: function(device) {
-      this.get('toy').connectDevice(device);
+    testDevice: function(device) {
+      this.get('toy').testDevice(device);
+    },
+
+    setMissingDevice: function() {
+      this.set('toy.device', undefined);
+      this.set('toy.hasDevice', 0);
+      this.set('toy.deviceStatus', "Sign in to restore your toy's software");
     }
 
 

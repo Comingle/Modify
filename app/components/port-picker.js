@@ -12,10 +12,41 @@ export default Ember.Component.extend({
     this.setDevices();
   },
 
+  updateIcon: function() {
+    let hasDevice = this.get("hasDevice");
+    let newClass = "";
+    let color = "";
+    let el = "label span"
+    if (hasDevice === 0) {
+      newClass = "glyphicon glyphicon-remove";
+      color = "#ff0000";
+    } else if (hasDevice === 1) {
+      newClass = "glyphicon glyphicon-exclamation-sign";
+      color = "#ff7700";
+    } else if (hasDevice === 2) {
+      newClass = "glyphicon glyphicon-ok";
+      color = "#00ff00";
+    }
+    this.$(el).removeClass();
+    this.$(el).addClass(newClass);
+    this.$(el).css("color", color);
+    this.$(el).css("display", "inline");
+    this.$(el).attr("data-original-title", this.get('deviceStatus'));
+    this.$(el).tooltip('show');
+    setTimeout(function() {
+      this.$(el).tooltip('hide');
+    }, 6000);
+  }.observes('deviceStatus'),
+
   deviceChanged: function() {
     let chosenPort = this.get('chosenPort');
     if (typeof(chosenPort) != undefined) {
-      this.sendAction('chooseDevice', chosenPort);
+      if (!chosenPort.missing) {
+        this.sendAction('testDevice', chosenPort);
+      } else {
+        this.sendAction('setMissingDevice');
+      }
+
     }
   }.observes('chosenPort'),
 
@@ -24,6 +55,7 @@ export default Ember.Component.extend({
     if (chrome.serial) {
       chrome.serial.getDevices(function (devices) {
         // The toy is probably the last serial port to show up
+        devices.unshift({path:"My toy isn't visible here",missing:true});
         _this.set('devices', devices.reverse());
       });
     }
