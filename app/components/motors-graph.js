@@ -122,8 +122,6 @@ export default Ember.Component.extend({
       .attr("font-family", "Futura")
       .attr("font-size", "11px")
       .text("MINIMUM INTENSITY");
-
-
   },
 
   createMotorOne: function () {

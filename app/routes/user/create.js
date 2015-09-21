@@ -4,26 +4,26 @@ import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixi
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController: function (controller) {
     let sineWaveOne = this.store.createRecord('sine-wave', {
-      percentAmplitudeMin: 50,
+      percentAmplitudeMin: 0,
       percentAmplitudeMax: 100,
-      cyclesPerSecond: 2,
-      percentPhaseShift: 25,
+      cyclesPerSecond: 1,
+      percentPhaseShift: 10,
       color: '#d28dbf'
     });
 
     let sineWaveTwo = this.store.createRecord('sine-wave', {
-      percentAmplitudeMin: 25,
-      percentAmplitudeMax: 50,
-      cyclesPerSecond: 2,
-      percentPhaseShift: 30,
+      percentAmplitudeMin: 0,
+      percentAmplitudeMax: 100,
+      cyclesPerSecond: 1,
+      percentPhaseShift: 20,
       color: '#fec742'
     });
 
     let sineWaveThree = this.store.createRecord('sine-wave', {
       percentAmplitudeMin: 0,
       percentAmplitudeMax: 100,
-      cyclesPerSecond: 2,
-      percentPhaseShift: 35,
+      cyclesPerSecond: 1,
+      percentPhaseShift: 30,
       color: '#dbe546'
     });
 

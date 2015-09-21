@@ -11,7 +11,9 @@ export default DS.Model.extend({
 
   // INTERFACE
   at: function (time) {
-    return this.get('amplitudeMin') + (this.get('amplitude') * Math.sin((time * this.get('frequency')) + this.get('phaseShift')));
+    // f(time) = amplitude * sin(frequency * time - phaseShift)
+    let centerOfGraph = this.get('maxY') / 2;
+    return centerOfGraph + (this.get('amplitude') * Math.sin((time * this.get('frequency')) - this.get('phaseShift')));
   },
 
   integrate: function (motor) {
@@ -22,29 +24,22 @@ export default DS.Model.extend({
   },
 
   // IMPLEMENTATION
-  totalPercentAmplitude: function () {
-    return this.get('percentAmplitudeMax') - this.get('percentAmplitudeMin');
-  }.property('percentAmplitudeMax', 'percentAmplitudeMin'),
-
   amplitude: function () {
-    return this.amplitudePercentToValue(this.get('totalPercentAmplitude'));
+    let totalPercentAmplitude = this.get('percentAmplitudeMax') - this.get('percentAmplitudeMin');
+    return this.amplitudePercentToValue(totalPercentAmplitude) / 2;
   }.property('percentAmplitudeMin', 'percentAmplitudeMax'),
 
   amplitudeMin: function () {
     return this.amplitudePercentToValue(this.get('percentAmplitudeMin'));
   }.property('percentAmplitudeMin'),
 
-  cycle: function () {
-    // a constant one cycle per second
-    return (2 * Math.PI) / this.get('second');
-  }.property('second'),
-
   frequency: function () {
-    return this.get('cyclesPerSecond') * this.get('cycle');
-  }.property('cyclesPerSecond', 'cycle'),
+    let cycle = (2 * Math.PI) / this.get('second'); // a constant one cycle per second
+    return this.get('cyclesPerSecond') * cycle;
+  }.property('cyclesPerSecond'),
 
   phaseShift: function () {
-    let numOfCycles = this.get('cyclesPerSecond') / this.get('second');
+    let numOfCycles = this.get('cyclesPerSecond') * this.get('second');
     let shift = this.get('percentPhaseShift') / 100;
     return numOfCycles * shift * this.get('frequency');
   }.property('second', 'cyclesPerSecond', 'percentPhaseShift', 'frequency'),
@@ -54,7 +49,6 @@ export default DS.Model.extend({
       return 0;
     }
     let realValue = percent / 100;
-    let relationToZero = this.get('maxY') / 2;
-    return realValue * relationToZero;
+    return realValue * this.get('maxY');
   }
 });

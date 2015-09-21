@@ -17,12 +17,12 @@ export default Ember.ArrayProxy.extend({
     let frameParams, frame, time;
     time = this.get('tickOffset') * tick;
     // this should likely be detemined by the actual phase instead of the time
+    // meaning it should end at the end of the phase rather than the end of the second
     if (time < 1000) {
       frameParams = this.getFrameParamsAt(time);
       if (frame = this.get('content').objectAt(tick)) {
         frame.updateRecord(frameParams);
       } else {
-
         frame = this.get('store').createRecord('frame', frameParams);
         this.get('content').insertAt(tick, frame);
       }
@@ -31,7 +31,6 @@ export default Ember.ArrayProxy.extend({
   },
 
   getFrameParamsAt: function (time) {
-    let params = {};
     let sineWaves = this.get('sineWaves');
     return {
       motorOne: sineWaves[0].at(time),
