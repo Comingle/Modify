@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
         let toy = _this.get('toy');
         toy.set('progress', "Finished!");
         _this.get('target').send("hideOverlay");
-        _this.transitionTo('/quicky');
+        _this.transitionTo('/user/quicky');
       }.bind(toy), function(err) {
         _this.set('toy.progress', err);
         console.log('restoreStatus', err);

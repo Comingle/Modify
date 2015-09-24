@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
         toy.getSketchById("default")
         .then(toy.sendSketch.bind(toy))
         .then(function() {
-          _this.transitionTo("/quicky");
+          _this.transitionTo("/user/quicky");
         })
       }
     }

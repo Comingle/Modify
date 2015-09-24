@@ -8,7 +8,7 @@
     <div class="col-md-4 greeting">
       <p>Hello beautiful!</p>
       {{#if session.isAuthenticated}}
-        {{#link-to "account"}}My Account{{/link-to}}
+        {{#link-to "user.account"}}My Account{{/link-to}}
         <a {{ action 'invalidateSession' }}>Sign Out</a>
       {{else}}
         {{#link-to 'login'}}Login{{/link-to}}

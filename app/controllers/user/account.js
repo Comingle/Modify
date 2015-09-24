@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
         .then(toy.sendSketch.bind(toy))
         .then(function() {
           _this.get('target').send('hideOverlay');
-          _this.transitionTo("/quicky");
+          _this.transitionTo("/user/quicky");
         })
       }
     }

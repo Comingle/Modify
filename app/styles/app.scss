@@ -420,6 +420,9 @@ select {
   @include list-item;
   border: $gray 3px dashed;
   color: $gray;
+  & > :not(.range-wrapper):first-child {
+    margin-left: $list-item-margin-left;
+  }
 }
 
 .list-item {

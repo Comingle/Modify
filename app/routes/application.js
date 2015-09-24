@@ -22,11 +22,11 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         .then(_this.haveConfig.bind(_this), _this.missingConfig.bind(_this));
       // no device -- restore mode.
       } else {
-        let restore = _this.controllerFor('restore');
+        let restore = _this.controllerFor('user.restore');
         if (chrome.serial) {
           chrome.serial.getDevices(function (devices) {
             restore.set('devices', devices);
-            _this.transitionTo('/restore');
+            _this.transitionTo('/user/restore');
           });
         }
       }
@@ -86,11 +86,11 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   },
 
   haveConfig: function() {
-    this.transitionTo('/quicky');
+    this.transitionTo('/user/quicky');
   },
 
   missingConfig: function() {
-    this.transitionTo('/not_found');
+    this.transitionTo('/user/not_found');
   }
 
 });
