@@ -8,24 +8,30 @@ export default Ember.Service.extend({
   receiveTimeout: 1000,
   serverFindSketchEndpoint: "/api/v1/sketches/find",
   defaultSketchEndpoint: "/api/v1/sketches/default",
+  specificSketchEndpoint: "/api/v1/sketches/",
 
   // download sketch from toy in intel HEX format.
   getSketchParams: function () {
     let _this = this;
     console.log("getSketchParams");
 
-    // our actual sketch-grabbing callback. called from Avr109.readPageHandler
-    let f = function(sketch) {
-      console.log("callback");
-      this.set('sketch', sketch);
-      this.reviveConnection();
-    }.bind(this);
-
+    _this.set('progress', "Downloading sketch from toy...");
     let arduino = new Arduino(chrome.serial);
 
     return new Promise (function(resolve, reject) {
+      // XXX hack
+      if (_this.get('connectionId')) {
+        chrome.serial.disconnect(_this.get('connectionId'), function () {
+          _this.set("connectionId", null);
+        });
+      }
       arduino.connect(_this.get('device')).then(function() {
-        arduino.getSketch(f).then(resolve, reject);
+        arduino.getSketch().then(function(sketch) {
+          _this.set('sketch', sketch);
+          _this.set('progress', "Downloading sketch from toy...Complete!");
+          _this.reviveConnection();
+          resolve();
+        });
       },
       function() { // reject
         console.log("Could not connect to Mod.");
@@ -34,10 +40,38 @@ export default Ember.Service.extend({
     });
   },
 
+  getSketchById: function(id) {
+    let _this = this;
+    _this.set('progress', "Retrieving sketch from server...");
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      Ember.$.ajax({
+        url:        config.domain + _this.specificSketchEndpoint + id,
+        type:       'GET',
+        dataType:   'json',
+        success:    function(data, status, xhr) {
+          _this.set('sketch', data.hex);
+          _this.set('config', data.config);
+          resolve(data, status, xhr);
+          },
+        error:      function(xhr, status, error) { reject(xhr, status, error); },
+        beforeSend: function(xhr, settings) {
+          xhr.setRequestHeader('Accept', settings.accepts.json);
+        }
+      });
+    });
+  },
+
   sendSketch: function () {
     let _this = this;
     let arduino = new Arduino(chrome.serial);
+    _this.set('progress', "Uploading sketch to toy...");
     return new Promise (function(resolve, reject) {
+      // XXX hack
+      if (_this.get('connectionId')) {
+        chrome.serial.disconnect(_this.get('connectionId'), function () {
+          _this.set("connectionId", null);
+        });
+      }
       arduino.connect(_this.get('device')).then(function() {
         if (!_this.get('sketch')) {
           reject("Could not find sketch.");
@@ -62,6 +96,8 @@ export default Ember.Service.extend({
     let _this = this;
     if (!_this.get('sketch')) { return; }
     _this.set('connectionAttempts', 0);
+
+    _this.set('progress', "Reconnecting to your toy...");
 
     let getDevicesLoop = function() {
       chrome.serial.getDevices(function(devs) {
@@ -101,6 +137,7 @@ export default Ember.Service.extend({
   // fetches the default sketch from the backend and stores it in toy.sketch
   getDefault: function () {
     let _this = this;
+    _this.set('progress', "Downloading default sketch from server...");
     return new Ember.RSVP.Promise(function(resolve, reject) {
       Ember.$.ajax({
         url:        config.domain + _this.defaultSketchEndpoint,
@@ -108,6 +145,8 @@ export default Ember.Service.extend({
         dataType:   'json',
         success:    function(data, status, xhr) {
           _this.set('sketch', data.hex);
+          _this.set('config', data.config);
+          _this.set('progress', "Download complete.");
           resolve(data, status, xhr);
           },
         error:      function(xhr, status, error) { reject(xhr, status, error); },
@@ -122,6 +161,7 @@ export default Ember.Service.extend({
   findSketch: function() {
     let _this = this;
     let data = {sketch: _this.get('sketch') };
+    _this.set('progress', "Getting configuration from server...");
     return new Promise(function(sketchFound, sketchError) {
       try {
         Ember.$.ajax({
@@ -132,6 +172,7 @@ export default Ember.Service.extend({
           success:    function(data, status, xhr) {
             _this.set('config', data.sketch.config);
             _this.set('fingerprint', data.sketch.fingerprint);
+            _this.set('progress', "Found it!");
             sketchFound(data, status, xhr); },
           error:      function(xhr, status, error) {
             _this.set('config', null);
@@ -142,8 +183,44 @@ export default Ember.Service.extend({
         });
       } catch(e) {
         sketchError("", "", e);
-      }
+      };
     });
+  },
+
+  getFingerprint: function() {
+    let _this = this;
+    let command =  _this._stringToBinary("f\r\n");
+    let connectionId = _this.get('connectionId');
+
+    let receiver = function(info) {
+      if (info.connectionId == connectionId) {
+        let view = new Uint8Array(info.data);
+        // 32 byte sha256 + CR + LF
+        if (view.length === 34) {
+          let fingerprint = "";
+          for (let i = 0; i < 32; i++) {
+            let char = view[i].toString(16);
+            if (char.length === 1) {
+              char = "0" + char;
+            }
+            fingerprint += char;
+          }
+          _this.set('fingerprint', fingerprint);
+          console.log("fingerprint");
+          console.log(fingerprint);
+        }
+        chrome.serial.onReceive.removeListener(receiver);
+        chrome.serial.disconnect(info.connectionId, function (b) {
+          if (b) {
+            _this.connectionId = null;
+          }
+          console.log("Disconnect: " + b);
+        });
+      }
+    };
+
+    chrome.serial.onReceive.addListener(receiver);
+    chrome.serial.send(connectionId, command, function() {});
   },
 
   connectDevice: function (device) {
@@ -157,6 +234,7 @@ export default Ember.Service.extend({
   // with a value between 0 and 1023 inclusive.
   testDevice: function (device) {
     let _this = this;
+    let pauseDisconnect = false;
     _this.connectDevice(device).then(function() {
       console.log('testDevice');
       let connectionId = _this.get('connectionId');
@@ -171,16 +249,21 @@ export default Ember.Service.extend({
             if (0 <= parseInt(info.data) < 1024) {
               _this.set('hasDevice', 2);
               _this.set("deviceStatus", "Connected.");
+              // we have further questions for the toy. getFingerprint() will disconnect.
+              pauseDisconnect = true;
+              _this.getFingerprint();
             }
             chrome.serial.update(info.connectionId, { receiveTimeout: 0 }, function() {
               console.log("Received first.");
               chrome.serial.onReceive.removeListener(receiver);
-              chrome.serial.disconnect(info.connectionId, function (b) {
-                if (b) {
-                  _this.connectionId = null;
-                }
-                console.log("Disconnect: " + b);
-              });
+              if (!pauseDisconnect) {
+                chrome.serial.disconnect(info.connectionId, function (b) {
+                  if (b) {
+                    _this.connectionId = null;
+                  }
+                  console.log("Disconnect: " + b);
+                });
+              }
             });
           }
         };

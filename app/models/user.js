@@ -5,5 +5,6 @@ export default DS.Model.extend({
   password: DS.attr('string'),
   passwordConfirmation: DS.attr('string'),
   avatar: DS.attr('string'),
-  username: DS.attr('string')
+  username: DS.attr('string'),
+  sketchHistory: DS.hasMany('sketch-history')
 });

@@ -13,41 +13,27 @@ export default Ember.Controller.extend({
       let _this = this;
       let toy = _this.get('toy');
 
-      _this.set('restoreStatus', "Finding your toy...");
+      _this.get('target').send("displayOverlay");
+      toy.set('progress', "Finding your toy...");
       _this.findNewDevice()
-      .then(function() {
-        return new Promise(function(go) {
-          _this.set('restoreStatus', "Downloading sofware from server...");
-          go();
-        });
-      }.bind(_this))
       .then(toy.getDefault.bind(toy))
-      .then(function() {
-        return new Promise(function(go) {
-          _this.set('restoreStatus', "Uploading software to toy...");
-          go();
-        });
-      }.bind(_this))
       .then(toy.sendSketch.bind(toy))
       .then(function() {
-        _this.set('restoreStatus', "Finished!");
+        let toy = _this.get('toy');
+        toy.set('progress', "Finished!");
+        _this.get('target').send("hideOverlay");
         _this.transitionTo('/quicky');
-      }, function(err) {
+      }.bind(toy), function(err) {
+        _this.set('toy.progress', err);
         console.log('restoreStatus', err);
-        _this.set('restoreStatus', err);
       });
-    },
-
-    setStatus: function(status) {
-      this.set('restoreStatus', status);
     }
+
   },
 
-  status: function() {
-    console.log("status");
-    return this.get('restoreStatus');
-  }.property('restoreStatus'),
-
+  //  runs chrome.serial.getDevices multiple times, presumably after the user
+  //  has dropped their toy in to bootloader mode. it sometimes takes a few
+  //  seconds for the serial port to reappear.
   findNewDevice: function() {
     let _this = this;
     _this.set('connectionAttempts', 0);
@@ -70,6 +56,7 @@ export default Ember.Controller.extend({
             resolve();
           } else {
             let connectionAttempts = _this.get('connectionAttempts');
+            // bootloader is only active for 8 seconds
             if (connectionAttempts > 8) {
               console.log("connection timeout"); // XXX handle an error here.
               reject("Connection timeout.");

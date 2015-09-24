@@ -14,10 +14,6 @@
   flex-wrap: wrap;
 }
 
-.col {
-  @include flex-center-column;
-}
-
 @mixin flex-center-row {
 
 }
@@ -45,7 +41,7 @@ a {
 
 // ember actions don't need a href, so we set the cursor to pointer to
 // indicate they can still be clicked.
-a[data-ember-action] {
+[data-ember-action] {
   cursor: pointer;
 }
 
@@ -135,6 +131,17 @@ body > .ember-view {
   margin-top: 0;
 }
 
+/* column spacing definition */
+
+.main-column {
+  @extend .col-md-8;
+  @extend .col-md-offset-2;
+  @extend .col-sm-10;
+  @extend .col-sm-offset-1;
+  @extend .col-xs-10;
+  @extend .col-xs-offset-1;
+}
+
 /* nav definitions */
 
 .nav-logo {
@@ -167,7 +174,7 @@ body > .ember-view {
   color: $comingle-pink !important;
 }
 
-// /* login */
+/* login */
 
 .login {
   background: #08c2f1 url('images/loginlogo.svg') no-repeat;
@@ -261,12 +268,53 @@ input[type='text'],input[type='password'] {
   cursor: ew-resize;
 }
 
-.pattern-container {
+.collapse-container {
   margin-top: -10px;
 }
 
 /* */
 
+// overlay
+
+.overlay:after {
+  background-color: rgba(17, 196, 241, 0.95);
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  content:'';
+  z-index:10;
+}
+
+.overlay-view {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  margin-left: -200px;
+  & span {
+    color: #fff;
+    margin-top: 2rem;
+    font-size: 1.6rem;
+  }
+  & > :nth-child(2) {
+    font-size: 3rem;
+  }
+}
+
+.overlay-remove {
+  position: fixed;
+  top: 1%;
+  font-size: 2rem;
+  color: #fff;
+  z-index: 11;
+  right: 1%;
+}
 
 // unsorted
 
@@ -382,7 +430,7 @@ select {
   border-left:#e6e7ee 1px solid;
   border-right:#e6e7ee 1px solid;
   border-bottom:#d3d6e1 1px solid;
-  span: {
+  & > :not(.range-wrapper):first-child {
     margin-left: $list-item-margin-left;
   }
 }
@@ -429,7 +477,7 @@ select {
   content: counter(section);
   flex: 1 0 auto;
   margin-right: 1em;
-  margin-left: $list-item-margin-left;
+  // margin-left: $list-item-margin-left;
   color: $gray;
 }
 
@@ -446,7 +494,7 @@ select {
 
 .list-item-prefix {
   flex: 1 0 auto;
-  margin-left: $list-item-margin-left;
+  // margin-left: $list-item-margin-left;
   color: $gray;
 }
 
@@ -465,7 +513,17 @@ select {
 }
 
 .list-item-name {
-    flex: 20 0 85%;
+    flex: 20 0 75%;
+}
+
+.list-item.col {
+  @include flex-center-column;
+  button {
+    align-self: flex-end;
+  }
+  span {
+    align-self: flex-start;
+  }
 }
 
 /* tooltip styling */
@@ -528,5 +586,6 @@ select {
   background-color: transparent;
   border: $gray 3px solid;
   border-radius: 12px 12px 12px 12px;
-  font-size: 0.8em;
+  font-size: 1.1rem;
+  flex: 0 0 auto;
 }
