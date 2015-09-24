@@ -40,7 +40,7 @@ class Arduino {
 
   // sketch must be an array of hex values
   uploadSketch (sketch) {
-    if (!sketch) { reject("No sketch for upload."); return; }
+    if (!sketch) { console.log("No sketch for upload."); return; }
     let data;
     data = new Data(sketch, 'intelHEX');
 

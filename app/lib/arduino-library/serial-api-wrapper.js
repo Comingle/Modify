@@ -76,10 +76,21 @@ class SerialApiWrapper {
     // console.log('PAYLOAD 2 : ', translator.binToHex2(data.getBin()));
 
     return new Promise( function (resolve) {
-      serialApi.send(id, data.getBin(), function (info) {
-        resolve(info);
+      serialApi.send(id, data.getBin(), function (sent) {
+        resolve(sent);
       });
     });
+  }
+
+  // flush buffers
+  flush () {
+    let id = this.connection.id;
+    let serialApi = this.serialApi;
+    return new Promise( function (resolve) {
+      serialApi.flush(id, function(result) {
+        resolve(result);
+      })
+    })
   }
 
   listen (callback) {
