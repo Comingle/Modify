@@ -1,13 +1,13 @@
 <div class="app-main">
   {{partial "header"}}
   <div class="row">
-    <header class="col-md-8 col-md-offset-2">
+    <header class="main-column">
       <h1>Restore your Mod's software</h1>
       <h3>Fix an unresponsive toy</h3>
     </header>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="main-column">
       <p>If your toy stopped responding and isn't appearing for selection at login, it can be restored to its original software.</p>
       <p>Before attempting to restore your toy's software, make sure of the following:</p>
       <ul>
@@ -26,14 +26,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="main-column">
       <div class="list-item" {{action 'restore'}}>
         <span>Restore My Toy's Software</span>
-      </div>
-      <div class="list-item">
-        <span>Status: {{status}}</span>
       </div>
     </div>
   </div>
 </div>
-{{partial "nav"}}

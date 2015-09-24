@@ -16,6 +16,7 @@ class Avr109 {
     this.pageSize = 128;
     this.commands = commands;
     this.pages = [];
+    this.verifyPages = [];
     this.responseHandler = this.defaultHandler;
     this.listenToDevice();
     this.totalPages = this.flashSize / this.pageSize;
@@ -24,15 +25,14 @@ class Avr109 {
 
   // INTERFACE
 
-  downloadSketch (downloadCallback) {
-    this.downloadCallback = downloadCallback;
+  downloadSketch () {
     let self = this;
     return new Promise(function(resolve) {
       self.startProgramming().then( function (success) {
         if (success) {
-          self.readSketchPages().then( function () {
+          self.readSketchPages().then( function (sketch) {
             console.log('Finished reading sketch pages.');
-            resolve();
+            resolve(sketch);
           });
         }
       });
@@ -48,7 +48,7 @@ class Avr109 {
           page = self.pad(page);
         }
         self.pages[i] = page;
-        // self.verifyPages[i] = page;
+        self.verifyPages[i] = page;
       } else {
         break;
       }
@@ -57,8 +57,10 @@ class Avr109 {
       return self.startProgramming().then( function (success) {
         if (success) {
           self.writeSketchPages().then( function () {
-            console.log('Finished uploading sketch.');
-            resolve();
+            self.verifySketch().then( function () {
+              console.log('Finished uploading sketch.');
+              resolve();
+            });
           });
         }
       });
@@ -67,40 +69,53 @@ class Avr109 {
 
   // PRIVATE
 
-  // verifySketch () {
-  //   let self = this;
-  //   this.downloadCallback = function(sketch) {
-  //     if (!this.verifyPages) {
-  //       console.log("no sketch to verify.");
-  //       return;
-  //     }
-  //     let sketchdata = translator.intelHEXToBin(sketch);
-  //   };
-  //   return new Promise(function(resolve, reject) {
-  //     self.readSketchPages().then( function () {
-  //       console.log('Finished reading sketch pages.');
-  //       resolve();
-  //     });
-  //   });
-  // }
+  verifySketch () {
+    let self = this;
 
-  readDispatcher (readArg) {
-    this.responseHandler(readArg);
-    return;
+    return new Promise(function(resolve, reject) {
+      self.readSketchPages().then( function (sketch) {
+        if (!self.verifyPages) {
+          console.log("no sketch to verify.");
+          return;
+        }
+        let uploadedData = translator.intelHEXToBin(sketch);
+        let origPages = self.verifyPages;
+        let originalData = [];
+        for (let i = 0; i < self.verifyPages.length; i++) {
+          for (let k = 0; k < self.verifyPages[i].length; k++) {
+            originalData.push(self.verifyPages[i][k]);
+          }
+        }
+        let misMatch = 0;
+        for (let j = 0; j < originalData.length; j++) {
+          if (uploadedData[j] != originalData[j]) {
+            console.log("data mismatch at " + j);
+            console.log("uploaded: " + uploadedData[j]);
+            console.log("original: " + originalData[j]);
+            misMatch++;
+          }
+          if (misMatch > 5) break;
+        }
+        console.log('Finished verifying sketch.');
+        resolve();
+      });
+    });
   }
+
+
 
   readSketchPages () {
     let self = this;
     return new Promise( function (success) {
       // store the success function in a handler so the readPageHandler listener
-      // can pass it off to stopProgramming() when we're done downloading.
+      // can run it when we're done downloading from the toy.
       // FYI, success is the 'then(...)' after readSketchPages, which
       // may include code to resolve other promises. (this was really confusing)
       self.resolveHandler = success;
+
       self.setAddressTo(0).then( function () {
         self.readPage(0);
       });
-      // resolve(true); // XXX this needs to be resolved after the last page.
     });
   }
 
@@ -117,11 +132,12 @@ class Avr109 {
       let data = new Data([readPage, sizeBytes[0], sizeBytes[1], typeFlash]);
 
       board.responseHandler = this.readPageAndRequestNext;
-      this.serial.send(data);
+      board.serial.send(data);
+
     }
   }
 
-  // put readPage in here so that it's called on receive rather than on send
+  // read next page after receiving ack from board of previous page read.
   readPageAndRequestNext (args) {
     this.readPageHandler(args);
     if (this.pages.length < this.totalPages) {
@@ -130,20 +146,29 @@ class Avr109 {
   }
 
   readPageHandler (args) {
+    let _this = this;
     let hexData = translator.binToHex2(args.data);
     let pages = this.pages;
+
     // don't put ACKs from the microprocessor in to sketch data
-    if (pages.length === 0 && hexData.length === 1 && hexData[0] === 13) {
-      return;
+    // these happen at the beginning.
+    if (pages.length === 0) {
+      for (let i = 0; i < hexData.length; i++) {
+        if (hexData[i] != 13) break;
+        if (i === hexData.length-1 && hexData[i] === 13) {
+          return;
+        }
+      }
     }
-    // console.log('Got: ' + hexData);
+
     pages.push(hexData);
     if (pages.length >= this.totalPages) {
       let data = [].concat.apply([], pages);
       let sketch = translator.binToHex(data);
       //console.log('sketch : ', sketch);
-      this.downloadCallback(sketch);
-      this.stopProgramming();
+      this.stopProgramming().then(function() {
+        _this.resolveHandler(sketch);
+      })
     }
   }
 
@@ -170,39 +195,38 @@ class Avr109 {
       let payload = board.pages[0];
 
       if (payload.length < 1) {
-        board.stopProgramming();
+        board.verifySketch();
       }
 
       let data = new Data([writePage, sizeBytes[0], sizeBytes[1], typeFlash]);
       data.addHex(payload);
 
       board.responseHandler = this.writePageAndRequestNext;
-      this.serial.send(data);
+      board.serial.send(data);
       board.pages.splice(0,1);
     }
   }
 
   writePageAndRequestNext() {
+    let _this = this;
     if (this.pages.length > 0) {
-      this.writePage();
+      setTimeout(function() {
+        _this.writePage();
+      }, 25);
     } else {
-      this.stopProgramming();
+      // unlike readPageAndRequestNext, we don't want to stop programming after getting
+      // to the last page since we're going to read the pages and verify.
+      _this.resolveHandler();
     }
 
   }
 
   pad (payload) {
     while (payload.length % this.pageSize !== 0) {
-      payload.push(0);
+      payload.push(255);
     }
     return payload;
   }
-
-
-
-  defaultHandler () {
-    console.log('Basic response handler called.');
-  };
 
   setAddressTo (bitNum) {
     let self = this;
@@ -273,13 +297,14 @@ class Avr109 {
   stopProgramming () {
     let board = this;
     board.responseHandler = board.defaultHandler;
-    board.leaveProgrammingMode().then( function () {
+    return new Promise(function(resolve) {
+      board.leaveProgrammingMode().then( function () {
       board.exitBootloader().then( function () {
         board.serial.unlisten(board.serialListener);
         board.serialListener = board.defaultHandler.bind(board);
         board.pages = [];
-        // board.serial.disconnect(board.serial.connection.id);
-        board.resolveHandler();
+        resolve();
+        });
       });
     });
   }
@@ -301,6 +326,15 @@ class Avr109 {
     this.serial.listen(this.serialListener);
     return true;
   }
+
+  readDispatcher (readArg) {
+    this.responseHandler(readArg);
+    return;
+  }
+
+  defaultHandler (response) {
+    console.log('Basic response handler called.');
+  };
 
   getConnection (serial) {
     var connection = serial.connection;

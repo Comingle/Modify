@@ -8,6 +8,7 @@ export default DS.Model.extend({
   defaultValue: DS.attr('number'),
   min: DS.attr('number'),
   max: DS.attr('number'),
+  color: DS.attr('string'),
 
   value: function () {
     return this.get('defaultValue');

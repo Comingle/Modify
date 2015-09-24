@@ -10,7 +10,7 @@
         <span {{action 'toggleOptions'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
     </div>
     {{#if showOptions}}
-    <div class="pattern-container">
+    <div class="collapse-container">
       <div class="list-item col">
         {{#each controlOption in pattern.controlOptions}}
           <div class="range-wrapper">
@@ -22,7 +22,7 @@
               minValue=controlOption.min
               rightHandleValueChangeEnded='maxValueChanged'
               leftHandleValueChanged='minValueChanged'
-              rangeLineColor=pattern.colorHex
+              rangeLineColor=controlOption.color
             }}
           </div>
         {{/each}}

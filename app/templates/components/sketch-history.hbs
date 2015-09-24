@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="main-column">
+    <div class="list-item">
+      <span class="list-item-name list-item-numbered">{{sketchHistory.niceDate}}</span>
+      <span {{action 'toggleCollapse'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
+    </div>
+    {{#if showCollapse}}
+      <div class="collapse-container">
+        <div class="list-item col">
+          {{#if sketchHistory.note}}
+            <span>"{{sketchHistory.note}}"</span>
+          {{else}}
+            <span>(No sketch information available)</span>
+          {{/if}}
+          <button class="btn save-button list-item-suffix" {{action 'restore' sketchHistory.sketchId}}>Restore</button>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>
