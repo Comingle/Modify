@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="list-item" draggable=true>
+    <span class="list-item-name">{{pattern.prettyName}}</span>
+    {{#if isPlaying}}
+      <span {{action 'pausePattern'}} class="glyphicon glyphicon-pause list-item-suffix"></span>
+    {{else}}
+      <span {{action 'playPattern'}} class="glyphicon glyphicon-play list-item-suffix"></span>
+    {{/if}}
+      <span {{action 'addToCurrentPatterns'}} class="glyphicon glyphicon-plus list-item-suffix"></span>
+  </div>
+</div>

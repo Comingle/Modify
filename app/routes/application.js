@@ -54,7 +54,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
       this.transitionTo('/login');
     },
 
-    displayOverlay: function(model) {
+    displayOverlay: function() {
       let controller = this.controllerFor('overlay');
       $("body").addClass("overlay");
       return this.render('components/overlay', {
@@ -69,7 +69,16 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         outlet: 'overlay',
         parentView: 'application'
       });
-    }
+    },
+    displaySelectOverlay: function(model) {
+      let controller = this.controllerFor('user.quicky');
+      $("body").addClass("overlay");
+      return this.render('components/select-overlay', {
+        into: 'application',
+        outlet: 'overlay',
+        controller: controller
+      });
+    },
 
   },
 
