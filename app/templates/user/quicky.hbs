@@ -1,7 +1,7 @@
 <div class="app-main">
   {{partial "header"}}
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="main-column">
       <div id="pattern-grid-controls">
         <div id="controls">
           <a {{action null}} id="play-pause-wrapper">
@@ -23,12 +23,12 @@
     </div>
   </div>
   <div class="row">
-    <header class="col-md-8 col-md-offset-2">
+    <header class="main-column">
       <h1>Pleasure Playlist</h1>
       <button class="btn save-button">Save Playlist</button>
     </header>
   </div>
-  {{#each pattern in model}}
+  {{#each pattern in currentPatterns}}
     {{patterns/basic-pattern
       pattern=pattern
       selectPattern='startPlayingPattern'
@@ -36,4 +36,12 @@
       maxValueChanged='maxOptionValueChanged'
     }}
   {{/each}}
+  <div class="row">
+    <div class="main-column">
+      <div class="list-item-add" {{action 'chooseNewPatterns'}}>
+        <span class="glyphicon glyphicon-plus list-item-prefix"></span>
+        <span class="list-item-name">Add more patterns</span>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,16 @@
+<span class="glyphicon glyphicon-remove overlay-remove" {{action 'hideOverlay'}}></span>
+<div class="overlay-select">
+  <div class="scroll-wrapper">
+    <div class="row">
+      <h3>Add more patterns to your toy:</h3>
+    </div>
+    {{#each pattern in extraPatterns}}
+      {{patterns/overlay-pattern
+        pattern=pattern
+        selectPattern='startPlayingPattern'
+        stopPlayingPattern='stopPlayingPattern'
+        addPattern='addPattern'
+      }}
+    {{/each}}
+  </div>
+</div>

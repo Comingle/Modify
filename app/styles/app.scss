@@ -287,6 +287,10 @@ input[type='text'],input[type='password'] {
   z-index:10;
 }
 
+.overlay {
+  overflow-y: hidden;
+}
+
 .overlay-view {
   position: fixed;
   top: 35%;
@@ -305,6 +309,32 @@ input[type='text'],input[type='password'] {
   & > :nth-child(2) {
     font-size: 3rem;
   }
+}
+
+.scroll-wrapper {
+  position:static;
+}
+
+.overlay-select {
+  background-color: $background;
+  box-shadow: #00a7d2 0px 1px 0px;
+  border-left:#e6e7ee 1px solid;
+  border-right:#e6e7ee 1px solid;
+  border-bottom:#d3d6e1 1px solid;
+  color: #555;
+  position: fixed;
+  top: 15%;
+  left: 0;
+  bottom: 5%;
+  right: 0;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  margin: auto;
+  width: 80%;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .overlay-remove {
@@ -516,7 +546,8 @@ select {
 }
 
 .list-item-name {
-    flex: 20 0 75%;
+  flex: 20 0 75%;
+  margin-left: 1rem;
 }
 
 .list-item.col {
