@@ -1,30 +1,27 @@
 <div class="app-main">
   {{partial "header"}}
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <!-- <button {{action 'startMotors'}}>Lets Play</button>
-      <button {{action 'stopMotors'}}>Stop Playin'</button> -->
+    <div class="main-column">
       <div id="pattern-grid-controls">
         <div id="controls">
-          <a {{action null}} id="play-pause-wrapper">
+          <a {{action 'startMotors'}} id="play-pause-wrapper">
             <span class="glyphicon glyphicon-play playback-btn"></span>
             <span class="playback-btn-label">Let's play!</span>
           </a>
         </div>
         {{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
       </div>
-
     </div>
   </div>
   <div class="row">
-    <header class="col-md-8 col-md-offset-2">
+    <header class="main-column">
       <h1>Set The Mood</h1>
-      <button class="btn save-button">Save Playlist</button>
+      <button class="btn save-button">Save To Toy</button>
     </header>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="list-item" draggable=true>
+    <div class="main-column">
+      <div class="list-item">
         <span class="list-item-name">Motor 1</span>
         <span {{action 'toggleOptions'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
       </div>
@@ -58,7 +55,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="main-column">
       <div class="list-item col motorTwo">
         <div class="range-wrapper">
           <label>Amplitude</label>
@@ -86,7 +83,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="main-column">
       <div class="list-item col motorThree">
         <div class="range-wrapper">
           <label>Amplitude</label>

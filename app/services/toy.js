@@ -183,7 +183,7 @@ export default Ember.Service.extend({
         });
       } catch(e) {
         sketchError("", "", e);
-      };
+      }
     });
   },
 
@@ -193,7 +193,7 @@ export default Ember.Service.extend({
     let connectionId = _this.get('connectionId');
 
     let receiver = function(info) {
-      if (info.connectionId == connectionId) {
+      if (info.connectionId === connectionId) {
         let view = new Uint8Array(info.data);
         // 32 byte sha256 + CR + LF
         if (view.length === 34) {

@@ -81,7 +81,9 @@ export default Ember.Controller.extend({
 
     stopMotors: function () {
       this.set('running', false);
-    }
+    },
+
+    
   }
 
 });

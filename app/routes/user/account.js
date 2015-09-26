@@ -9,13 +9,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         user: u,
         sketchHistory: u.get('sketchHistory')
       });
-    })
+    });
   },
   setupController: function (controller, model) {
     let user = model.user;
     let sh = model.sketchHistory;
     controller.set('model', model);
     controller.set('user', user);
-    controller.set('sketchHistory', sh)
+    controller.set('sketchHistory', sh);
   }
 });

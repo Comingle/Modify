@@ -2,8 +2,6 @@ import Ember from 'ember';
 
 
 export default Ember.Controller.extend({
-  rowBasis: "col-sm-8 col-md-offset-2",
-
   username: function () {
     return this.get('user.username');
   }.property(),
@@ -33,7 +31,7 @@ export default Ember.Controller.extend({
         .then(function() {
           _this.get('target').send('hideOverlay');
           _this.transitionTo("/user/quicky");
-        })
+        });
       }
     }
   },

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8 col-md-offset-2">
+  <div class="main-column">
     <div class="list-item" draggable=true>
       <span class="list-item-name list-item-numbered">{{pattern.prettyName}}</span>
       {{#if isPlaying}}
@@ -12,6 +12,7 @@
     {{#if showOptions}}
     <div class="collapse-container">
       <div class="list-item col">
+        <span>{{pattern.description}}</span>
         {{#each controlOption in pattern.controlOptions}}
           <div class="range-wrapper">
             <label>{{controlOption.pretty_name}}</label>
