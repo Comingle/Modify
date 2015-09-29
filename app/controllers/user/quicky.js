@@ -5,10 +5,6 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
   quantity: 10,
 
   makeActive: function (selectedPattern) {
-<<<<<<< HEAD
-    this.get('model').setEach('active', false);
-    selectedPattern.set('active', true);
-=======
     this.get('model').forEach( function (pattern) {
       pattern.set('active', false);
     });
@@ -27,7 +23,6 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
 
   showInGraph: function (pattern) {
     this.set('shownFrames', pattern.get('frames'));
->>>>>>> Refactor to help frames work in graph from both angles
   },
 
   // reject all patterns not found in config
