@@ -8,6 +8,7 @@ export default Ember.Mixin.create({
     let params = { id: pattern.get('id'), settings: pattern.get('updateOptionValues') };
     let patternId = pattern.get('id');
     let frames = pattern.get('frames');
+    console.log(frames);
     return self.callForNewFrames(params).done( function (framesData) {
       framesData.steps.forEach(function (frameData, index) {
         let formattedFrameData = self.formatFrameData(frameData);

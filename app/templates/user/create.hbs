@@ -9,7 +9,7 @@
             <span class="playback-btn-label">Let's play!</span>
           </a>
         </div>
-        {{motors-graph motorOne=motorOne motorTwo=motorTwo motorThree=motorThree}}
+        {{frames-graph frames=frames}}
       </div>
     </div>
   </div>
@@ -19,40 +19,6 @@
       <button class="btn save-button">Save To Toy</button>
     </header>
   </div>
-  <div class="row">
-    <div class="main-column">
-      <div class="list-item">
-        <span class="list-item-name">Motor 1</span>
-        <span {{action 'toggleOptions'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
-      </div>
-      <div class="collapse-container">
-        <div class="list-item col motorOne">
-          <div class="range-wrapper">
-            <label>Amplitude</label>
-            {{slider-input
-              data=baseData
-              leftHandleValue=motorOne.percentAmplitudeMin
-              rightHandleValue=motorOne.percentAmplitudeMax
-              rangeLineColor=motorOne.color}}
-          </div>
-          <div class="range-wrapper">
-            <label>Frequency</label>
-            {{slider-input
-              data=baseData
-              rightHandleValue=motorOne.cyclesPerSecond
-              rangeLineColor=motorOne.color}}
-          </div>
-          <div class="range-wrapper">
-            <label>Shift</label>
-            {{slider-input
-              data=baseData
-              rightHandleValue=motorOne.percentPhaseShift
-              rangeLineColor=motorOne.color}}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="row">
     <div class="main-column">
@@ -61,51 +27,92 @@
           <label>Amplitude</label>
           {{slider-input
             data=baseData
-            leftHandleValue=motorTwo.percentAmplitudeMin
-            rightHandleValue=motorTwo.percentAmplitudeMax
-            rangeLineColor=motorTwo.color}}
+            leftHandleValue=sineWaveOne.percentAmplitudeMin
+            rightHandleValue=sineWaveOne.percentAmplitudeMax
+            leftHandleValueChangeEnded='minAmplitudeOneChanged'
+            rightHandleValueChangeEnded='maxAmplitudeOneChanged'
+            rangeLineColor=sineWaveOne.color}}
         </div>
         <div class="range-wrapper">
           <label>Frequency</label>
           {{slider-input
             data=baseData
-            rightHandleValue=motorTwo.cyclesPerSecond
-            rangeLineColor=motorTwo.color}}
+            rightHandleValue=sineWaveOne.cyclesPerSecond
+            rightHandleValueChangeEnded='frequencyOneChanged'
+            rangeLineColor=sineWaveOne.color}}
         </div>
         <div class="range-wrapper">
           <label>Shift</label>
           {{slider-input
             data=baseData
-            rightHandleValue=motorTwo.percentPhaseShift
-            rangeLineColor=motorTwo.color}}
+            rightHandleValue=sineWaveOne.percentPhaseShift
+            rightHandleValueChangeEnded='shiftOneChanged'
+            rangeLineColor=sineWaveOne.color}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="list-item col motorTwo">
+        <div class="range-wrapper">
+          <label>Amplitude</label>
+          {{slider-input
+            data=baseData
+            leftHandleValue=sineWaveTwo.percentAmplitudeMin
+            rightHandleValue=sineWaveTwo.percentAmplitudeMax
+            leftHandleValueChangeEnded='minAmplitudeTwoChanged'
+            rightHandleValueChangeEnded='maxAmplitudeTwoChanged'
+            rangeLineColor=sineWaveTwo.color}}
+        </div>
+        <div class="range-wrapper">
+          <label>Frequency</label>
+          {{slider-input
+            data=baseData
+            rightHandleValue=sineWaveTwo.cyclesPerSecond
+            rightHandleValueChangeEnded='frequencyTwoChanged'
+            rangeLineColor=sineWaveTwo.color}}
+        </div>
+        <div class="range-wrapper">
+          <label>Shift</label>
+          {{slider-input
+            data=baseData
+            rightHandleValue=sineWaveTwo.percentPhaseShift
+            rightHandleValueChangeEnded='shiftTwoChanged'
+            rangeLineColor=sineWaveTwo.color}}
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="main-column">
+    <div class="col-md-8 col-md-offset-2">
       <div class="list-item col motorThree">
         <div class="range-wrapper">
           <label>Amplitude</label>
           {{slider-input
             data=baseData
-            leftHandleValue=motorThree.percentAmplitudeMin
-            rightHandleValue=motorThree.percentAmplitudeMax
-            rangeLineColor=motorThree.color}}
+            leftHandleValue=sineWaveThree.percentAmplitudeMin
+            rightHandleValue=sineWaveThree.percentAmplitudeMax
+            leftHandleValueChangeEnded='minAmplitudeThreeChanged'
+            rightHandleValueChangeEnded='maxAmplitudeThreeChanged'
+            rangeLineColor=sineWaveThree.color}}
         </div>
         <div class="range-wrapper">
           <label>Frequency</label>
           {{slider-input
             data=baseData
-            rightHandleValue=motorThree.cyclesPerSecond
-            rangeLineColor=motorThree.color}}
+            rightHandleValue=sineWaveThree.cyclesPerSecond
+            rightHandleValueChangeEnded='frequencyThreeChanged'
+            rangeLineColor=sineWaveThree.color}}
         </div>
         <div class="range-wrapper">
           <label>Shift</label>
           {{slider-input
             data=baseData
-            rightHandleValue=motorThree.percentPhaseShift
-            rangeLineColor=motorThree.color}}
+            rightHandleValue=sineWaveThree.percentPhaseShift
+            rightHandleValueChangeEnded='shiftThreeChanged'
+            rangeLineColor=sineWaveThree.color}}
         </div>
       </div>
     </div>

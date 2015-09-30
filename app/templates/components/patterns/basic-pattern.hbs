@@ -1,34 +1,26 @@
 <div class="row">
   <div class="main-column">
-    <div class="list-item" draggable=true>
-      <span class="list-item-name list-item-numbered">{{pattern.prettyName}}</span>
-      {{#if isPlaying}}
-        <span {{action 'pausePattern'}} class="glyphicon glyphicon-pause list-item-suffix"></span>
-      {{else}}
-        <span {{action 'playPattern'}} class="glyphicon glyphicon-play list-item-suffix"></span>
-      {{/if}}
-        <span {{action 'toggleOptions'}} class="glyphicon glyphicon-option-vertical list-item-suffix"></span>
-    </div>
+
     {{#if showOptions}}
-    <div class="collapse-container">
-      <div class="list-item col">
-        <span>{{pattern.description}}</span>
-        {{#each controlOption in pattern.controlOptions}}
-          <div class="range-wrapper">
-            <label>{{controlOption.pretty_name}}</label>
-            {{slider-input
-              data=controlOption
-              rightHandleValue=controlOption.value
-              maxValue=controlOption.max
-              minValue=controlOption.min
-              rightHandleValueChangeEnded='maxValueChanged'
-              leftHandleValueChanged='minValueChanged'
-              rangeLineColor=controlOption.color
-            }}
-          </div>
-        {{/each}}
+      <div class="collapse-container">
+        <div class="list-item col">
+          <span>{{pattern.description}}</span>
+          {{#each controlOption in pattern.controlOptions}}
+            <div class="range-wrapper">
+              <label>{{controlOption.pretty_name}}</label>
+              {{slider-input
+                data=controlOption
+                rightHandleValue=controlOption.value
+                maxValue=controlOption.max
+                minValue=controlOption.min
+                rightHandleValueChangeEnded='maxValueChanged'
+                leftHandleValueChanged='minValueChanged'
+                rangeLineColor=controlOption.color
+              }}
+            </div>
+          {{/each}}
+        </div>
       </div>
-    </div>
     {{/if}}
   </div>
 </div>

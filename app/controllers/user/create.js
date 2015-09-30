@@ -1,54 +1,25 @@
 import Ember from 'ember';
-import SineWave from 'chrome-app/lib/sine-wave';
+import SignWaveFrames from 'chrome-app/models/sine-wave-frames';
 
 export default Ember.Controller.extend({
   second: 1000,
   maxY: 255,
 
-  motorOneSin: function () {
-    let motor = this.get('motorOne');
-    return new SineWave(
-      motor.get('percentAmplitudeMin'),
-      motor.get('percentAmplitudeMax'),
-      motor.get('cyclesPerSecond'),
-      motor.get('percentPhaseShift'),
-      this.get('second'),
-      this.get('maxY')
-    );
-  }.property('motorOne.percentAmplitudeMin',
-             'motorOne.percentAmplitudeMax',
-             'motorOne.cyclesPerSecond',
-             'motorOne.percentPhaseShift'),
-
-  motorTwoSin: function () {
-    let motor = this.get('motorTwo');
-    return new SineWave(
-      motor.get('percentAmplitudeMin'),
-      motor.get('percentAmplitudeMax'),
-      motor.get('cyclesPerSecond'),
-      motor.get('percentPhaseShift'),
-      this.get('second'),
-      this.get('maxY')
-    );
-  }.property('motorTwo.percentAmplitudeMin',
-             'motorTwo.percentAmplitudeMax',
-             'motorTwo.cyclesPerSecond',
-             'motorTwo.percentPhaseShift'),
-
-  motorThreeSin: function () {
-    let motor = this.get('motorThree');
-    return new SineWave(
-      motor.get('percentAmplitudeMin'),
-      motor.get('percentAmplitudeMax'),
-      motor.get('cyclesPerSecond'),
-      motor.get('percentPhaseShift'),
-      this.get('second'),
-      this.get('maxY')
-    );
-  }.property('motorThree.percentAmplitudeMin',
-             'motorThree.percentAmplitudeMax',
-             'motorThree.cyclesPerSecond',
-             'motorThree.percentPhaseShift'),
+  frames: function () {
+    let waves = [this.get('sineWaveOne'), this.get('sineWaveTwo'), this.get('sineWaveThree')];
+    return SignWaveFrames.create({ sineWaves: Ember.A(waves), store: this.store });
+  }.property('sineWaveOne.percentAmplitudeMin',
+             'sineWaveOne.percentAmplitudeMax',
+             'sineWaveOne.cyclesPerSecond',
+             'sineWaveOne.percentPhaseShift',
+             'sineWaveTwo.percentAmplitudeMin',
+             'sineWaveTwo.percentAmplitudeMax',
+             'sineWaveTwo.cyclesPerSecond',
+             'sineWaveTwo.percentPhaseShift',
+             'sineWaveThree.percentAmplitudeMin',
+             'sineWaveThree.percentAmplitudeMax',
+             'sineWaveThree.cyclesPerSecond',
+             'sineWaveThree.percentPhaseShift'),
 
   runMotors: function (time) {
     let controller = this;
@@ -72,6 +43,59 @@ export default Ember.Controller.extend({
   }.property(),
 
   actions: {
+    minAmplitudeOneChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    maxAmplitudeOneChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    frequencyOneChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    shiftOneChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+
+
+    minAmplitudeTwoChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    maxAmplitudeTwoChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    frequencyTwoChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    shiftTwoChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+
+
+    minAmplitudeThreeChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    maxAmplitudeThreeChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    frequencyThreeChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+    shiftThreeChanged: function (data, newValue) {
+      console.log('right', newValue);
+    },
+
+
     startMotors: function () {
       if (!this.get('running')) {
         this.set('running', true);
@@ -81,9 +105,6 @@ export default Ember.Controller.extend({
 
     stopMotors: function () {
       this.set('running', false);
-    },
-
-    
+    }
   }
-
 });

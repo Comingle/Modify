@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('motors-graph', {
+moduleForComponent('frames-graph', {
   // Specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
 });

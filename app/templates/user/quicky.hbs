@@ -11,14 +11,7 @@
           <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
           <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
         </div>
-        <div id="grid">
-          <div id="top-haze">
-              <span class='graph-label'>Maximum Intensity</span>
-          </div>
-          <div id="bottom-haze">
-            <span class='graph-label'>Minimum Intensity</span>
-          </div>
-        </div>
+        {{frames-graph frames=shownFrames}}
       </div>
     </div>
   </div>
@@ -31,7 +24,8 @@
   {{#each pattern in currentPatterns}}
     {{patterns/basic-pattern
       pattern=pattern
-      selectPattern='startPlayingPattern'
+      openPattern='openPattern'
+      startPlayingPattern='startPlayingPattern'
       stopPlayingPattern='stopPlayingPattern'
       maxValueChanged='maxOptionValueChanged'
     }}
