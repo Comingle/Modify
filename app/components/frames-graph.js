@@ -145,31 +145,23 @@ export default Ember.Component.extend({
   }.observes('frames'),
 
   updateMotorOnePath: function () {
-    let motorData = this.motorDataFor('motorOne');
-    let path = this.get('motorOnePath');
-    this.updatePath(path, motorData);
+    this.get('motorOnePath').remove();
   }.observes('frames.@each.motorOne'),
 
   updateMotorTwoPath: function () {
-    let motorData = this.motorDataFor('motorTwo');
-    let path = this.get('motorTwoPath');
-    this.updatePath(path, motorData);
+    this.get('motorTwoPath').remove();
   }.observes('frames.@each.motorTwo'),
 
   updateMotorThreePath: function () {
-    let motorData = this.motorDataFor('motorThree');
-    let path = this.get('motorThreePath');
-    this.updatePath(path, motorData);
+    this.get('motorThreePath').remove();
   }.observes('frames.@each.motorThree'),
 
-  updatePath: function (path, motorData) {
-    let lineFunction = this.get('lineFunction');
-    d3.transition(path).attr("d", lineFunction(motorData));
-  },
-
   motorDataFor: function (motorName) {
-    return this.get('frames').map(function (frame) {
-      return { x: frame.get('timeMS'), y: frame.get(motorName) };
+    let totalTime = 0
+    return this.get('frames').map(function (frame, index) {
+      let data = { x: totalTime, y: frame.get(motorName) };
+      totalTime = totalTime + parseInt(frame.get('timeMS'));
+      return data;
     });
   },
 

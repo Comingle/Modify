@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayProxy.extend({
-  tickOffset: 50,
+  tickOffset: 5,
 
   init: function () {
     this._super();
@@ -18,6 +18,7 @@ export default Ember.ArrayProxy.extend({
     time = this.get('tickOffset') * tick;
     // this should likely be detemined by the actual phase instead of the time
     // meaning it should end at the end of the phase rather than the end of the second
+    // but that doesn't work when frames are used to create a graph that uses other sine waves with their own phase
     if (time < 1000) {
       frameParams = this.getFrameParamsAt(time);
       if (frame = this.get('content').objectAt(tick)) {
