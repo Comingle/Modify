@@ -36,7 +36,7 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
       });
     } else {
       return this.get('model').reject(function() {
-        return true;
+        return false;
       });
     }
   }.property('toy.config.pattern'),

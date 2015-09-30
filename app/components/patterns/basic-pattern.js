@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['basic-pattern'],
   classNameBindings: ['active'],
-  showOptions: false,
+  showOptions: true,
 
   active: function () {
     return this.get('pattern.active');
