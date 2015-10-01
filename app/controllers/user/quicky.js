@@ -89,6 +89,11 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
       }
       patterns.set(pattern.get('name'), Ember.Object.create({}));
       this.notifyPropertyChange('toy.config.pattern');
+    },
+
+    activatePattern: function (pattern) {
+      console.log('fired')
+      this.makeActive(pattern);
     }
   }
 });

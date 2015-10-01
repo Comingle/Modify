@@ -4,21 +4,30 @@
     {{#if showOptions}}
       <div class="collapse-container">
         <div class="list-item col">
-          <span>{{pattern.description}}</span>
-          {{#each controlOption in pattern.controlOptions}}
-            <div class="range-wrapper">
-              <label>{{controlOption.pretty_name}}</label>
-              {{slider-input
-                data=controlOption
-                rightHandleValue=controlOption.value
-                maxValue=controlOption.max
-                minValue=controlOption.min
-                rightHandleValueChangeEnded='maxValueChanged'
-                leftHandleValueChanged='minValueChanged'
-                rangeLineColor=controlOption.color
-              }}
-            </div>
-          {{/each}}
+          <div class='pattern-controller'>
+            <span>{{pattern.description}}</span>
+            {{#if pattern.active}}
+              <span {{action 'toggleActive'}}>CLOSE</span>
+            {{else}}
+              <span {{action 'toggleActive'}}>OPEN</span>
+            {{/if}}
+          </div>
+          {{#if pattern.active}}
+            {{#each controlOption in pattern.controlOptions}}
+              <div class="range-wrapper">
+                <label>{{controlOption.pretty_name}}</label>
+                  {{slider-input
+                    data=controlOption
+                    rightHandleValue=controlOption.value
+                    maxValue=controlOption.max
+                    minValue=controlOption.min
+                    rightHandleValueChangeEnded='maxValueChanged'
+                    leftHandleValueChanged='minValueChanged'
+                    rangeLineColor=controlOption.color
+                  }}
+              </div>
+            {{/each}}
+          {{/if}}
         </div>
       </div>
     {{/if}}

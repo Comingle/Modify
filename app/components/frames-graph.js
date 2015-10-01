@@ -145,15 +145,24 @@ export default Ember.Component.extend({
   }.observes('frames'),
 
   updateMotorOnePath: function () {
-    this.get('motorOnePath').remove();
+    let path = this.get('motorOnePath');
+    if (path) {
+      path.remove();
+    }
   }.observes('frames.@each.motorOne'),
 
   updateMotorTwoPath: function () {
-    this.get('motorTwoPath').remove();
+    let path = this.get('motorTwoPath');
+    if (path) {
+      path.remove();
+    }
   }.observes('frames.@each.motorTwo'),
 
   updateMotorThreePath: function () {
-    this.get('motorThreePath').remove();
+    let path = this.get('motorThreePath');
+    if (path) {
+      path.remove();
+    }
   }.observes('frames.@each.motorThree'),
 
   motorDataFor: function (motorName) {

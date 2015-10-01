@@ -1,4 +1,24 @@
 .basic-pattern {
+  // this is a hack to get around list item styling
+  // should come back and handle this better
+  .list-item {
+    & > :not(.range-wrapper):first-child {
+      margin-left: 0;
+    }
+  }
+  .pattern-controller {
+    width: 100%;
+    margin: 0;
+    span:first-of-type {
+      width: 85%;
+      float: left;
+    }
+    span:last-of-type {
+      background-color: $gray;
+      width: 15%;
+      float: right;
+    }
+  }
 }
 
 /* Drag And drop stuff */
