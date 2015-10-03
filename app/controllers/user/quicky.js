@@ -12,6 +12,7 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
     if (selectedPattern) {
       selectedPattern.set('active', true);
       this.showInGraph(selectedPattern);
+      this.set('selectedPattern', selectedPattern);
     } else {
       this.showInGraph(this.get('nullPattern'))
     }
@@ -67,7 +68,8 @@ export default Ember.Controller.extend(PatternUpdaterMixin, {
       }
     },
 
-    startPlayingPattern: function (pattern) {
+    startPlayingPattern: function () {
+      let pattern = this.get('selectedPattern');
       this.makeActive(pattern);
       this.get('toy').startPlaying(pattern.get('frames'));
     },

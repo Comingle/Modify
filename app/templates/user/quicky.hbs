@@ -3,14 +3,26 @@
   <div class="row">
     <div class="main-column">
       <div id="pattern-grid-controls">
-        <div id="controls">
-          <a {{action null}} id="play-pause-wrapper">
-            <span class="glyphicon glyphicon-play playback-btn"></span>
-            <span class="playback-btn-label">Let's play!</span>
-          </a>
-          <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
-          <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
-        </div>
+        {{#if selectedPattern}}
+          <div id="controls">
+            {{#if selectedPattern.active}}
+              <a {{action "stopPlayingPattern"}} id="play-pause-wrapper">
+                <span class="glyphicon glyphicon-pause playback-btn"></span>
+                <span class="playback-btn-label">Pause</span>
+              </a>
+            {{else}}
+              <a {{action "startPlayingPattern"}} id="play-pause-wrapper">
+                <span class="glyphicon glyphicon-play playback-btn"></span>
+                <span class="playback-btn-label">Let's play!</span>
+              </a>
+            {{/if}}
+            <a {{action null}} class="playback-btn-label" id="play-pause-next"><span>Next</span></a>
+            <a {{action null}} class="playback-btn-label" id="play-pause-previous"><span>Previous</span></a>
+          </div>
+        {{else}}
+          <div id="controls">
+          </div>
+        {{/if}}
         {{frames-graph frames=shownFrames}}
       </div>
     </div>
