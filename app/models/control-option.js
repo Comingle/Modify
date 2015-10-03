@@ -12,5 +12,15 @@ export default DS.Model.extend({
 
   value: function () {
     return this.get('defaultValue');
-  }.property('defaultValue')
+  }.property('defaultValue'),
+
+  // we need to be getting a default lowValue and a default highValue actually
+  // This is an intentionally bad hack to make us do the refactor
+  lowValue: function () {
+    return this.get('value');
+  }.property('value'),
+
+  highValue: function () {
+    return this.get('value');
+  }.property('value')
 });

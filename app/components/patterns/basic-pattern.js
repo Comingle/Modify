@@ -14,8 +14,12 @@ export default Ember.Component.extend({
   }.property('pattern.active'),
 
   actions: {
-    maxValueChanged: function (controlOption, newValue) {
-      this.sendAction('maxValueChanged', this.get('pattern'), controlOption, 'max', newValue);
+    highOptionValueChanged: function (controlOption, newValue) {
+      this.sendAction('optionValueChanged', this.get('pattern'), controlOption, 'highValue', newValue);
+    },
+
+    lowOptionValueChanged: function (controlOption, newValue) {
+      this.sendAction('optionValueChanged', this.get('pattern'), controlOption, 'lowValue', newValue);
     },
 
     pausePattern: function () {
