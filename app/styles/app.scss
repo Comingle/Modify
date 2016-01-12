@@ -210,6 +210,10 @@ body > .ember-view {
   }
 }
 
+.spinner {
+  cursor: progress;
+}
+
 .end-link {
   flex-direction:row;
   flex-wrap:wrap;
